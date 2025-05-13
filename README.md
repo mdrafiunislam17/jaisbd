@@ -3,6 +3,15 @@
 ##  Laravel Install
 composer create-project "laravel/laravel:^10.0" jaisbd.com
 
+
+## Git 
+
+
+git status
+git add .
+git commit -m ""
+git push origin main
+
 ## Login
 composer require laravel/ui
 php artisan ui bootstrap --auth
