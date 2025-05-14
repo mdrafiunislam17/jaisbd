@@ -50,6 +50,17 @@
         </a>
     </li>
 
+    <li class="nav-item {{
+    request()->routeIs('clients.index') ||
+    request()->routeIs('clients.create') ||
+    request()->routeIs('clients.show') ||
+    request()->routeIs('clients.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('clients.index') }}">
+            <i class="fas fa-user-tie"></i>
+            <span>Client</span>
+        </a>
+    </li>
+
 
     <li class="nav-item ">
         <a class="nav-link" href="{{route('role.index')}}">

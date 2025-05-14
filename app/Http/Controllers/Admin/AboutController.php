@@ -106,12 +106,12 @@ class AboutController extends Controller
     {
         try {
             // পুরনো image ফাইল ডিলিট (optional but recommended)
-            if ($about->image && file_exists(public_path('uploads/' . $about->image))) {
-                unlink(public_path('uploads/' . $about->image));
+            if ($about->image && file_exists(public_path('uploads/about' . $about->image))) {
+                unlink(public_path('uploads/about' . $about->image));
             }
 
-            if ($about->image1 && file_exists(public_path('uploads/' . $about->image1))) {
-                unlink(public_path('uploads/' . $about->image1));
+            if ($about->image1 && file_exists(public_path('uploads/about' . $about->image1))) {
+                unlink(public_path('uploads/about' . $about->image1));
             }
 
             // ডেটাবেজ থেকে ডিলিট
