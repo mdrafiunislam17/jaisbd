@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AssignRoleController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
@@ -32,6 +33,8 @@ Route::middleware('auth')->group(function () {
     // SliderController
     Route::resource("sliders", SliderController::class);
 
+    //AboutController
+    Route::resource('abouts',AboutController::class);
     // Role Route
     Route::get('/dashboard/role', [RoleController::class,'index'])->name('role.index');
     Route::get('/dashboard/role/create', [RoleController::class,'create'])->name('role.create');

@@ -38,6 +38,19 @@
         </a>
     </li>
 
+
+    <li class="nav-item {{
+    request()->routeIs('abouts.index') ||
+    request()->routeIs('abouts.create') ||
+    request()->routeIs('abouts.show') ||
+    request()->routeIs('abouts.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('abouts.index') }}">
+            <i class="fas fa-fw fa-info-circle"></i>
+            <span>About</span>
+        </a>
+    </li>
+
+
     <li class="nav-item ">
         <a class="nav-link" href="{{route('role.index')}}">
             <i class="fas fa-id-badge"></i>
