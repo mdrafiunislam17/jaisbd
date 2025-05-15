@@ -1,13 +1,13 @@
 @extends("admin.layouts.master")
-@section("title", "services")
+@section("title", "workProcesses")
 @section("content")
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">services</h1>
-            <a href="{{ route("services.create") }}"
+            <h1 class="h3 mb-0 text-gray-800">workProcesses</h1>
+            <a href="{{ route("works.create") }}"
                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-plus fa-sm text-white-50"></i> Create services</a>
+                    class="fas fa-plus fa-sm text-white-50"></i> Create workProcesses</a>
         </div>
 
         @if (session()->has("success"))
@@ -35,20 +35,20 @@
                         <thead>
                         <tr>
                             <th>#SL</th>
-                            <th>Title</th>
-                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Icon</th>
                             <th>Status</th>
                             <th style="width: 100px">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach( $services as $i => $service)
+                        @foreach( $workProcesses as $i => $work)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td>{{ $service->title }}</td>
-                                <td><img src="{{ asset("uploads/service/$service->image") }}" width="100" alt=""></td>
+                                <td>{{ $work->name }}</td>
+                                <td><img src="{{ asset("uploads/work/$work->icon") }}" width="100" alt=""></td>
                                 <td>
-                                    @if ($service->status == 1)
+                                    @if ($work->status == 1)
                                         <span class="badge badge-success badge-counter">Active</span>
                                     @else
                                         <span class="badge badge-danger badge-counter">Inactive</span>
@@ -58,12 +58,12 @@
                                 <td>
                                     {{--                                    <a href="{{ route("$clients.show", $client->id) }}" class="btn btn-sm"><i--}}
                                     {{--                                            class="fa fa-eye"></i></a>--}}
-                                    <a href="{{ route("services.edit", $service->id) }}" class="btn btn-sm btn-warning"><i
+                                    <a href="{{ route("works.edit", $work->id) }}" class="btn btn-sm btn-warning"><i
                                             class="fa fa-edit"></i></a>
-                                    <form action="{{ route('services.destroy', $service->id) }}" method="post" class="d-inline delete-form" data-id="{{ $service->id }}">
+                                    <form action="{{ route('works.destroy', $work->id) }}" method="post" class="d-inline delete-form" data-id="{{ $work->id }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-sm btn-danger delete-btn h-100" data-id="{{ $service->id }}">
+                                        <button type="button" class="btn btn-sm btn-danger delete-btn h-100" data-id="{{ $work->id }}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>

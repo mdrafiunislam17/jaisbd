@@ -62,6 +62,31 @@
     </li>
 
 
+
+    <li class="nav-item {{
+    request()->routeIs('services.index') ||
+    request()->routeIs('services.create') ||
+    request()->routeIs('services.show') ||
+    request()->routeIs('services.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('services.index') }}">
+            <i class="fas fa-user-tie"></i>
+            <span>Services</span>
+        </a>
+    </li>
+
+
+    <li class="nav-item {{
+    request()->routeIs('works.index') ||
+    request()->routeIs('works.create') ||
+    request()->routeIs('works.show') ||
+    request()->routeIs('works.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('works.index') }}">
+            <i class="fas fa-user-tie"></i>
+            <span>Work Process</span>
+        </a>
+    </li>
+
+
     <li class="nav-item ">
         <a class="nav-link" href="{{route('role.index')}}">
             <i class="fas fa-id-badge"></i>

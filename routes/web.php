@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WorkProcessController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,7 +46,9 @@ Route::middleware('auth')->group(function () {
 
     //ServiceController
 
-    Route::resource('service', ServiceController::class);
+    Route::resource('services', ServiceController::class);
+
+    Route::resource('works',WorkProcessController::class);
 
     // Role Route
     Route::get('/dashboard/role', [RoleController::class,'index'])->name('role.index');
