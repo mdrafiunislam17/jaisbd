@@ -86,6 +86,19 @@
         </a>
     </li>
 
+    <li class="nav-item {{
+    request()->routeIs('achievements.index') ||
+    request()->routeIs('achievements.create') ||
+    request()->routeIs('achievements.show') ||
+    request()->routeIs('achievements.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('achievements.index') }}">
+            <i class="fas fa-award"></i>
+
+
+            <span>Achievement</span>
+        </a>
+    </li>
+
 
     <li class="nav-item ">
         <a class="nav-link" href="{{route('role.index')}}">

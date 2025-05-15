@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\AssignRoleController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\RoleController;
@@ -47,9 +48,12 @@ Route::middleware('auth')->group(function () {
     //ServiceController
 
     Route::resource('services', ServiceController::class);
-
+//WorkProcessController
     Route::resource('works',WorkProcessController::class);
 
+
+    //AchievementController
+    Route::resource('achievements',AchievementController::class);
     // Role Route
     Route::get('/dashboard/role', [RoleController::class,'index'])->name('role.index');
     Route::get('/dashboard/role/create', [RoleController::class,'create'])->name('role.create');

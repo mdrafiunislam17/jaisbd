@@ -36,6 +36,7 @@ class WorkProcessController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'required|boolean',
+            "icon" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
         ]);
 
         try {
@@ -72,6 +73,7 @@ class WorkProcessController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'required|boolean',
+            "icon" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
         ]);
 
         try {
