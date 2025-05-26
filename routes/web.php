@@ -4,11 +4,19 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\AssignRoleController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\DesignationController;
+use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProjectCategoryController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectInfoController;
 use App\Http\Controllers\WorkProcessController;
+use App\Http\Controllers\Admin\BlogController as AdminBlogController;
+use App\Http\Controllers\Admin\EventController as AdminEventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +62,32 @@ Route::middleware('auth')->group(function () {
 
     //AchievementController
     Route::resource('achievements',AchievementController::class);
+
+    //ManagementController
+    Route::resource('managements',ManagementController::class);
+
+    //DesignationController
+
+    Route::resource('designations',DesignationController::class);
+
+    //TeamMemberController
+
+    Route::resource('teams',TeamMemberController::class);
+
+    Route::resource('project-categories', ProjectCategoryController::class);
+
+
+    Route::resource('projectinfo', ProjectInfoController::class);
+
+    Route::resource('project',ProjectController::class);
+
+       // AdminBlogController
+    Route::resource("blogs", AdminBlogController::class);
+
+    // AdminEventController
+    Route::resource("events", AdminEventController::class);
+
+
     // Role Route
     Route::get('/dashboard/role', [RoleController::class,'index'])->name('role.index');
     Route::get('/dashboard/role/create', [RoleController::class,'create'])->name('role.create');

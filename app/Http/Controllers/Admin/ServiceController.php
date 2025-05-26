@@ -40,6 +40,7 @@ class ServiceController extends Controller
             "description" => "nullable|string",
             "image" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             "icon" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+            "video" => "required|mp4|string|max:255"
         ]);
 
         try {

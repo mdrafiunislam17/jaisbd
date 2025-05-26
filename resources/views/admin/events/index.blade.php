@@ -5,7 +5,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Events</h1>
-            <a href="{{ route("admin.events.create") }}"
+            <a href="{{ route("events.create") }}"
                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-plus fa-sm text-white-50"></i> Create Event</a>
         </div>
@@ -48,7 +48,7 @@
                         @foreach($events as $i => $event)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td><img src="{{ asset("storage/uploads/$event->image") }}" width="100" alt=""></td>
+                                <td><img src="{{ asset("uploads/event/$event->image") }}" width="100" alt=""></td>
                                 <td>{{ $event->event_name }}</td>
                                 <td>{{ $event->event_date }}</td>
                                 <td>{{ date("h:i A", strtotime($event->start_time)) ." - ". date("h:i A", strtotime($event->end_time)) }}</td>
@@ -61,14 +61,17 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route("admin.events.show", $event->id) }}" class="btn btn-sm"><i
-                                            class="fa fa-eye"></i></a>
-                                    <a href="{{ route("admin.events.edit", $event->id) }}" class="btn btn-sm"><i
+
+                                    <a href="{{ route("events.edit", $event->id) }}" class="btn btn-sm btn-warning"><i
                                             class="fa fa-edit"></i></a>
-                                    <form action="{{ route("admin.events.destroy", $event->id) }}" method="post" class="d-inline">
+
+
+                                     <form action="{{ route('events.destroy', $event->id) }}" method="post" class="d-inline delete-form" data-id="{{ $event->id }}">
                                         @csrf
-                                        @method("DELETE")
-                                        <button class="btn btn-sm" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash"></i></button>
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-sm btn-danger delete-btn h-100" data-id="{{ $event->id }}">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -79,4 +82,56 @@
             </div>
         </div>
     </div>
+
+
+
+      <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-danger">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel"><i class="fa fa-trash me-2"></i> Confirm Deletion</h5>
+                    {{--                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+                    {{--                --}}
+                </div>
+                <div class="modal-body text-center">
+                    <p class="fs-5">Are you sure you want to delete this Client?</p>
+                    <i class="fa fa-exclamation-triangle fa-2x text-warning"></i>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary px-4" id="cancel" data-dismiss="modal">Cancel</button>
+
+                    <button type="button" class="btn btn-danger px-4" id="confirmDeleteBtn">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+
+    $(document).ready(function () {
+        let deleteForm = null;
+
+        // Delete button click
+        $('.delete-btn').click(function () {
+            deleteForm = $(this).closest('form'); // Store the form
+            $('#deleteModal').modal('show'); // Show modal
+        });
+
+        // Confirm delete from modal
+        $('#confirmDeleteBtn').click(function () {
+            if (deleteForm) {
+                deleteForm.submit();
+            }
+        });
+    });
+
+</script>

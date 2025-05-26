@@ -5,7 +5,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Edit Event</h1>
-            <a href="{{ route("admin.events.index") }}"
+            <a href="{{ route("events.index") }}"
                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                         class="fas fa-eye fa-sm text-white-50"></i> Events</a>
         </div>
@@ -44,7 +44,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
-                <form action="{{ route("admin.events.update", $event->id) }}" method="post"
+                <form action="{{ route("events.update", $event->id) }}" method="post"
                       enctype="multipart/form-data">
                     @csrf
                     @method("PUT")
@@ -114,7 +114,7 @@
                         <label for="image"
                                class="col-sm-3 col-form-label text-right font-weight-bold">Existing Image</label>
                         <div class="col-sm-6">
-                            <img src="{{ asset("storage/uploads/$event->image") }}" width="120"
+                            <img src="{{ asset("uploads/event/$event->image") }}" width="120"
                                  alt="{{ $event->image }}">
                         </div>
                     </div>
@@ -185,20 +185,21 @@
                                         <td colspan="3" class="text-center">Image not exist</td>
                                     </tr>
                                 @else
-                                    @foreach(json_decode($event->gallery) as $i => $image)
-                                        <tr id="gallery_item_{{ ++$i }}">
-                                            <td>
-                                                <input type="hidden" name="hidden_gallery[]" value="{{ $image }}">
-                                                {{ $i }}
-                                            </td>
-                                            <td><img src="{{ asset("storage/uploads/$image") }}" width="100"
-                                                     alt="{{ $image }}"></td>
-                                            <td style="width: 50px">
-                                                <button type="button" onclick="document.getElementById('gallery_item_{{ $i }}').remove()" class="btn btn-sm btn-danger"><i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                  @foreach($event->gallery as $i => $image)
+                                    <tr id="gallery_item_{{ ++$i }}">
+                                        <td>
+                                            <input type="hidden" name="hidden_gallery[]" value="{{ $image }}">
+                                            {{ $i }}
+                                        </td>
+                                        <td><img src="{{ asset("uploads/gallery/$image") }}" width="100" alt="{{ $image }}"></td>
+                                        <td style="width: 50px">
+                                            <button type="button" onclick="document.getElementById('gallery_item_{{ $i }}').remove()" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
                                 @endif
                                 </tbody>
                             </table>

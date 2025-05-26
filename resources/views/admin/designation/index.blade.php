@@ -1,13 +1,13 @@
 @extends("admin.layouts.master")
-@section("title", "Blogs")
+@section("title", "Designations")
 @section("content")
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Blogs</h1>
-            <a href="{{ route("blogs.create") }}"
+            <h1 class="h3 mb-0 text-gray-800">Designations</h1>
+            <a href="{{ route("designations.create") }}"
                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-plus fa-sm text-white-50"></i> Create Blog</a>
+                    class="fas fa-plus fa-sm text-white-50"></i> Create Designations</a>
         </div>
 
         @if (session()->has("success"))
@@ -35,39 +35,24 @@
                         <thead>
                         <tr>
                             <th>#SL</th>
-                            <th>Image</th>
-                            <th>Title</th>
-                            <th>Posted By</th>
-                            <th>Posted On</th>
-                            <th>Status</th>
+                            <th>Name</th>
+
                             <th style="width: 100px">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($blogs as $i => $blog)
+                        @foreach( $designations as $i => $designation)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td><img src="{{ asset("uploads/blog/$blog->image") }}" width="100" alt=""></td>
-                                <td>{{ $blog->title }}</td>
-                                <td>{{ $blog->posted_by }}</td>
-                                <td>{{ date("Y-m-d h:i A", strtotime($blog->posted_on)) }}</td>
-                                <td>
-                                    @if ($blog->status == 1)
-                                        <span class="badge badge-success badge-counter">Active</span>
-                                    @else
-                                        <span class="badge badge-danger badge-counter">Inactive</span>
-                                    @endif
-                                </td>
-                                <td>
+                                <td>{{ $designation->name }}</td>
 
-                                    <a href="{{ route("blogs.edit", $blog->id) }}" class="btn btn-sm btn-warning"><i
+                                <td>
+                                    <a href="{{ route("designations.edit", $designation->id) }}" class="btn btn-sm btn-warning"><i
                                             class="fa fa-edit"></i></a>
-
-
-                                     <form action="{{ route('blogs.destroy', $blog->id) }}" method="post" class="d-inline delete-form" data-id="{{ $blog->id }}">
+                                    <form action="{{ route('designations.destroy', $designation->id) }}" method="post" class="d-inline delete-form" data-id="{{ $designation->id }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-sm btn-danger delete-btn h-100" data-id="{{ $blog->id }}">
+                                        <button type="button" class="btn btn-sm btn-danger delete-btn h-100" data-id="{{ $designation->id }}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
@@ -82,7 +67,9 @@
     </div>
 
 
-      <!-- Delete Confirmation Modal -->
+
+
+    <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-danger">
@@ -106,11 +93,13 @@
 
 
 
+
+
 @endsection
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
 
@@ -132,3 +121,6 @@
     });
 
 </script>
+
+
+

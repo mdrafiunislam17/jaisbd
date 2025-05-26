@@ -5,7 +5,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Create Blog</h1>
-            <a href="{{ route("admin.blogs.index") }}"
+            <a href="{{ route("blogs.index") }}"
                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-eye fa-sm text-white-50"></i> Blogs</a>
         </div>
@@ -44,7 +44,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
-                <form action="{{ route("admin.blogs.update", $blog->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route("blogs.update", $blog->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method("PUT")
                     <div class="form-group row">
@@ -60,7 +60,7 @@
                         <label for="image"
                                class="col-sm-3 col-form-label text-right font-weight-bold">Existing Image</label>
                         <div class="col-sm-6">
-                            <img src="{{ asset("storage/uploads/$blog->image") }}" width="120" alt="{{ $blog->image }}">
+                            <img src="{{ asset("uploads/blog/$blog->image") }}" width="120" alt="{{ $blog->image }}">
                         </div>
                     </div>
 

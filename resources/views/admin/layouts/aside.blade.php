@@ -12,13 +12,7 @@
         </a>
     </li>
 
-    <!-- Nav Item - Dashboard -->
-{{--    <li class="nav-item {{ request()->routeIs("admin.dashboard.index") ? "active" : "" }}">--}}
-{{--        <a class="nav-link" href="{{ route("admin.dashboard.index") }}">--}}
-{{--            <i class="fas fa-fw fa-tachometer-alt"></i>--}}
-{{--            <span>Dashboard</span>--}}
-{{--        </a>--}}
-{{--    </li>--}}
+
     <li class="nav-item ">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -47,6 +41,31 @@
         <a class="nav-link" href="{{ route('abouts.index') }}">
             <i class="fas fa-fw fa-info-circle"></i>
             <span>About</span>
+        </a>
+    </li>
+
+
+       <li class="nav-item {{
+    request()->routeIs("blogs.index") ||
+    request()->routeIs("blogs.create") ||
+    request()->routeIs("blogs.show") ||
+    request()->routeIs("blogs.edit")
+    ? "active" : "" }}">
+        <a class="nav-link" href="{{ route("blogs.index") }}">
+            <i class="fas fa-fw fa-newspaper"></i>
+            <span>Blogs</span>
+        </a>
+    </li>
+
+    <li class="nav-item {{
+    request()->routeIs("events.index") ||
+    request()->routeIs("events.create") ||
+    request()->routeIs("events.show") ||
+    request()->routeIs("events.edit")
+    ? "active" : "" }}">
+        <a class="nav-link" href="{{ route("events.index") }}">
+            <i class="fas fa-fw fa-list-ol"></i>
+            <span>Events</span>
         </a>
     </li>
 
@@ -99,6 +118,83 @@
         </a>
     </li>
 
+    <li class="nav-item {{
+    request()->routeIs('managements.index') ||
+    request()->routeIs('managements.create') ||
+    request()->routeIs('managements.show') ||
+    request()->routeIs('managements.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('managements.index') }}">
+            <i class="fas fa-users-cog me-2"></i>
+
+
+            <span>Management</span>
+        </a>
+    </li>
+
+    <li class="nav-item {{
+    request()->routeIs('designations.index') ||
+    request()->routeIs('designations.create') ||
+    request()->routeIs('designations.show') ||
+    request()->routeIs('designations.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('designations.index') }}">
+            <i class="fas fa-id-badge me-2"></i>
+
+
+            <span>Designation</span>
+        </a>
+    </li>
+
+    <li class="nav-item {{
+    request()->routeIs('teams.index') ||
+    request()->routeIs('teams.create') ||
+    request()->routeIs('teams.show') ||
+    request()->routeIs('teams.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('teams.index') }}">
+            <i class="fas fa-users me-2"></i>
+
+
+            <span>Team</span>
+        </a>
+    </li>
+
+
+    @php
+        $isActive = request()->routeIs('project-categories.*');
+    @endphp
+
+    <li class="nav-item {{ $isActive ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('project-categories.index') }}">
+            <i class="fas fa-folder me-2"></i>
+            <span>Project Categories</span>
+        </a>
+    </li>
+
+
+    <li class="nav-item {{
+    request()->routeIs('projectinfo.index') ||
+    request()->routeIs('projectinfo.create') ||
+    request()->routeIs('projectinfo.show') ||
+    request()->routeIs('projectinfo.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('projectinfo.index') }}">
+            <i class="fas fa-info-circle me-2"></i>
+            <span>Project Info</span>
+        </a>
+    </li>
+
+
+    <li class="nav-item {{
+    request()->routeIs('project.index') ||
+    request()->routeIs('project.create') ||
+    request()->routeIs('project.show') ||
+    request()->routeIs('project.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('project.index') }}">
+            <i class="fas fa-folder-open me-2"></i>
+
+
+            <span>Project</span>
+        </a>
+    </li>
+
 
     <li class="nav-item ">
         <a class="nav-link" href="{{route('role.index')}}">
@@ -116,73 +212,4 @@
 
 
 
-
-
-{{--    <li class="nav-item {{--}}
-{{--    request()->routeIs("admin.members.index") ||--}}
-{{--    request()->routeIs("admin.members.create") ||--}}
-{{--    request()->routeIs("admin.members.show") ||--}}
-{{--    request()->routeIs("admin.members.edit")--}}
-{{--    ? "active" : "" }}">--}}
-{{--        <a class="nav-link" href="{{ route("admin.members.index") }}">--}}
-{{--            <i class="fas fa-fw fa-users"></i>--}}
-{{--            <span>Members</span>--}}
-{{--        </a>--}}
-{{--    </li>--}}
-
-{{--    <li class="nav-item {{--}}
-{{--    request()->routeIs("admin.testimonials.index") ||--}}
-{{--    request()->routeIs("admin.testimonials.create") ||--}}
-{{--    request()->routeIs("admin.testimonials.show") ||--}}
-{{--    request()->routeIs("admin.testimonials.edit")--}}
-{{--    ? "active" : "" }}">--}}
-{{--        <a class="nav-link" href="{{ route("admin.testimonials.index") }}">--}}
-{{--            <i class="fas fa-fw fa-list"></i>--}}
-{{--            <span>Testimonials</span>--}}
-{{--        </a>--}}
-{{--    </li>--}}
-
-{{--    <li class="nav-item {{--}}
-{{--    request()->routeIs("admin.blogs.index") ||--}}
-{{--    request()->routeIs("admin.blogs.create") ||--}}
-{{--    request()->routeIs("admin.blogs.show") ||--}}
-{{--    request()->routeIs("admin.blogs.edit")--}}
-{{--    ? "active" : "" }}">--}}
-{{--        <a class="nav-link" href="{{ route("admin.blogs.index") }}">--}}
-{{--            <i class="fas fa-fw fa-newspaper"></i>--}}
-{{--            <span>Blogs</span>--}}
-{{--        </a>--}}
-{{--    </li>--}}
-
-{{--    <li class="nav-item {{--}}
-{{--    request()->routeIs("admin.events.index") ||--}}
-{{--    request()->routeIs("admin.events.create") ||--}}
-{{--    request()->routeIs("admin.events.show") ||--}}
-{{--    request()->routeIs("admin.events.edit")--}}
-{{--    ? "active" : "" }}">--}}
-{{--        <a class="nav-link" href="{{ route("admin.events.index") }}">--}}
-{{--            <i class="fas fa-fw fa-list-ol"></i>--}}
-{{--            <span>Events</span>--}}
-{{--        </a>--}}
-{{--    </li>--}}
-
-{{--    <li class="nav-item {{--}}
-{{--    request()->routeIs("admin.announcements")--}}
-{{--    ? "active" : "" }}">--}}
-{{--        <a class="nav-link" href="{{ route("admin.announcements") }}">--}}
-{{--            <i class="fas fa-fw fa-envelope"></i>--}}
-{{--            <span>Announcements</span>--}}
-{{--        </a>--}}
-{{--    </li>--}}
-
-
-{{--    <li class="nav-item  {{--}}
-{{--    request()->routeIs("admin.settings.index") ||--}}
-{{--    request()->routeIs("admin.settings.update")--}}
-{{--    ? "active" : "" }}">--}}
-{{--        <a class="nav-link" href="{{ route("admin.settings.index") }}">--}}
-{{--            <i class="fas fa-fw fa-cog"></i>--}}
-{{--            <span>Settings</span>--}}
-{{--        </a>--}}
-{{--    </li>--}}
 </ul>
