@@ -20,6 +20,7 @@ class Career extends Model
         'description',
         'requirements',
         'deadline',
+        'status',
     ];
 
     /**

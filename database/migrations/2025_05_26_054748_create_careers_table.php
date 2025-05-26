@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('requirements')->nullable();
             $table->date('deadline')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

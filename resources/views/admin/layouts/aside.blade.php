@@ -20,6 +20,30 @@
         </a>
     </li>
 
+       <li class="nav-item {{
+    request()->routeIs("career.index") ||
+    request()->routeIs("career.create") ||
+    request()->routeIs("career.show") ||
+    request()->routeIs("career.edit")
+    ? "active" : "" }}">
+        <a class="nav-link" href="{{ route("career.index") }}">
+            <i class="fas fa-user-tie"></i>
+            <span>career</span>
+        </a>
+    </li>
+
+       <li class="nav-item {{
+    request()->routeIs("career-apply.index") ||
+    request()->routeIs("career-apply.create") ||
+    request()->routeIs("career-apply.show") ||
+    request()->routeIs("career-apply.edit")
+    ? "active" : "" }}">
+        <a class="nav-link" href="{{ route("career-apply.index") }}">
+            <i class="fas fa-file-alt"></i>
+            <span>Career Apply</span>
+        </a>
+    </li>
+
     <li class="nav-item {{
     request()->routeIs("sliders.index") ||
     request()->routeIs("sliders.create") ||

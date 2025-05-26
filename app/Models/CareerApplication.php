@@ -16,6 +16,7 @@ class CareerApplication extends Model
         'phone',
         'message',
         'resume',
+        'status'
     ];
 
     public function career()
