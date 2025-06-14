@@ -54,6 +54,14 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+//    public function create(): View
+//    {
+//        $permission = Auth::user();
+//
+//
+//        return view('admin.roles.create',compact('permission'));
+//    }
+
     public function create(): View
     {
         $auth_user = Auth::user();
@@ -73,22 +81,19 @@ class RoleController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $this->validate($request, [
+        $validated = $request->validate([
             'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+            'permission' => 'required|array',
         ]);
 
-        Role::create(['name' => $request->input('name')]);
+        $role = Role::create(['name' => $validated['name']]);
 
-        $newRole = Role::findByName($request->input('name'));
-        foreach ($request->input('permission') as $key => $value) {
-            $permissionName = Permission::findById($value);
-            $newRole->givePermissionTo($permissionName->name);
-        }
+        // Assign permissions directly
+        $role->syncPermissions($validated['permission']);
 
         return redirect()
-            ->route('role.index')
-            ->with('success','Role created successfully');
+            ->route('projectinfo.index') // বা role.index, যেটা প্রযোজ্য
+            ->with('success', 'Role created successfully.');
     }
     /**
      * Display the specified resource.

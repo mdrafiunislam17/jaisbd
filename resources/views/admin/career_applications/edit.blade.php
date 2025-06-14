@@ -36,9 +36,9 @@
     <!-- Edit Form -->
     <div class="card shadow mb-4">
         <div class="card-body">
-        <form action="{{ route('career-apply.update', $career_apply) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
+            <form action="{{ route('career-apply.update', $careerApplication->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
                 {{-- Career Selection --}}
                 <div class="form-group row">
@@ -47,7 +47,7 @@
                         <select name="career_id" id="career_id" class="form-control" required>
                             <option value="">-- Select Career --</option>
                             @foreach($careers as $career)
-                                <option value="{{ $career->id }}" {{ (old('career_id', $career_apply->career_id) == $career->id) ? 'selected' : '' }}>
+                                <option value="{{ $career->id }}" {{ (old('career_id', $careerApplication->career_id) == $career->id) ? 'selected' : '' }}>
                                     {{ $career->job_title }}
                                 </option>
                             @endforeach
@@ -59,7 +59,7 @@
                 <div class="form-group row">
                     <label for="name" class="col-sm-3 col-form-label text-right font-weight-bold">Name *</label>
                     <div class="col-sm-6">
-                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $career_apply->name) }}" required>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $careerApplication->name) }}" required>
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                 <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label text-right font-weight-bold">Email *</label>
                     <div class="col-sm-6">
-                        <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $career_apply->email) }}" required>
+                        <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $careerApplication->email) }}" required>
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@
                 <div class="form-group row">
                     <label for="phone" class="col-sm-3 col-form-label text-right font-weight-bold">Phone *</label>
                     <div class="col-sm-6">
-                        <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone', $career_apply->phone) }}" required>
+                        <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone', $careerApplication->phone) }}" required>
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@
                 <div class="form-group row">
                     <label for="message" class="col-sm-3 col-form-label text-right font-weight-bold">Message</label>
                     <div class="col-sm-6">
-                        <textarea name="message" id="message" class="form-control tinymce-editor" rows="5">{{ old('message', $career_apply->message) }}</textarea>
+                        <textarea name="message" id="message" class="form-control tinymce-editor" rows="5">{{ old('message', $careerApplication->message) }}</textarea>
                     </div>
                 </div>
 
@@ -92,11 +92,11 @@
                     <label for="resume" class="col-sm-3 col-form-label text-right font-weight-bold">Resume</label>
                     <div class="col-sm-6">
                         <input type="file" name="resume" id="resume" class="form-control-file">
-                        @if($career_apply->resume)
+                        @if($careerApplication->resume)
                             <p class="mt-2">
                                 Current:
-                                <a href="{{ asset('uploads/resumes/' . $career_apply->resume) }}" target="_blank">
-                                    {{ $career_apply->resume }}
+                                <a href="{{ asset('uploads/resumes/' . $careerApplication->resume) }}" target="_blank">
+                                    {{ $careerApplication->resume }}
                                 </a>
                             </p>
                         @endif
@@ -109,8 +109,8 @@
                     <label for="status" class="col-sm-3 col-form-label text-right font-weight-bold">Status</label>
                     <div class="col-sm-6">
                         <select name="status" id="status" class="form-control">
-                            <option value="1" {{ old('status', $career_apply->status) == "1" ? 'selected' : '' }}>Active</option>
-                            <option value="0" {{ old('status', $career_apply->status) == "0" ? 'selected' : '' }}>Inactive</option>
+                            <option value="1" {{ old('status', $careerApplication->status) == "1" ? 'selected' : '' }}>Active</option>
+                            <option value="0" {{ old('status', $careerApplication->status) == "0" ? 'selected' : '' }}>Inactive</option>
                         </select>
                     </div>
                 </div>

@@ -2,7 +2,9 @@
 
 ##  Laravel Install
 composer create-project "laravel/laravel:^10.0" jaisbd.com
+composer require spatie/laravel-permission
 
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider
 
 ## Git 
 

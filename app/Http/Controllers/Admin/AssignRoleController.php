@@ -1,20 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
-use Yajra\DataTables\Facades\DataTables;
-
-
 class AssignRoleController extends Controller
 {
-    //
-
-
     public function index(Request $request)
     {
         $auth_user = Auth::user();
@@ -61,4 +55,5 @@ class AssignRoleController extends Controller
         $user->assignRole($request->role);
         return back()->with('success', 'Role assigned successfully');
     }
+
 }

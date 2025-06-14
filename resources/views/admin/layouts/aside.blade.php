@@ -5,8 +5,8 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-icon rotate-n-15">
 
-{{--                <img src="{{ asset("storage/uploads/" . $settings["SETTING_SITE_LOGO"]) }}" class="w-75" alt="">--}}
-{{--            --}}
+                {{--                <img src="{{ asset("storage/uploads/" . $settings["SETTING_SITE_LOGO"]) }}" class="w-75" alt="">--}}
+                {{--            --}}
             </div>
             <h6 class="sidebar-brand-text mx-3 mt-2 font-weight-bold" title="JA IT SOLUTION">jaisbd.com</h6>
         </a>
@@ -20,7 +20,7 @@
         </a>
     </li>
 
-       <li class="nav-item {{
+    <li class="nav-item {{
     request()->routeIs("career.index") ||
     request()->routeIs("career.create") ||
     request()->routeIs("career.show") ||
@@ -32,7 +32,7 @@
         </a>
     </li>
 
-       <li class="nav-item {{
+    <li class="nav-item {{
     request()->routeIs("career-apply.index") ||
     request()->routeIs("career-apply.create") ||
     request()->routeIs("career-apply.show") ||
@@ -69,7 +69,7 @@
     </li>
 
 
-       <li class="nav-item {{
+    <li class="nav-item {{
     request()->routeIs("blogs.index") ||
     request()->routeIs("blogs.create") ||
     request()->routeIs("blogs.show") ||

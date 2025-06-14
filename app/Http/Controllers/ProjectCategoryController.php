@@ -10,6 +10,16 @@ class ProjectCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware('permission:project-categories-list|project-categories-create|project-categories-edit|project-categories-delete')->only('index');
+        $this->middleware('permission:project-categories-create')->only(['create', 'store']);
+        $this->middleware('permission:project-categories-edit')->only(['edit', 'update']);
+        $this->middleware('permission:project-categories-delete')->only('destroy');
+    }
+
+
     public function index()
     {
 
