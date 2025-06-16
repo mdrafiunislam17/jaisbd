@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\CareerApplicationController;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -118,6 +119,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/assign-role', [AssignRoleController::class, 'index'])->name('assignrole.index');
     Route::post('/dashboard/assign-role/store', [AssignRoleController::class, 'assignRole'])->name('assignrole.store');
 
+
+
+    Route::get('/chatbot', function () {
+    return view('chatbot');
+});
 
 
 });
