@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 class CareerController extends Controller
 {
     //
+
+      public function __construct()
+        {
+            $this->middleware('permission:career-list|career-create|career-edit|career-delete')->only('index');
+            $this->middleware('permission:career-create')->only(['create', 'store']);
+            $this->middleware('permission:career-edit')->only(['edit', 'update']);
+            $this->middleware('permission:career-delete')->only('destroy');
+        }
     public function index()
     {
         $creers = Career::all();

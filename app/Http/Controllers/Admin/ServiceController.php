@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+
+        public function __construct()
+        {
+            $this->middleware('permission:service-list|service-create|service-edit|service-delete')->only('index');
+            $this->middleware('permission:service-create')->only(['create', 'store']);
+            $this->middleware('permission:service-edit')->only(['edit', 'update']);
+            $this->middleware('permission:service-delete')->only('destroy');
+        }
+
     //
     private function uploadImage($image): string
     {

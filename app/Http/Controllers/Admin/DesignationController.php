@@ -11,6 +11,14 @@ class DesignationController extends Controller
 {
     //
 
+    public function __construct()
+        {
+            $this->middleware('permission:designation-list|designation-create|designation-edit|designation-delete')->only('index');
+            $this->middleware('permission:designation-create')->only(['create', 'store']);
+            $this->middleware('permission:designation-edit')->only(['edit', 'update']);
+            $this->middleware('permission:designation-delete')->only('destroy');
+        }
+
     public function index()
     {
         $designations = Designation::all();

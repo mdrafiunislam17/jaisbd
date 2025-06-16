@@ -11,6 +11,16 @@ class WorkProcessController extends Controller
     //
 
 
+        public function __construct()
+        {
+            $this->middleware('permission:work-process-list|work-process-create|work-process-edit|work-process-delete')->only('index');
+            $this->middleware('permission:work-process-create')->only(['create', 'store']);
+            $this->middleware('permission:work-process-edit')->only(['edit', 'update']);
+            $this->middleware('permission:work-process-delete')->only('destroy');
+        }
+
+
+
     private function uploadIcon($icon): string
     {
         $iconName = time() . '.' . $icon->getClientOriginalExtension();

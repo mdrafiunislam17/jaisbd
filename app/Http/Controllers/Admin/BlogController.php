@@ -11,6 +11,14 @@ class BlogController extends Controller
 {
     //
 
+     public function __construct()
+        {
+            $this->middleware('permission:blog-list|blog-create|blog-edit|blog-delete')->only('index');
+            $this->middleware('permission:blog-create')->only(['create', 'store']);
+            $this->middleware('permission:blog-edit')->only(['edit', 'update']);
+            $this->middleware('permission:blog-delete')->only('destroy');
+        }
+
      private function uploadImage($image): string
     {
         $imageName = time() . '.' . $image->getClientOriginalExtension();

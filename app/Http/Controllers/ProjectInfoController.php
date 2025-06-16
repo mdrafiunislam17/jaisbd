@@ -11,6 +11,15 @@ class ProjectInfoController extends Controller
 {
     //
 
+        public function __construct()
+        {
+            $this->middleware('permission:project-info-list|project-info-create|project-info-edit|project-info-delete')->only('index');
+            $this->middleware('permission:project-info-create')->only(['create', 'store']);
+            $this->middleware('permission:project-info-edit')->only(['edit', 'update']);
+            $this->middleware('permission:project-info-delete')->only('destroy');
+        }
+
+
     public function index()
     {
         $projectInfos = ProjectInfo::all();

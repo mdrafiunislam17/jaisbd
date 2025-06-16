@@ -13,6 +13,15 @@ class TeamMemberController extends Controller
 {
     //
 
+    public function __construct()
+    {
+        $this->middleware('permission:team-member-list|team-member-create|team-member-edit|team-member-delete')->only('index');
+        $this->middleware('permission:team-member-create')->only(['create', 'store']);
+        $this->middleware('permission:team-member-edit')->only(['edit', 'update']);
+        $this->middleware('permission:team-member-delete')->only('destroy');
+    }
+
+
     private function uploadImage($image): string
     {
         $imageName = time() . '.' . $image->getClientOriginalExtension();

@@ -12,6 +12,13 @@ class EventController extends Controller
 {
     //
 
+     public function __construct()
+        {
+            $this->middleware('permission:event-list|event-create|event-edit|event-delete')->only('index');
+            $this->middleware('permission:event-create')->only(['create', 'store']);
+            $this->middleware('permission:event-edit')->only(['edit', 'update']);
+            $this->middleware('permission:event-delete')->only('destroy');
+        }
 
  private function uploadImage($image): string
 {

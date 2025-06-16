@@ -11,6 +11,15 @@ class ManagementController extends Controller
 {
     //
 
+    public function __construct()
+        {
+            $this->middleware('permission:management-list|management-create|management-edit|management-delete')->only('index');
+            $this->middleware('permission:management-create')->only(['create', 'store']);
+            $this->middleware('permission:management-edit')->only(['edit', 'update']);
+            $this->middleware('permission:management-delete')->only('destroy');
+        }
+
+
     public function index()
     {
         $managements = Management::all();

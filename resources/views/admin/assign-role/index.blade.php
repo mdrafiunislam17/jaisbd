@@ -1,154 +1,133 @@
 @extends("admin.layouts.master")
-@section("title", "Assign Role")
-@push('custom-style')
-    {{-- Datatable css  --}}
-    <link rel="stylesheet" href="{{url('https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css')}}">
-    <link rel="stylesheet" href="{{url('https://cdn.datatables.net/1.10.25/css/dataTables.semanticui.min.css')}}">
-@endpush
-@section("content")
-    <div class="container-fluid">
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Assign Role</h1>
 
-        </div>
+@section('title')
+    User
+@endsection
 
-        @if (session()->has("success"))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{ session("success") }}
-            </div>
-        @endif
+<style>
 
-        @if (session()->has("error"))
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{ session("error") }}
-            </div>
-        @endif
 
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable">
+</style>
 
+@section('content')
+<div class="container-fluid my-4">
+    <div class="row">
+        <div class="col-12">
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            <div class="card table-card">
+                <div class="card-header table-header">
+                    <div class="title-with-breadcrumb">
+                        <div class="table-title">User</div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Assign Role</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered w-100">
                         <thead>
-                        <tr>
-                            <th scope="col">SL NO</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Action</th>
-                        </tr>
+                            <tr>
+                                <th>SL NO</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                         <tbody>
-
+                            @foreach ($users as $index => $user)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-primary"
+                                            onclick='assignRole({{ json_encode($user->id) }}, {{ json_encode($user->name) }}, {{ json_encode($user->email) }}, {{ json_encode($user->roles->pluck("name")->first()) }})'>
+                                            Edit
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal fade" id="assignroleModal" tabindex="-1" aria-labelledby="modalName" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+
+
+<!-- Assign Role Modal -->
+<div class="modal fade" id="assignroleModal" tabindex="-1" aria-labelledby="assignroleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('assignrole.store') }}">
+                @csrf
+
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 me-2" id="modalName">
-                    </h1>
-                    <span id="modalEmail"></span>
+                    <h5 class="modal-title" id="assignroleModalLabel">
+                        <span id="modalName"></span>
+                        <small id="modalEmail" class="text-muted ms-2"></small>
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="{{route('assignrole.store')}}">
-                    <div class="modal-body">
-                        @csrf
-                        <input type="hidden" name="email" value="" class="modalEmail">
 
-                        <div class="mb-3">
-                            <span class="roles-label">Roles :</span>
-                            @foreach ($roles as $role)
-                                <div class="form-check form-check-inline role-outter-wrapper">
-                                    <input type="radio" id="{{$role}}" name="role" class="role-input d-none form-check-input" value="{{$role}}">
-                                    <label for="{{$role}}" class="role-wrapper">
-                                        <p>{{$role}}</p>
-                                    </label>
-                                </div>
-                            @endforeach
+                <div class="modal-body">
+                    <input type="hidden" name="email" class="modalEmail">
 
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label d-block">Select Role:</label>
+                        @foreach ($roles as $role)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input role-input" type="radio" name="role" id="role_{{ $role }}" value="{{ $role }}">
+                                <label class="form-check-label" for="role_{{ $role }}">{{ ucfirst($role) }}</label>
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="assign-role-btn">Assign role</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Assign Role</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+
+
+            </form>
         </div>
     </div>
+</div>
+
+
 
 @endsection
 
-@push('custom-scripts')
-    <script src="{{url('https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js')}}" defer></script>
-    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js')}}" defer></script>
 
-    <script type="text/javascript">
-        var listUrl = SITEURL + '/dashboard/assign-role';
+<!-- Bootstrap 5 JS Bundle CDN (includes Popper) -->
+<script src="{{url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js')}}"></script>
 
-        function assignRole(id, name, email, role) {
-            var emailbracket = "( "+email+" )"
-            $("#modalName").html(name);
-            $("#modalEmail").html(emailbracket);
-            $(".modalEmail").val(email);
-            $("#modalRole").html(role);
-            $('#assignroleModal').modal('show');
+<script>
+    function assignRole(id, name, email, role) {
+        console.log({id, name, email, role});  // For debugging
 
-            var roles = document.getElementsByClassName('role-input');
-            for (var i = 0; i < roles.length; i++) {
-                if (roles[i].id == role) {
-                    roles[i].checked = true;
-                }
-                else{
-                    roles[i].checked = false;
-                }
-            }
-        }
+        document.getElementById('modalName').innerText = name;
+        document.getElementById('modalEmail').innerText = `(${email})`;
+        document.querySelector('.modalEmail').value = email;
 
-        $(document).ready( function () {
-            var table = $('#dataTable').DataTable({
-
-                processing: true,
-                responsive: true,
-                serverSide: true,
-                fixedHeader: true,
-                "pageLength": 20,
-                "lengthMenu": [ 20, 50, 100, 500 ],
-                ajax: {
-                    url: listUrl,
-                    type: 'GET'
-                },
-                columns: [
-                    { data: 'id', name: 'id', orderable: true },
-                    { data: 'name', name: 'name', orderable: true },
-                    { data: 'email', name: 'email', orderable: true },
-                    { data: 'role', name: 'role', orderable: true },
-                    {
-                        data: 'action-btn',
-                        orderable: false,
-                        render: function (data) {
-                            var btn1 = '';
-                            btn1 += '<div class="action-btn">';
-                            btn1 += `<button type="button" class="btn btn-edit" onclick="assignRole(${data.id}, '${data.name}', '${data.email}', '${data.role}');"><i class="ri-edit-line"></i></button>`;
-                            btn1 += '</div>';
-                            return btn1;
-                        }
-                    }
-                ],
-                order: [[0, 'asc']]
-            });
+        const radios = document.querySelectorAll('.role-input');
+        radios.forEach(radio => {
+            radio.checked = (radio.value === role);
         });
-    </script>
-@endpush
+
+        let myModal = new bootstrap.Modal(document.getElementById('assignroleModal'));
+        myModal.show();
+    }
+</script>
+

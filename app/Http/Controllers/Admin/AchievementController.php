@@ -11,6 +11,14 @@ class AchievementController extends Controller
 {
     //
 
+      public function __construct()
+        {
+            $this->middleware('permission:achievement-list|achievement-create|achievement-edit|achievement-delete')->only('index');
+            $this->middleware('permission:achievement-create')->only(['create', 'store']);
+            $this->middleware('permission:achievement-edit')->only(['edit', 'update']);
+            $this->middleware('permission:achievement-delete')->only('destroy');
+        }
+
     private function uploadIcon($icon): string
     {
         $iconName = time() . '.' . $icon->getClientOriginalExtension();

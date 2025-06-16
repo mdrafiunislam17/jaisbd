@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     //
+
+    public function __construct()
+        {
+            $this->middleware('permission:client-list|client-create|client-edit|client-delete')->only('index');
+            $this->middleware('permission:client-create')->only(['create', 'store']);
+            $this->middleware('permission:client-edit')->only(['edit', 'update']);
+            $this->middleware('permission:client-delete')->only('destroy');
+        }
     private function uploadImage($image): string
     {
         $imageName = time() . '.' . $image->getClientOriginalExtension();

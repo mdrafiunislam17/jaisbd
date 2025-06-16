@@ -14,54 +14,65 @@ use Yajra\DataTables\Facades\DataTables;
 
 class RoleController extends Controller
 {
-    //
-
-
-    public function index(Request $request)
+    function __construct()
     {
-        if ($request->ajax()) {
-            $auth_user = Auth::user();
-            if ($auth_user->hasRole('superadmin')) {
-                $roles = Role::get()->all();
-            } else {
-                $roles = Role::where('name','!=', 'superadmin')->get()->all();
-            }
-            return DataTables::of($roles)
-                ->addIndexColumn()
-                ->addColumn('action-btn', function($row) {
-                    $auth_user = Auth::user();
-                    if($auth_user->hasRole('superadmin')){
-                        $roleMatch = [
-                            'id' => $row->id,
-                            'role' => $auth_user->roles->first()->name ?? null,
-                        ];
-                        return $roleMatch;
-                    }else{
-                        $roleMatch = [
-                            'id' => $row->id
-                        ];
-                        return $roleMatch;
-                    }
-                })
-                ->rawColumns(['action-btn'])
-                ->make(true);
-        }
-        return view('admin.roles.index');
+         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:role-create', ['only' => ['create','store']]);
+         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+//    public function index(Request $request)
+// {
+//     if ($request->ajax()) {
+//         $auth_user = Auth::user();
+
+//         $roles = $auth_user->hasRole('superadmin')
+//             ? Role::all()
+//             : Role::where('name', '!=', 'superadmin')->get();
+
+//         return DataTables::of($roles)
+//             ->addIndexColumn()
+//             ->addColumn('action-btn', function($row) {
+//                 $btn = '<div class="action-btn">';
+//                 $btn .= '<a href="' . route('role.edit', $row->id) . '" class="btn btn-edit"><i class="ri-edit-line"></i></a>';
+//                 if ($row->name != 'superadmin') {
+//                     $btn .= '<a href="javascript:void(0);" class="btn btn-delete" onclick="confirmDeletion(\'' . route('role.delete', $row->id) . '\')"><i class="ri-delete-bin-2-line"></i></a>';
+//                 }
+//                 $btn .= '</div>';
+//                 return $btn;
+//             })
+//             ->rawColumns(['action-btn'])
+//             ->make(true);
+//     }
+
+//     return view('admin.roles.index');
+// }
+
+public function index()
+{
+    $auth_user = Auth::user();
+
+    $roles = $auth_user->hasRole('superadmin')
+        ? Role::all()
+        : Role::where('name', '!=', 'superadmin')->get();
+
+    return view('admin.roles.index', compact('roles'));
+}
+
+
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-//    public function create(): View
-//    {
-//        $permission = Auth::user();
-//
-//
-//        return view('admin.roles.create',compact('permission'));
-//    }
-
     public function create(): View
     {
         $auth_user = Auth::user();
@@ -81,19 +92,22 @@ class RoleController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
+        $this->validate($request, [
             'name' => 'required|unique:roles,name',
-            'permission' => 'required|array',
+            'permission' => 'required',
         ]);
 
-        $role = Role::create(['name' => $validated['name']]);
+        Role::create(['name' => $request->input('name')]);
 
-        // Assign permissions directly
-        $role->syncPermissions($validated['permission']);
+        $newRole = Role::findByName($request->input('name'));
+        foreach ($request->input('permission') as $key => $value) {
+            $permissionName = Permission::findById($value);
+            $newRole->givePermissionTo($permissionName->name);
+        }
 
         return redirect()
-            ->route('projectinfo.index') // বা role.index, যেটা প্রযোজ্য
-            ->with('success', 'Role created successfully.');
+            ->route('role.index')
+            ->with('success','Role created successfully');
     }
     /**
      * Display the specified resource.
@@ -115,9 +129,9 @@ class RoleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|View
+     * @return \Illuminate\Http\Response
      */
-    public function edit($id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|View
+    public function edit($id): View
     {
         $auth_user = Auth::user();
         $role = Role::findorfail($id);
@@ -166,7 +180,7 @@ class RoleController extends Controller
         }
 
         return redirect()->route('role.index')
-            ->with('success','Role updated successfully');
+                        ->with('success','Role updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -174,20 +188,21 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id): RedirectResponse
-    {
-        DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('role.index')
-            ->with('success', 'Role deleted successfully');
-    }
+    // public function destroy($id): RedirectResponse
+    // {
+    //     DB::table("roles")->where('id',$id)->delete();
+    //     return redirect()->route('role.index')
+    //                     ->with('success', 'Role deleted successfully');
+    // }
 
-    public function delete($id){
+    public function destroy($id){
         $role = Role::find($id);
         if ($role->name === 'superadmin' && !Auth::user()->hasRole('superadmin')) {
             return redirect()->route('role.index');
         }
         $role->delete();
         return redirect()->route('role.index')
-            ->with('success', 'Role deleted successfully');
+                        ->with('success', 'Role deleted successfully');
     }
+
 }

@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 
 class CareerApplicationController extends Controller
 {
+
+     public function __construct()
+        {
+            $this->middleware('permission:career-application-list|career-application-career-application|career-application-edit|career-application-delete')->only('index');
+            $this->middleware('permission:career-application-create')->only(['create', 'store']);
+            $this->middleware('permission:career-application-edit')->only(['edit', 'update']);
+            $this->middleware('permission:career-application-delete')->only('destroy');
+        }
     //
 
 //      private function uploadResume($file)

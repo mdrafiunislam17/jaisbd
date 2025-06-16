@@ -2,14 +2,14 @@
 
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AchievementController;
-use App\Http\Controllers\Admin\AssignRoleController;
+// use App\Http\Controllers\Admin\AssignRoleController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SliderController;
-
+use App\Http\Controllers\AssignRoleController;
 use App\Http\Controllers\Admin\TeamMemberController;
 
 use App\Http\Controllers\HomeController;
@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\CareerApplicationController;
+
+
 
 
 
@@ -105,9 +107,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/role/create', [RoleController::class,'create'])->name('role.create');
     Route::post('/dashboard/role/store', [RoleController::class,'store'])->name('role.store');
     Route::get('/dashboard/role/edit/{id}', [RoleController::class,'edit'])->name('role.edit');
-    Route::post('/dashboard/role/update/{id}', [RoleController::class,'update'])->name('role.update');
-    Route::get('/dashboard/role/delete/{id}', [RoleController::class,'delete'])->name('role.delete');
-    Route::get('/dashboard/role/delete/{id}', [RoleController::class,'destroy'])->name('role.delete');
+    Route::put('/dashboard/role/update/{id}', [RoleController::class,'update'])->name('role.update');
+    // Route::get('/dashboard/role/delete/{id}', [RoleController::class,'delete'])->name('role.delete');
+    Route::delete('/dashboard/role/delete/{id}', [RoleController::class,'destroy'])->name('role.delete');
 
 
     // ==============================
