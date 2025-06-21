@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\CareerApplicationController;
+use App\Http\Controllers\FrontedController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -41,9 +42,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/',[FrontedController::class,'index'])->name('fronted.index');
 
 Auth::routes();
 // Protected routes (requires authentication)
