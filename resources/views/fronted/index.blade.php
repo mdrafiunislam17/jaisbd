@@ -13,147 +13,100 @@
         <div class="banner-fade">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-
-                <!-- Single Item -->
-                <div class="swiper-slide banner-style-one">
-                    <div class="banner-thumb bg-cover shadow dark" style="background: url(assets/img/banner/16.jpg);"></div>
-                    <div class="container">
-                        <div class="row align-center">
-                            <div class="col-xl-7 offset-xl-5">
-                                <div class="content">
-                                    <h4>Optimize IT Systems</h4>
-                                    <h2>Creating a better <strong>Tech solutions</strong></h2>
-                                    <div class="button">
-                                        <a class="btn btn-gradient btn-md radius animation" href="#">Meet with us</a>
+                @foreach($slider as $item)
+                    <!-- Single Item -->
+                    <div class="swiper-slide banner-style-one">
+                        <div class="banner-thumb bg-cover shadow dark" style="background: url('{{ asset("uploads/slider/".$item->image) }}');"></div>
+                        <div class="container">
+                            <div class="row align-center">
+                                <div class="col-xl-7 offset-xl-5">
+                                    <div class="content">
+                                        <h4>{{ $item->title }}</h4>
+                                        <h2>{!! $item->subtitle !!}</h2> {{-- Use {!! !!} if HTML tags are included --}}
+                                        <div class="button">
+                                            <a class="btn btn-gradient btn-md radius animation" href="{{ $item->button_link ?? '#' }}">{{ $item->button_text ?? 'Meet with us' }}</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Shape -->
-                    <div class="banner-angle-shape">
-                        <div class="shape-item"></div>
-                        <div class="shape-item"></div>
-                        <div class="shape-item"></div>
-                    </div>
-                    <!-- End Shape -->
-                </div>
-                <!-- End Single Item -->
-
-                <!-- Single Item -->
-                <div class="swiper-slide banner-style-one">
-                    <div class="banner-thumb bg-cover shadow dark" style="background: url(assets/img/banner/28.jpg);"></div>
-                    <div class="container">
-                        <div class="row align-center">
-                            <div class="col-xl-7 offset-xl-5">
-                                <div class="content">
-                                    <h4>IT Software & Design</h4>
-                                    <h2>Transform every <strong>technical process</strong></h2>
-                                    <div class="button">
-                                        <a class="btn btn-gradient btn-md radius animation" href="#">Meet with us</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Shape -->
+                        <div class="banner-angle-shape">
+                            <div class="shape-item"></div>
+                            <div class="shape-item"></div>
+                            <div class="shape-item"></div>
                         </div>
+                        <!-- End Shape -->
                     </div>
-                    <!-- Shape -->
-                    <div class="banner-angle-shape">
-                        <div class="shape-item"></div>
-                        <div class="shape-item"></div>
-                        <div class="shape-item"></div>
-                    </div>
-                    <!-- End Shape -->
-                </div>
-                <!-- End Single Item -->
-
+                    <!-- End Single Item -->
+                @endforeach
             </div>
 
             <!-- Navigation -->
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
-
         </div>
+
     </div>
     <!-- End Main -->
 
     <!-- Start About
     ============================================= -->
-    <div class="about-area default-padding-top pb-md-110 pb-xs-45 overflow-hidden">
-        <div class="container">
-            <div class="about-style-one-box">
-                <div class="row">
-                    <div class="about-style-one col-xl-6 col-lg-6">
-                        <div class="thumb">
-                            <img src="assets/img/about/5.jpg" alt="Thumb">
-                            <div class="award">
-                                <div class="icon">
-                                    <i class="flaticon-medal"></i>
+        <div class="about-area default-padding-top pb-md-110 pb-xs-45 overflow-hidden">
+            <div class="container">
+                <div class="about-style-one-box">
+                    <div class="row">
+                        <!-- Left Column: Image and Award -->
+                        <div class="about-style-one col-xl-6 col-lg-6">
+                            <div class="thumb">
+                                <img src="{{ asset('uploads/about/' . $about->image) }}" alt="About Image">
+
+                                <div class="award">
+                                    <div class="icon">
+                                        <i class="flaticon-medal"></i>
+                                    </div>
+                                    <div class="info">
+                                        <h4>{{ $about->award_title ?? 'Certified Company' }}</h4>
+                                        <p>{{ $about->award_description ?? 'We adapt our delivery to the way your work, whether as an external provider.' }}</p>
+                                    </div>
                                 </div>
-                                <div class="info">
-                                    <h4>Certified Company</h4>
-                                    <p>
-                                        We adapt our delivery to the way your work, whether as an external provider.
-                                    </p>
+
+                                <div class="thumb-shape">
+                                    @for ($i = 0; $i < 5; $i++)
+                                        <div class="shape"></div>
+                                    @endfor
                                 </div>
-                            </div>
-                            <div class="thumb-shape">
-                                <div class="shape"></div>
-                                <div class="shape"></div>
-                                <div class="shape"></div>
-                                <div class="shape"></div>
-                                <div class="shape"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="about-style-one pl-lg-30 pl-70 pl-md-15 pl-xs-15 col-xl-6 col-lg-6">
-                        <div class="info">
-                            <h4 class="sub-heading mb-20">Who we are</h4>
-                            <h2 class="heading">Preparing for your success <br> trusted source in IT services</h2>
-                            <p class="mb-0">
-                                Dissuade ecstatic and properly saw entirely sir why laughter endeavor. In on my jointure horrible margaret suitable he followed speedily. Indeed vanity excuse or mr lovers of on. By offer scale an stuff. Blush be sorry no sight sang lose.
-                            </p>
-                            <ul class="short-feature-list">
-                                <li>
-                                    <h4><a href="#">IT Consultancy</a></h4>
-                                    <p>
-                                        Believe fat how six drawing pursuit minute  exact dear open to reaching out.
-                                    </p>
-                                </li>
-                                <li>
-                                    <h4><a href="#">Cyber Security</a></h4>
-                                    <p>
-                                        Same do seen head am part it dear open to travelling so especially prosperous.
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="experience">
-                            <div class="shape-bottom-large"></div>
-                            <div class="left">
-                                <h2>28</h2>
-                                <h4>Years <br> of experience</h4>
+
+                        <!-- Right Column: Text Content -->
+                        <div class="about-style-one pl-lg-30 pl-70 pl-md-15 pl-xs-15 col-xl-6 col-lg-6">
+                            <div class="info">
+                                <h4 class="sub-heading mb-20">{{ $about->title }}</h4>
+                                <p class="mb-0">{!! $about->description !!}</p>
                             </div>
+
+                            {{-- Optional Experience Section --}}
+                            {{--
+                            <div class="experience">
+                                <div class="shape-bottom-large"></div>
+                                <div class="left">
+                                    <h2>{{ $about->experience_years ?? '28' }}</h2>
+                                    <h4>Years <br> of experience</h4>
+                                </div>
+                            </div>
+                            --}}
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Background Shape Image -->
+            {{-- <div class="shape-left-top" style="background-image: url('{{ asset('uploads/about/' . $about->image) }}');"></div> --}}
+
+
         </div>
-        <!-- Shape -->
-        <div class="shape-left-top" style="background-image: url(assets/img/shape/1.png);"></div>
-        <!-- End Shape -->
 
-        <!-- Shape -->
-        <div class="shape-animated">
-            <img src="assets/img/shape/11.png" alt="Shape">
-        </div>
-        <!-- End Shape -->
-
-        <!-- Shape -->
-        <div class="blur-bg"></div>
-        <!-- End Shape -->
-
-
-    </div>
     <!-- End About -->
 
     <!-- Start Services
@@ -173,73 +126,41 @@
             <div class="services-style-one-box">
                 <div class="row">
                     <!-- Sngle Item -->
-                    <div class="services-style-one col-xl-3 col-md-6">
-                        <div class="item style-one-item">
-                            <i class="flaticon-data-processing"></i>
-                            <p>
-                                Indeed vanity excuse or mr lovers of on. By offer scale an stuff. Blush be sorry no sight sang lose.
-                            </p>
-                            <div class="bottom">
-                                <h4><a href="#">Data Center</a></h4>
-                                <a href="#"><i class="fas fa-arrow-right"></i></a>
+                    @foreach ($services as $service)
+                        <div class="services-style-one col-xl-3 col-md-6">
+                            <div class="item style-one-item {{ $loop->first ? 'active' : '' }}">
+                                 <img src="{{ asset('uploads/service/' . $service->icon) }}" alt="{{ $service->title }}"
+                                 style="height: 60px; width: 60px; object-fit: cover; border-radius: 50%; margin-bottom: 15px;">
+
+                                 <p>{!! Str::limit($service->description, 120) !!}</p>
+                                <div class="bottom">
+                                      @if(!empty($service->slug))
+                                        <h4><a href="{{ route('services.details1', ['slug' => $service->slug]) }}">{{ $service->title }}</a></h4>
+                                    @else
+                                        <h4>{{ $service->title }}</h4> {{-- fallback without link --}}
+                                    @endif
+                                    <a href="#"><i class="fas fa-arrow-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+
                     <!-- End Sngle Item -->
                     <!-- Sngle Item -->
-                    <div class="services-style-one col-xl-3 col-md-6">
-                        <div class="item style-one-item active">
-                            <i class="flaticon-data-security"></i>
-                            <p>
-                                Indeed vanity excuse or mr lovers of on. By offer scale an stuff. Blush be sorry no sight sang lose.
-                            </p>
-                            <div class="bottom">
-                                <h4><a href="#">Cloud Services</a></h4>
-                                <a href="#"><i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Sngle Item -->
-                    <!-- Sngle Item -->
-                    <div class="services-style-one col-xl-3 col-md-6">
-                        <div class="item style-one-item">
-                            <i class="flaticon-augmented-reality"></i>
-                            <p>
-                                Indeed vanity excuse or mr lovers of on. By offer scale an stuff. Blush be sorry no sight sang lose.
-                            </p>
-                            <div class="bottom">
-                                <h4><a href="#">Software Development</a></h4>
-                                <a href="#"><i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Sngle Item -->
-                    <!-- Sngle Item -->
-                    <div class="services-style-one col-xl-3 col-md-6">
-                        <div class="item style-one-item">
-                            <i class="flaticon-stock-market"></i>
-                            <p>
-                                Indeed vanity excuse or mr lovers of on. By offer scale an stuff. Blush be sorry no sight sang lose.
-                            </p>
-                            <div class="bottom">
-                                <h4><a href="#">IT Management</a></h4>
-                                <a href="#"><i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                     @endforeach
                     <!-- End Sngle Item -->
                 </div>
             </div>
         </div>
         <!-- Shape -->
-        <div class="shape" style="background-image: url(assets/img/shape/14.png);"></div>
+
         <!-- End Shape -->
     </div>
     <!-- End Services -->
 
     <!-- Start Achivement
     ============================================= -->
-    <div class="achivement-area default-padding-bottom">
+    {{-- <div class="achivement-area default-padding-bottom">
         <div class="top-shape-120"></div>
         <div class="container">
             <div class="row">
@@ -282,26 +203,27 @@
                 <!-- End Single Item -->
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- End Achivement -->
 
     <!-- Start Why Choose Us
     ============================================= -->
-    <div class="choose-us-area default-padding-bottom">
+    <div class="choose-us-area default-padding-bottom py-4">
         <!-- Shape -->
         <div class="shape" style="background-image: url(assets/img/shape/38.png);"></div>
         <!-- End Shape -->
         <div class="container">
             <div class="row">
                 <div class="choose-us-style-one col-xl-5 col-lg-5">
-                    <h4 class="sub-heading">Why choose us</h4>
-                    <h2 class="heading">Our goal is giving the <br> best our customers </h2>
-                    <p class="mb--5">
-                        Jennings appetite disposed me an at subjects an. To no indulgence diminution so discovered mr apartments. Are off under folly death wrote cause her way spite. Plan upon yet way get cold spot its week. Almost do am or limits hearts. Resolve parties but why she shewing. She sang know now
-                    </p>
-                    <a class="btn mt-30 btn-md btn-theme" href="#">Know More</a>
+                    <h4 class="sub-heading">{{$choose->title}}</h4>
+                    <h2 class="heading">{{$choose->slug}} </h2>
+                     <p>{!! Str::limit($choose->description, 120) !!}</p>
+                    @if(!empty($choose->slug))
+                        <a class="btn mt-30 btn-md btn-theme" href="{{ route('choose.details', ['slug' => $choose->slug]) }}">Know More</a>
+                    @endif
+
                 </div>
-                <div class="choose-us-style-one text-center col-xl-6 offset-xl-1 col-lg-7">
+                {{-- <div class="choose-us-style-one text-center col-xl-6 offset-xl-1 col-lg-7">
                     <div class="right-item">
                         <div class="row">
                             <!-- Signle Item -->
@@ -326,7 +248,7 @@
                             <!-- End Signle Item -->
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -334,7 +256,7 @@
 
     <!-- Start Brand
     ============================================= -->
-    <div class="brand-area">
+    {{-- <div class="brand-area">
         <div class="container">
             <div class="brand-items pt-80 pb-80">
                 <div class="row">
@@ -374,7 +296,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- End Brand -->
 
     <!-- Start Projects
@@ -384,7 +306,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <div class="site-heading text-center">
-                        <h4 class="sub-title">Case Studies</h4>
+                        <h4 class="sub-title">Project Studies</h4>
                         <h2 class="title">Latest showcase and <br> solutions to our customers!</h2>
                     </div>
                 </div>
@@ -395,104 +317,35 @@
                 <div class="col-xl-12">
                     <div class="masonary">
                         <div class="gallery-items text-center colums-3 mixed">
-                            <!-- Single Item -->
-                            <div class="gallery-item gallery-style-one">
-                                <div class="item gallery-mixed-item active">
-                                    <div class="thumb">
-                                        <img src="assets/img/portfolio/15.jpg" alt="Thumb">
-                                    </div>
-                                    <div class="content">
-                                        <div class="info">
-                                            <h4><a href="project-details.html">IT Management</a></h4>
-                                            <span>Technology</span>
+                            @foreach($projects as $project)
+                                <div class="gallery-item gallery-style-one">
+                                    <div class="item gallery-mixed-item">
+                                        <div class="thumb">
+                                            <img src="{{ asset('uploads/project/' . $project->image) }}" alt="{{ $project->title }}">
+                                        </div>
+                                        <div class="content">
+                                            <div class="info">
+                                             <h4>
+                                                <a href="{{ route('project.details1', ['title' => $project->title]) }}">
+                                                    {{ $project->title }}
+                                                </a>
+                                            </h4>
+
+                                                <select name="project_info_id" class="form-control"@disabled(true) >
+                                                    @foreach($projectInfo as $category)
+                                                        <option value="{{ $category->id }}" {{ $project->project_info_id == $category->id ? 'selected' : '' }}>
+                                                            {{ $category->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <span>{{ $project->category ?? 'Technology' }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- End Single Item -->
-
-                            <!-- Single Item -->
-                            <div class="gallery-item gallery-style-one">
-                                <div class="item gallery-mixed-item">
-                                    <div class="thumb">
-                                        <img src="assets/img/portfolio/13.jpg" alt="Thumb">
-                                    </div>
-                                    <div class="content">
-                                        <div class="info">
-                                            <h4><a href="project-details.html">Cyber Security</a></h4>
-                                            <span>Technology</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Item -->
-
-                            <!-- Single Item -->
-                            <div class="gallery-item gallery-style-one">
-                                <div class="item gallery-mixed-item">
-                                    <div class="thumb">
-                                        <img src="assets/img/portfolio/3.jpg" alt="Thumb">
-                                    </div>
-                                    <div class="content">
-                                        <div class="info">
-                                            <h4><a href="project-details.html">Cloud Computing</a></h4>
-                                            <span>Technology</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Item -->
-
-                            <!-- Single Item -->
-                            <div class="gallery-item gallery-style-one">
-                                <div class="item gallery-mixed-item">
-                                    <div class="thumb">
-                                        <img src="assets/img/portfolio/5.jpg" alt="Thumb">
-                                    </div>
-                                    <div class="content">
-                                        <div class="info">
-                                            <h4><a href="project-details.html">Software Dev</a></h4>
-                                            <span>Technology</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Item -->
-
-                            <!-- Single Item -->
-                            <div class="gallery-item gallery-style-one">
-                                <div class="item gallery-mixed-item">
-                                    <div class="thumb">
-                                        <img src="assets/img/portfolio/7.jpg" alt="Thumb">
-                                    </div>
-                                    <div class="content">
-                                        <div class="info">
-                                            <h4><a href="project-details.html">Backup & Recovery</a></h4>
-                                            <span>Technology</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Item -->
-
-                            <!-- Single Item -->
-                            <div class="gallery-item gallery-style-one">
-                                <div class="item gallery-mixed-item">
-                                    <div class="thumb">
-                                        <img src="assets/img/portfolio/8.jpg" alt="Thumb">
-                                    </div>
-                                    <div class="content">
-                                        <div class="info">
-                                            <h4><a href="project-details.html">Social Media App</a></h4>
-                                            <span>Technology</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Item -->
-
-
+                            @endforeach
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -502,7 +355,7 @@
 
     <!-- Start Process
     ============================================= -->
-    <div class="process-area bg-dark text-light default-padding">
+    {{-- <div class="process-area bg-dark text-light default-padding">
         <div class="container">
             <div class="row align-center">
                 <div class="col-xl-6 col-lg-5">
@@ -552,7 +405,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- End Process -->
 
     <!-- Start Team
@@ -575,169 +428,36 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Single Item -->
-                            <div class="swiper-slide">
-                                <div class="team-style-one">
-                                    <div class="thumb">
-                                        <img src="assets/img/team/1.jpg" alt="Thumb">
-                                        <div class="angle-shape" style="background-image: url(assets/img/shape/24.png);"></div>
-                                    </div>
-                                    <div class="info">
-                                        <div class="content">
-                                            <h4 class="title"><a href="team-details.html">Sporia Deko</a></h4>
-                                            <span>Marketing</span>
+                           @foreach ($teamMembers as $member)
+                                <div class="swiper-slide">
+                                    <div class="team-style-one">
+                                        <div class="thumb">
+                                            <img src="{{ asset('uploads/teamMember/' . $member->image) }}" alt="{{ $member->name }}">
+                                            <div class="angle-shape" style="background-image: url({{ asset('assets/img/shape/24.png') }});"></div>
                                         </div>
-                                        <ul class="social">
-                                            <li>
-                                                <a class="facebook" href="#">
-                                                    <i class="fab fa-facebook-f"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="twitter" href="#">
-                                                    <i class="fab fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="pinterest" href="#">
-                                                    <i class="fab fa-pinterest"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        <div class="info">
+                                            <div class="content">
+                                                <h4 class="title"><a href="#">{{ $member->name }}</a></h4>
+                                                <span>{{ $member->position }}</span>
+                                            </div>
+                                            <ul class="social">
+                                                @if($member->facebook)
+                                                    <li><a class="facebook" href="{{ $member->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                                                @endif
+                                                @if($member->twitter)
+                                                    <li><a class="twitter" href="{{ $member->twitter }}"><i class="fab fa-twitter"></i></a></li>
+                                                @endif
+                                                @if($member->pinterest)
+                                                    <li><a class="pinterest" href="{{ $member->pinterest }}"><i class="fab fa-pinterest"></i></a></li>
+                                                @endif
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
+
                             <!-- End Single Item -->
-                            <!-- Single Item -->
-                            <div class="swiper-slide">
-                                <div class="team-style-one">
-                                    <div class="thumb">
-                                        <img src="assets/img/team/5.jpg" alt="Thumb">
-                                        <div class="angle-shape" style="background-image: url(assets/img/shape/24.png);"></div>
-                                    </div>
-                                    <div class="info">
-                                        <div class="content">
-                                            <h4 class="title"><a href="team-details.html">Adhom Jonam</a></h4>
-                                            <span>Project Manager</span>
-                                        </div>
-                                        <ul class="social">
-                                            <li>
-                                                <a class="facebook" href="#">
-                                                    <i class="fab fa-facebook-f"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="twitter" href="#">
-                                                    <i class="fab fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="pinterest" href="#">
-                                                    <i class="fab fa-pinterest"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Item -->
-                            <!-- Single Item -->
-                            <div class="swiper-slide">
-                                <div class="team-style-one">
-                                    <div class="thumb">
-                                        <img src="assets/img/team/3.jpg" alt="Thumb">
-                                        <div class="angle-shape" style="background-image: url(assets/img/shape/24.png);"></div>
-                                    </div>
-                                    <div class="info">
-                                        <div class="content">
-                                            <h4 class="title"><a href="team-details.html">Turka Pruda</a></h4>
-                                            <span>Co-Founder</span>
-                                        </div>
-                                        <ul class="social">
-                                            <li>
-                                                <a class="facebook" href="#">
-                                                    <i class="fab fa-facebook-f"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="twitter" href="#">
-                                                    <i class="fab fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="pinterest" href="#">
-                                                    <i class="fab fa-pinterest"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Item -->
-                            <!-- Single Item -->
-                            <div class="swiper-slide">
-                                <div class="team-style-one">
-                                    <div class="thumb">
-                                        <img src="assets/img/team/4.jpg" alt="Thumb">
-                                        <div class="angle-shape" style="background-image: url(assets/img/shape/24.png);"></div>
-                                    </div>
-                                    <div class="info">
-                                        <div class="content">
-                                            <h4 class="title"><a href="team-details.html">Monas Paul</a></h4>
-                                            <span>Designer</span>
-                                        </div>
-                                        <ul class="social">
-                                            <li>
-                                                <a class="facebook" href="#">
-                                                    <i class="fab fa-facebook-f"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="twitter" href="#">
-                                                    <i class="fab fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="pinterest" href="#">
-                                                    <i class="fab fa-pinterest"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Item -->
-                            <!-- Single Item -->
-                            <div class="swiper-slide">
-                                <div class="team-style-one">
-                                    <div class="thumb">
-                                        <img src="assets/img/team/6.jpg" alt="Thumb">
-                                        <div class="angle-shape" style="background-image: url(assets/img/shape/24.png);"></div>
-                                    </div>
-                                    <div class="info">
-                                        <div class="content">
-                                            <h4 class="title"><a href="team-details.html">Duan Evua</a></h4>
-                                            <span>Marketing Assistant</span>
-                                        </div>
-                                        <ul class="social">
-                                            <li>
-                                                <a class="facebook" href="#">
-                                                    <i class="fab fa-facebook-f"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="twitter" href="#">
-                                                    <i class="fab fa-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="pinterest" href="#">
-                                                    <i class="fab fa-pinterest"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+
                             <!-- End Single Item -->
                         </div>
 

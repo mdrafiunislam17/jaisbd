@@ -82,6 +82,10 @@ class PermissionSeeder extends Seeder
             'about-create',
             'about-edit',
             'about-delete',
+             'choose-list',
+            'choose-create',
+            'choose-edit',
+            'choose-delete',
 
         ];
 

@@ -49,7 +49,6 @@ class ServiceController extends Controller
             "description" => "nullable|string",
             "image" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             "icon" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
-            "video" => "required|mp4|string|max:255"
         ]);
 
         try {
@@ -58,6 +57,7 @@ class ServiceController extends Controller
                 "title" => $request->input("title"),
                 "description" => $request->input("description"),
                 "status" => $request->input("status"),
+                "slug" => $request->input("slug") ,
             ]);
 
             if ($request->hasFile('image')) {
@@ -89,6 +89,7 @@ class ServiceController extends Controller
             "description" => "nullable|string",
             "image" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             "icon" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+
         ]);
 
         try {
@@ -96,6 +97,7 @@ class ServiceController extends Controller
                 "title" => $request->input("title"),
                 "description" => $request->input("description"),
                 "status" => $request->input("status"),
+                "slug" => $request->input("slug") ,
             ]);
 
             if ($request->hasFile('image')) {

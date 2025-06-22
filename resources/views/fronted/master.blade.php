@@ -15,7 +15,7 @@
     @yield('css')
 
     <!-- ========== Favicon Icon ========== -->
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset("uploads/" . $settings["SETTING_SITE_FAVICON"]) }}" type="image/x-icon">
 
     <!-- ========== Start Stylesheet ========== -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />

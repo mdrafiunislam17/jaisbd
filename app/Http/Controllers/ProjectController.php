@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\ProjectCategory;
 use Illuminate\Database\QueryException;
 use App\Models\ProjectInfo;
 use Illuminate\Support\Facades\Storage;
@@ -37,7 +38,7 @@ class ProjectController extends Controller
 
     public function create()
     {
-        $projectInfo = ProjectInfo::all();
+        $projectInfo = ProjectCategory::all();
         return view('admin.project.create', compact('projectInfo'));
     }
     public function store(Request $request)
@@ -71,7 +72,7 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        $projectInfo = ProjectInfo::all();
+        $projectInfo = ProjectCategory::all();
         return view('admin.project.edit', compact('project', 'projectInfo'));
     }
 

@@ -5,7 +5,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Settings</h1>
-            <a href="{{ route("admin.settings.index") }}"
+            <a href="{{ route("setting.index") }}"
                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-sync fa-sm text-white-50"></i> Settings</a>
         </div>
@@ -44,10 +44,10 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
-                <form action="{{ route("admin.settings.update") }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route("setting.update") }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method("PUT")
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="SETTING_SITE_TITLE"
                                class="col-sm-3 col-form-label text-right font-weight-bold">Website Title</label>
                         <div class="col-sm-9">
@@ -55,9 +55,9 @@
                                    value="{{ $settings["SETTING_SITE_TITLE"] }}"
                                    name="SETTING_SITE_TITLE" autofocus>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="HOME_PAGE_CONTENT" class="col-sm-3 col-form-label text-right font-weight-bold">Home
                             Page Content</label>
                         <div class="col-sm-9">
@@ -65,12 +65,12 @@
                                       class="form-control">{{ $settings["HOME_PAGE_CONTENT"] }}</textarea>
                         </div>
                     </div>
-                    <hr>
+                    <hr> --}}
                     <div class="form-group row">
                         <label for="SETTING_SITE_LOGO"
                                class="col-sm-3 col-form-label text-right font-weight-bold">Logo</label>
                         <div class="col-sm-6">
-                            <img src="{{ asset("storage/uploads/" . $settings["SETTING_SITE_LOGO"]) }}"
+                            <img src="{{ asset("uploads/" . $settings["SETTING_SITE_LOGO"]) }}"
                                  alt="{{ $settings["SETTING_SITE_LOGO"] }}" width="150">
                             <input type="file" class="form-control" id="SETTING_SITE_LOGO" name="SETTING_SITE_LOGO">
                         </div>
@@ -80,7 +80,7 @@
                         <label for="SETTING_SITE_FAVICON"
                                class="col-sm-3 col-form-label text-right font-weight-bold">Favicon</label>
                         <div class="col-sm-6">
-                            <img src="{{ asset("storage/uploads/" . $settings["SETTING_SITE_FAVICON"]) }}"
+                            <img src="{{ asset("uploads/" . $settings["SETTING_SITE_FAVICON"]) }}"
                                  alt="{{ $settings["SETTING_SITE_FAVICON"] }}" width="150">
                             <input type="file" class="form-control" id="SETTING_SITE_FAVICON"
                                    name="SETTING_SITE_FAVICON">
@@ -91,7 +91,7 @@
                         <label for="SETTING_PAGE_BANNER"
                                class="col-sm-3 col-form-label text-right font-weight-bold">Page Banner</label>
                         <div class="col-sm-6">
-                            <img src="{{ asset("storage/uploads/" . $settings["SETTING_PAGE_BANNER"]) }}"
+                            <img src="{{ asset("uploads/" . $settings["SETTING_PAGE_BANNER"]) }}"
                                  alt="{{ $settings["SETTING_PAGE_BANNER"] }}" width="150">
                             <input type="file" class="form-control" id="SETTING_PAGE_BANNER"
                                    name="SETTING_PAGE_BANNER">

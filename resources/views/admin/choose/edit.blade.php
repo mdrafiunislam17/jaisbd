@@ -1,11 +1,11 @@
 @extends("admin.layouts.master")
-@section("title", "Edit Service")
+@section("title", "Edit Choose")
 @section("content")
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Edit Service</h1>
-            <a href="{{ route("services.index") }}" class="btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-eye fa-sm text-white-50"></i> View Services
+            <h1 class="h3 mb-0 text-gray-800">Edit Choose</h1>
+            <a href="{{ route("choose.index") }}" class="btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-eye fa-sm text-white-50"></i> View Chooses
             </a>
         </div>
 
@@ -29,7 +29,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-body">
-                <form action="{{ route('services.update', $service->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('choose.update', $choose->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -37,7 +37,7 @@
                         <label for="title" class="col-sm-3 col-form-label text-right font-weight-bold">Title *</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="title" name="title"
-                                   value="{{ old('title', $service->title) }}">
+                                   value="{{ old('title', $choose->title) }}">
                         </div>
                     </div>
 
@@ -45,14 +45,14 @@
                         <label for="slug" class="col-sm-3 col-form-label text-right font-weight-bold">Slug *</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="slug" name="slug"
-                                   value="{{ old('slug', $service->slug) }}">
+                                   value="{{ old('slug', $choose->slug) }}">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="description" class="col-sm-3 col-form-label text-right font-weight-bold">Description *</label>
                         <div class="col-sm-6">
-                            <textarea name="description" id="description" class="form-control">{{ old('description', $service->description) }}</textarea>
+                            <textarea name="description" id="description" class="form-control">{{ old('description', $choose->description) }}</textarea>
                         </div>
                     </div>
 
@@ -60,28 +60,20 @@
                         <label for="image" class="col-sm-3 col-form-label text-right font-weight-bold">Image</label>
                         <div class="col-sm-6">
                             <input type="file" class="form-control" name="image" id="image">
-                            @if($service->image)
-                                <img src="{{ asset('uploads/service/' . $service->image) }}" alt="Image" width="100" class="mt-2">
+                            @if($choose->image)
+                                <img src="{{ asset('uploads/choose/' . $choose->image) }}" alt="Image" width="100" class="mt-2">
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="icon" class="col-sm-3 col-form-label text-right font-weight-bold">Icon</label>
-                        <div class="col-sm-6">
-                            <input type="file" class="form-control" name="icon" id="icon">
-                            @if($service->icon)
-                                <img src="{{ asset('uploads/service/' . $service->icon) }}" alt="Icon" width="100" class="mt-2">
-                            @endif
-                        </div>
-                    </div>
+
 
                     <div class="form-group row">
                         <label for="status" class="col-sm-3 col-form-label text-right font-weight-bold">Status</label>
                         <div class="col-sm-6">
                             <select name="status" id="status" class="form-control">
-                                <option value="1" {{ $service->status == 1 ? 'selected' : '' }}>Active</option>
-                                <option value="0" {{ $service->status == 0 ? 'selected' : '' }}>Inactive</option>
+                                <option value="1" {{ $choose->status == 1 ? 'selected' : '' }}>Active</option>
+                                <option value="0" {{ $choose->status == 0 ? 'selected' : '' }}>Inactive</option>
                             </select>
                         </div>
                     </div>
@@ -90,7 +82,7 @@
 
                     <div class="form-group row">
                         <div class="offset-3 col-sm-6">
-                            <button type="submit" class="btn btn-primary">Update Service</button>
+                            <button type="submit" class="btn btn-primary">Update choose</button>
                         </div>
                     </div>
                 </form>

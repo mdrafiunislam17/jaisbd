@@ -32,7 +32,7 @@
         </a>
     </li> --}}
 
-
+{{--
 @canany(['career-list', 'career-create', 'career-edit', 'career-delete'])
     <li class="nav-item {{
         request()->routeIs('career.index') ||
@@ -60,6 +60,20 @@
         <a class="nav-link" href="{{ route("career-apply.index") }}">
             <i class="fas fa-file-alt"></i>
             <span>Career Apply</span>
+        </a>
+    </li>
+@endcanany --}}
+
+@canany(['choose-list', 'choose-create', 'choose-edit', 'choose-delete'])
+    <li class="nav-item {{
+        request()->routeIs("choose.index") ||
+        request()->routeIs("choose.create") ||
+        request()->routeIs("choose.show") ||
+        request()->routeIs("choose.edit")
+        ? "active" : "" }}">
+        <a class="nav-link" href="{{ route("choose.index") }}">
+            <i class="fas fa-check-square"></i>
+            <span>Choose Us</span>
         </a>
     </li>
 @endcanany
@@ -299,6 +313,25 @@
         </a>
     </li>
 @endcanany
+
+
+  @if(auth()->user()->hasRole('superadmin'))
+        <li class="nav-item {{ request()->routeIs('setting.index') || request()->routeIs('setting.update') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('setting.index') }}">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+    @endif
+
+
+
+
+
+
+
+
+
 
 
 

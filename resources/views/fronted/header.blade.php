@@ -73,9 +73,8 @@
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                                 <i class="fa fa-bars"></i>
                             </button>
-                            <a class="navbar-brand" href="index.html">
-                                <img src="assets/img/logo-light.png" class="logo logo-display" alt="Logo">
-                                <img src="assets/img/logo.png" class="logo logo-scrolled" alt="Logo">
+                            <a class="navbar-brand" href="{{route('fronted.index')}}">
+                                <img src="{{ asset('uploads/' . $settings['SETTING_SITE_LOGO']) }}" class="logo logo-display" alt="Logo">
                             </a>
                         </div>
                     </div>

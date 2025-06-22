@@ -104,3 +104,19 @@
     </div>
 </div>
 @endsection
+
+
+@push("scripts")
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js')}}" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#description',  // Use textarea as the editor
+            height: 300,           // Set the height of the editor
+            plugins: 'advlist autolink lists link image charmap print preview anchor',
+            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image link',
+            menubar: false,
+        });
+    </script>
+
+@endpush

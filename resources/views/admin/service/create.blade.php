@@ -55,6 +55,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label for="slug" class="col-sm-3 col-form-label text-right font-weight-bold">Slug *</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="slug" value="{{ old("slug") }}"
+                                   name="slug">
+                        </div>
+                    </div>
+
 
 
                     <div class="form-group row">

@@ -9,13 +9,17 @@ use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\ChooseController;
 use App\Http\Controllers\AssignRoleController;
+
 use App\Http\Controllers\Admin\TeamMemberController;
+use App\Http\Controllers\Admin\ChooseChontroller;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectCategoryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectInfoController;
+use App\Http\Controllers\Admin\SettingController;
 
 use App\Http\Controllers\WorkProcessController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
@@ -23,6 +27,7 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\CareerApplicationController;
 use App\Http\Controllers\FrontedController;
+use App\Models\Choose;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -47,6 +52,14 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',[FrontedController::class,'index'])->name('fronted.index');
+
+Route::get('/services/{slug}', [FrontedController::class, 'servicesDetails'])
+                                        ->name('services.details1');
+Route::get('/choose/{slug}', [FrontedController::class, 'chooseDetails'])
+                                        ->name('choose.details');
+Route::get('/projects/{title}', [FrontedController::class, 'projectDetails'])->name('project.details1');
+
+
 
 Auth::routes();
 // Protected routes (requires authentication)
@@ -101,10 +114,18 @@ Route::middleware('auth')->group(function () {
     // AdminEventController
     Route::resource("events", AdminEventController::class);
 
-    Route::resource('career', CareerController::class);
+    Route::resource("choose", ChooseController::class);
 
-    Route::resource('career-apply', CareerApplicationController::class);
+    // Route::resource('career', CareerController::class);
 
+    // Route::resource('career-apply', CareerApplicationController::class);
+
+    // Route::resource('choose',[ChooseChontroller::class]);
+
+
+      // SettingsController
+    Route::get("settings", [SettingController::class, "index"])->name("setting.index");
+    Route::put("settings", [SettingController::class, "update"])->name("setting.update");
 
     // Role Route
     Route::get('/dashboard/role', [RoleController::class,'index'])->name('role.index');
@@ -126,6 +147,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/chatbot', function () {
     return view('chatbot');
+
+
+      // SettingsController
+
 });
 
 
