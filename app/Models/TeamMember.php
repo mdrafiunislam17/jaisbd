@@ -17,13 +17,14 @@ class TeamMember extends Model
         'status'
     ];
 
-    public function management()
-    {
-        return $this->belongsTo(Management::class);
-    }
+ public function management()
+{
+    return $this->belongsTo(Management::class, 'management_id');
+}
 
-    public function designation()
-    {
-        return $this->belongsTo(Designation::class);
-    }
+public function designation()
+{
+    return $this->belongsTo(Designation::class, 'designation_id');
+}
+
 }

@@ -7,6 +7,8 @@ use App\Models\Choose;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\Setting;
+use App\Models\Blog;
+use App\Models\Client;
 use App\Models\Slider;
 use App\Models\ProjectCategory;
 use App\Models\ProjectInfo;
@@ -42,28 +44,47 @@ class FrontedController extends Controller
                         ->get();
         $projectInfo = ProjectCategory::all();
 
-         $teamMembers = TeamMember::query()
+         $teamMembers = TeamMember::with(['management', 'designation'])
                     ->where('status', 1)
                     ->orderBy('id', 'desc')
                     ->get();
+        $blogs = Blog::query()
+            ->where('status', 1)
+            ->orderBy('id', 'desc')
+            ->take(3)
+            ->get();
+        $clients = Client::all();
 
         return view('fronted.index',
             compact('settings', 'slider', 'about', 'services',
-             'choose', 'projects', 'projectInfo','teamMembers'));
+             'choose', 'projects', 'projectInfo','teamMembers',
+             'blogs','clients'));
     }
 
-// public function servicesDetails($slug)
-// {
-//     $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+public function aboutus()
+{
+    $settings = Setting::query()->pluck("value", "setting_name")->toArray();
 
-//     $service = Service::query()
-//         ->where('status', 1)
-//         ->firstOrFail(); // or use ->first() with null check
+    $about = About::latest()->first();
+
+    return view('fronted.aboutus',
+            compact('settings', 'about',));
+
+}
 
 
+public function projectus(){
 
-//     return view('fronted.services', compact('settings', 'service'));
-// }
+     $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+      $projects = Project::query()
+                        ->where('status', 1)
+                        ->orderBy('id', 'desc')
+                        ->get();
+        $projectInfo = ProjectCategory::all();
+        return view('fronted.projectus',
+            compact('settings', 'projects', 'projectInfo',));
+
+}
 
 
 public function servicesDetails($slug)
@@ -114,16 +135,64 @@ public function projectDetails($title)
     return view('fronted.project', compact('settings', 'project', 'projectInfo'));
 }
 
-    // public function servicesDetails(Service $service)
-    // {
-    //     $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+public function ourBlog(){
 
-    //     $services = Service::query()
-    //         ->where('status', 1)
-    //         ->orderBy('id', 'asc')
-    //         ->get();
+    $settings = Setting::query()->pluck("value", "setting_name")->toArray();
 
-    //     return view('fronted.services', compact('settings', 'services'));
 
-    // }
+
+    $blogs = Blog::query()
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+          ->paginate(6);
+
+    return view('fronted.blogStandard',compact('settings',  'blogs'));
+
+}
+
+public function blogDetails($title)
+{
+    $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+
+    $blog = Blog::query()
+        ->where('title', $title)
+        ->where('status', 1)
+        ->firstOrFail();
+
+    $blogs = Blog::query()
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+        ->get();
+
+    return view('fronted.blogDetails', compact('settings', 'blog', 'blogs'));
+}
+
+public function ourTeam(){
+$settings = Setting::query()->pluck("value", "setting_name")->toArray();
+     $teamMembers = TeamMember::query()
+                    ->where('status', 1)
+                    ->orderBy('id', 'desc')
+                    ->get();
+    return view('fronted.team', compact('settings',  'teamMembers'));
+
+}
+
+
+public function teamDetails($name){
+    $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+   $teamMember = TeamMember::with(['management', 'designation'])
+                ->where('name', $name)
+                ->where('status', 1)
+                ->firstOrFail();
+
+    return view('fronted.teamDetails', compact('settings',  'teamMember'));
+
+}
+
+public function contact(){
+     $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+
+     return view('fronted.contact',compact('settings'));
+}
+
 }

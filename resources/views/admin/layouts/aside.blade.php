@@ -123,7 +123,7 @@
 @endcanany
 
 
-    @canany(['event-list', 'event-create', 'event-edit', 'event-delete'])
+    {{-- @canany(['event-list', 'event-create', 'event-edit', 'event-delete'])
     <li class="nav-item {{
         request()->routeIs("events.index") ||
         request()->routeIs("events.create") ||
@@ -135,7 +135,7 @@
             <span>Events</span>
         </a>
     </li>
-@endcanany
+@endcanany --}}
 
 
     @canany(['client-list', 'client-create', 'client-edit', 'client-delete'])
@@ -169,7 +169,7 @@
 
 
 
-  @canany(['work-process-list', 'work-process-create', 'work-process-edit', 'work-process-delete'])
+  {{-- @canany(['work-process-list', 'work-process-create', 'work-process-edit', 'work-process-delete'])
     <li class="nav-item {{
         request()->routeIs('works.index') ||
         request()->routeIs('works.create') ||
@@ -180,10 +180,10 @@
             <span>Work Process</span>
         </a>
     </li>
-@endcanany
+@endcanany --}}
 
 
-  @canany(['achievement-list', 'achievement-create', 'achievement-edit', 'achievement-delete'])
+  {{-- @canany(['achievement-list', 'achievement-create', 'achievement-edit', 'achievement-delete'])
     <li class="nav-item {{
         request()->routeIs('achievements.index') ||
         request()->routeIs('achievements.create') ||
@@ -194,7 +194,7 @@
             <span>Achievement</span>
         </a>
     </li>
-@endcanany
+@endcanany --}}
 
 
   @canany(['management-list', 'management-create', 'management-edit', 'management-delete'])

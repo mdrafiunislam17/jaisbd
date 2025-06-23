@@ -88,9 +88,9 @@
                         <div class="single-widget quick-contact-widget text-light" style="background-image: url(assets/img/about/2.jpg);">
                             <div class="content">
                                 <i class="fas fa-phone-alt"></i>
-                                <h2>+(012) 6679545</h2>
-                                <h4><a href="mailto:info@crysta.com">info@crysta.com</a></h4>
-                                <a class="btn mt-30 btn-sm btn-theme" href="contact-us.html">Contact Us</a>
+                                <h2>{!! $settings["CONTACT_PHONE"] !!}</h2>
+                                <h4><a href="{!! $settings["CONTACT_EMAIL"] !!}">{!! $settings["CONTACT_EMAIL"] !!}</a></h4>
+                                <a class="btn mt-30 btn-sm btn-theme" href="{{route('contact')}}">Contact Us</a>
                             </div>
                         </div>
                         <!-- Single Widget -->

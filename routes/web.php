@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ChooseController;
 use App\Http\Controllers\AssignRoleController;
+use App\Http\Controllers\NewsletterController;
 
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\ChooseChontroller;
@@ -53,17 +54,35 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FrontedController::class,'index'])->name('fronted.index');
 
-Route::get('/services/{slug}', [FrontedController::class, 'servicesDetails'])
+Route::get('/servicess/{slug}', [FrontedController::class, 'servicesDetails'])
                                         ->name('services.details1');
-Route::get('/choose/{slug}', [FrontedController::class, 'chooseDetails'])
-                                        ->name('choose.details');
-Route::get('/projects/{title}', [FrontedController::class, 'projectDetails'])->name('project.details1');
+Route::get('/choo/{slug}', [FrontedController::class, 'chooseDetails'])
+                                        ->name('choose.details1');
+Route::get('/projectss/{title}', [FrontedController::class, 'projectDetails'])->name('project.details1');
+
+Route::get('/blogDetails/{title}', [FrontedController::class, 'blogDetails'])->name('blog.details1');
+
+Route::get('/ourBlog',[FrontedController::class, 'ourBlog'])->name('ourBlog');
+
+Route::get('teamDetails/{name}',[FrontedController::class,'teamDetails'])->name('teamDetails1');
+
+Route::get('/ourTeam',[FrontedController::class,'ourTeam'])->name('oureTeam');
+
+Route::get('/contact',[FrontedController::class,'contact'])->name('contact');
+Route::post("/contact-form-submit", [FrontedController::class, "contactFormSubmit"])->name("contact_form_submit");
+Route::get('/aboutus',[FrontedController::class,'aboutus'])->name('aboutus');
+
+Route::get('/projectus',[FrontedController::class,'projectus'])->name('projectus');
 
 
 
 Auth::routes();
 // Protected routes (requires authentication)
 Route::middleware('auth')->group(function () {
+
+    // web.php
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+
 
     // Home Dashboard
     Route::get('/home', [HomeController::class, 'index'])->name('home');

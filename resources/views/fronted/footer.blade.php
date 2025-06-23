@@ -6,22 +6,22 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 item">
                         <div class="f-item about">
-                            <img class="logo" src="assets/img/logo-light.png" alt="Logo">
+                            <img class="logo" src="{{ asset('uploads/' . $settings['SETTING_SITE_LOGO']) }}" alt="Logo">
                             <p>
                                 Excellence decisively nay man yet impression for contrasted remarkably. There spoke happy for you are out. Fertile how old address did showing.
                             </p>
                             <ul class="social">
                                 <li>
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="{{ $settings["SETTING_SOCIAL_FACEBOOK"] }}"><i class="fab fa-facebook-f"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="{{ $settings["SETTING_SOCIAL_TWITTER"] }}"><i class="fab fa-twitter"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="{{ $settings["SETTING_SOCIAL_LINKEDIN"] }}"><i class="fab fa-linkedin-in"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                    <a href="{{ $settings["SETTING_SOCIAL_YOUTUBE"] }}"><i class="fab fa-youtube"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -30,24 +30,24 @@
                         <div class="f-item link">
                             <h4 class="widget-title">Solutions</h4>
                             <ul>
-                                <li>
-                                    <a href="services-details.html"><i class="fas fa-angle-right"></i> IT Management</a>
+
+                                 <li >
+                                        <a href="{{route('aboutus')}}" class="fas fa-angle-righte" data-toggle="dropdown" >About Us</a>
+
                                 </li>
-                                <li>
-                                    <a href="services-details.html"><i class="fas fa-angle-right"></i> Cyber Security</a>
+                                  <li >
+                                        <a href="{{route('oureTeam')}}" class="fas fa-angle-righte" data-toggle="dropdown" >Team</a>
+
                                 </li>
-                                <li>
-                                    <a href="services-details.html"><i class="fas fa-angle-right"></i> Cloud Computing</a>
+                                  <li >
+                                        <a href="{{route('contact')}}" class="fas fa-angle-righte" data-toggle="dropdown" >Contact Us</a>
+
                                 </li>
-                                <li>
-                                    <a href="services-details.html"><i class="fas fa-angle-right"></i> IT Consulting</a>
+                                <li >
+                                        <a href="{{route('projectus')}}" class="fas fa-angle-righte" data-toggle="dropdown" >Projects</a>
+
                                 </li>
-                                <li>
-                                    <a href="services-details.html"><i class="fas fa-angle-right"></i> Software Dev</a>
-                                </li>
-                                <li>
-                                    <a href="services-details.html"><i class="fas fa-angle-right"></i> Backup & Recovery</a>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -57,25 +57,29 @@
                             <div class="address">
                                 <ul>
                                     <li>
-                                        5919 Trussville Crossings Pkwy, new Dusting town, Austria
+                                      {!! $settings["CONTACT_ADDRESS"] !!}
                                     </li>
                                     <li>
                                         <div class="icon">
-                                            <i class="fal fa-clock"></i>
+                                            <i class="fal fa-envelope"></i>
+
                                         </div>
                                         <div class="content">
-                                            <strong>Opening Hours:</strong>
-                                            8:00 AM – 7:45 PM
+                                            <strong>Email:</strong>
+                                            {!! $settings["CONTACT_EMAIL"] !!}
                                         </div>
                                     </li>
                                     <li>
                                         <div class="icon">
                                             <i class="fal fa-user-headset"></i>
                                         </div>
-                                        <div class="content">
-                                            <strong>Phone:</strong>
-                                            <a href="tel:2151234567">+123 34598768</a>
-                                        </div>
+                                      <div class="content">
+                                        <strong>Phone:</strong>
+                                        <a href="tel:{!! $settings['CONTACT_PHONE'] !!}">
+                                            {!! $settings['CONTACT_PHONE'] !!}
+                                        </a>
+                                    </div>
+
                                     </li>
                                 </ul>
                             </div>
@@ -87,10 +91,12 @@
                             <p>
                                 Join our subscribers list to get the latest news and special offers.
                             </p>
-                            <form action="#">
-                                <input type="email" placeholder="Your Email" class="form-control" name="email">
-                                <button type="submit"> Subscribe Now <i class="fa fa-paper-plane"></i></button>
-                            </form>
+                          <form method="POST" action="{{ route('newsletter.subscribe') }}">
+                            @csrf
+                            <input type="email" name="email" placeholder="Your Email" class="form-control" required>
+                            <button type="submit">Subscribe Now <i class="fa fa-paper-plane"></i></button>
+                        </form>
+
                         </div>
                     </div>
                 </div>
@@ -102,10 +108,10 @@
                 <div class="footer-bottom-box">
                     <div class="row">
                         <div class="col-lg-6">
-                            <p>&copy; Copyright 2022. All Rights Reserved by <a href="#">validthemes</a></p>
+                            <p>&copy; Copyright  &copy; {{ now()->year }}.Developed by <a href="#">rafiun</a></p>
                         </div>
                         <div class="col-lg-6 text-right">
-                            <ul>
+                            {{-- <ul>
                                 <li>
                                     <a href="about-us.html">Terms</a>
                                 </li>
@@ -115,7 +121,7 @@
                                 <li>
                                     <a href="about-us.html">Support</a>
                                 </li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                 </div>

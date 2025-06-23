@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+Use App\Models\Setting;
 class LoginController extends Controller
 {
     /*
@@ -37,4 +37,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
+
+     public function showLoginForm()
+    {
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        return view('auth.login', compact('settings'));
+    }
+
+    // register
 }

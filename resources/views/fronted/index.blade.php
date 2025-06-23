@@ -1,5 +1,13 @@
 @extends('fronted.master')
 @section('title', 'Home Page')
+<style>
+    .no-bg {
+        background-color: transparent !important;
+        color: #d6cbcb; /* যাতে লেখা দেখা যায় */
+        border: 1px solid #d6cbcb;
+    }
+</style>
+
 
 @section('maincontent')
     <!-- Page specific content here -->
@@ -219,7 +227,7 @@
                     <h2 class="heading">{{$choose->slug}} </h2>
                      <p>{!! Str::limit($choose->description, 120) !!}</p>
                     @if(!empty($choose->slug))
-                        <a class="btn mt-30 btn-md btn-theme" href="{{ route('choose.details', ['slug' => $choose->slug]) }}">Know More</a>
+                        <a class="btn mt-30 btn-md btn-theme" href="{{ route('choose.details1', ['slug' => $choose->slug]) }}">Know More</a>
                     @endif
 
                 </div>
@@ -256,7 +264,7 @@
 
     <!-- Start Brand
     ============================================= -->
-    {{-- <div class="brand-area">
+    <div class="brand-area">
         <div class="container">
             <div class="brand-items pt-80 pb-80">
                 <div class="row">
@@ -265,29 +273,14 @@
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
                                 <!-- Single Item -->
-                                <div class="swiper-slide">
-                                    <img src="assets/img/logo/1.png" alt="Thumb">
+                                @foreach ($clients as $client)
+                                     <div class="swiper-slide">
+                                    <img src="{{asset("uploads/client/$client->image")}}" alt="Thumb">
                                 </div>
+                                @endforeach
+
                                 <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="swiper-slide">
-                                    <img src="assets/img/logo/2.png" alt="Thumb">
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="swiper-slide">
-                                    <img src="assets/img/logo/3.png" alt="Thumb">
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="swiper-slide">
-                                    <img src="assets/img/logo/4.png" alt="Thumb">
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="swiper-slide">
-                                    <img src="assets/img/logo/5.png" alt="Thumb">
-                                </div>
+
                                 <!-- End Single Item -->
                             </div>
 
@@ -296,7 +289,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- End Brand -->
 
     <!-- Start Projects
@@ -433,12 +426,14 @@
                                     <div class="team-style-one">
                                         <div class="thumb">
                                             <img src="{{ asset('uploads/teamMember/' . $member->image) }}" alt="{{ $member->name }}">
-                                            <div class="angle-shape" style="background-image: url({{ asset('assets/img/shape/24.png') }});"></div>
+                                            <div class="angle-shape" style="background-image: url({{asset('assets/img/shape/24.png')}});"></div>
+                                            <div class="angle-shape"></div>
                                         </div>
                                         <div class="info">
                                             <div class="content">
-                                                <h4 class="title"><a href="#">{{ $member->name }}</a></h4>
+                                                <h4 class="title"><a href="{{ route('teamDetails1', ['name' => $member->name]) }}">{{ $member->name }}</a></h4>
                                                 <span>{{ $member->position }}</span>
+                                                <span>{{ optional($member->management)->name ?? 'N/A' }}</span>
                                             </div>
                                             <ul class="social">
                                                 @if($member->facebook)
@@ -487,7 +482,8 @@
                     </div>
                 </div>
                 <div class="col-xl-6 offset-xl-1">
-                    <form action="https://validthemes.live/themeforest/crysa/assets/mail/contact.php" method="POST" class="contact-form consultation-form theme">
+                    <form action="{{ route("contact_form_submit") }}" method="POST" class="contact-form consultation-form theme">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -510,7 +506,15 @@
                                     <span class="alert-error"></span>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="message">Tell Message</label>
+                                    <input class="form-control" id="message" name="message" placeholder="message" type="text">
+                                    <span class="alert-error"></span>
+                                </div>
+                            </div>
+                            {{-- <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="subject">Subject</label>
                                     <select id="subject">
@@ -521,7 +525,20 @@
                                         <option value="6">Machine Language</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
+
+                            {{-- <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="message">Tell Message</label>
+                                    <textarea name="message" id="message" class="form-control no-bg" rows="5" placeholder="Write your message here..." required></textarea>
+                                    @error('message')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div> --}}
+
+
+
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
@@ -542,7 +559,7 @@
                             </div>
                             <div class="info">
                                 <h5>Call for Emergency Assistance</h5>
-                                <a href="tel:+4733378901">+4733378901</a>
+                                <a href="#">{!! $settings["CONTACT_PHONE"] !!}</a>
                             </div>
                         </li>
                     </ul>
@@ -568,104 +585,40 @@
         <div class="container">
             <div class="row">
                 <!-- Single Item -->
-                <div class="col-xl-4 col-md-6 single-item">
-                    <div class="blog-style-one">
-                        <div class="thumb">
-                            <a href="blog-single-with-sidebar.html"><img src="assets/img/blog/1.jpg" alt="Thumb"></a>
-                        </div>
-                        <div class="info">
-                            <div class="meta">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i class="fal fa-tag"></i> Technology</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="far fa-comment-alt"></i> 12 Comments</a>
-                                    </li>
-                                </ul>
+                @foreach ($blogs as $blog)
+                    <div class="col-xl-4 col-md-6 single-item">
+                        <div class="blog-style-one">
+                            <div class="thumb">
+                                <a href="{{ route('blog.details1', ['title' => $blog->title]) }}">
+                                    <img src="{{asset("uploads/blog/$blog->image") }}" alt="Thumb">
+                                </a>
                             </div>
-                            <h4 class="title">
-                                <a href="blog-single-with-sidebar.html">Discovery incommode earnestly commanded mentions.</a>
-                            </h4>
-                        </div>
-                        <div class="author">
-                            <div class="thumbs">
-                                <a href="#"><img src="assets/img/teams/1.jpg" alt="Author"></a>
-                            </div>
-                            <div class="author-info">
-                                <h5>Bruham Ibrahi</h5>
-                                <span>March 16, 2022</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Item -->
-                <!-- Single Item -->
-                <div class="col-xl-4 col-md-6 single-item">
-                    <div class="blog-style-one">
-                        <div class="thumb">
-                            <a href="blog-single-with-sidebar.html"><img src="assets/img/blog/2.jpg" alt="Thumb"></a>
-                        </div>
-                        <div class="info">
-                            <div class="meta">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i class="fal fa-tag"></i> Solution</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="far fa-comment-alt"></i> 18 Comments</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h4 class="title">
-                                <a href="blog-single-with-sidebar.html">Everything melancholy uncommonly but solicitude.</a>
-                            </h4>
-                        </div>
-                        <div class="author">
-                            <div class="thumbs">
-                                <a href="#"><img src="assets/img/teams/6.jpg" alt="Author"></a>
-                            </div>
-                            <div class="author-info">
-                                <h5>Mutuali Bintha</h5>
-                                <span>January 25, 2022</span>
+                            <div class="info">
+                                <div class="meta">
+                                    <ul>
+                                        <li>
+                                            <a href="#"><i class="fal fa-tag"></i> {{ $blog->posted_by ?? 'Uncategorized' }}</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="far fa-calendar-alt"></i>
+                                                {{ \Carbon\Carbon::parse($blog->posted_on)->format('F j, Y') }}
+                                            </a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h4 class="title">
+                                    <a href="{{ route('blog.details1', ['title' => $blog->title]) }}">
+                                        {{ Str::limit($blog->title, 70) }}
+                                    </a>
+                                </h4>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Single Item -->
-                <!-- Single Item -->
-                <div class="col-xl-4 col-md-6 single-item">
-                    <div class="blog-style-one">
-                        <div class="thumb">
-                            <a href="blog-single-with-sidebar.html"><img src="assets/img/blog/3.jpg" alt="Thumb"></a>
-                        </div>
-                        <div class="info">
-                            <div class="meta">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i class="fal fa-tag"></i> Analysis</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="far fa-comment-alt"></i> 25 Comments</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h4 class="title">
-                                <a href="blog-single-with-sidebar.html">Providing top quality cleaning and related services charms.</a>
-                            </h4>
-                        </div>
-                        <div class="author">
-                            <div class="thumbs">
-                                <a href="#"><img src="assets/img/teams/5.jpg" alt="Author"></a>
-                            </div>
-                            <div class="author-info">
-                                <h5>Dickua Pathari</h5>
-                                <span>July 16, 2022</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Item -->
+                @endforeach
+
+
             </div>
         </div>
     </div>

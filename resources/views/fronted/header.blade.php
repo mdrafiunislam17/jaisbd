@@ -18,23 +18,23 @@
                     <div class="social">
                         <ul>
                             <li>
-                                <a href="#">
+                                <a href="{{ $settings["SETTING_SOCIAL_FACEBOOK"] }}">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ $settings["SETTING_SOCIAL_TWITTER"] }}">
                                     <i class="fab fa-twitter"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ $settings["SETTING_SOCIAL_LINKEDIN"] }}">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <i class="fab fa-pinterest-p"></i>
+                                <a href="{{ $settings["SETTING_SOCIAL_YOUTUBE"] }}">
+                                    <i class="fab fa-youtube"></i>
                                 </a>
                             </li>
                         </ul>
@@ -74,7 +74,7 @@
                                 <i class="fa fa-bars"></i>
                             </button>
                             <a class="navbar-brand" href="{{route('fronted.index')}}">
-                                <img src="{{ asset('uploads/' . $settings['SETTING_SITE_LOGO']) }}" class="logo logo-display" alt="Logo">
+                                <img src="{{ asset('uploads/' . $settings['SETTING_SITE_LOGO']) }}"  alt="Logo">
                             </a>
                         </div>
                     </div>
@@ -84,96 +84,50 @@
                     <div class="col-xl-7 col-lg-8 col-md-4 col-sm-4 col-4">
                         <div class="collapse navbar-collapse" id="navbar-menu">
 
-                            <img src="assets/img/logo.png" alt="Logo">
+                            <img src="{{ asset('uploads/' . $settings['SETTING_SITE_LOGO']) }}"    alt="Logo">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                                 <i class="fa fa-times"></i>
                             </button>
 
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Home</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Multipage</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="index.html">It Solutions</a></li>
-                                                <li><a href="index-2.html">Technology</a></li>
-                                                <li><a href="index-5.html">SaaS Landing <span class="badge">New</span></a></li>
-                                                <li><a href="index-3.html">It Agency</a></li>
-                                                <li><a href="index-6.html">Data Analysis <span class="badge">New</span></a></li>
-                                                <li><a href="index-7.html">Consulting Business <span class="badge">New</span></a></li>
-                                                <li><a href="index-4.html">Tech Solution</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Onepage</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="index-op.html">It Solutions</a></li>
-                                                <li><a href="index-op-2.html">Technology</a></li>
-                                                <li><a href="index-op-5.html">SaaS Landing <span class="badge">New</span></a></li>
-                                                <li><a href="index-op-3.html">It Agency</a></li>
-                                                <li><a href="index-op-6.html">Data Analysis <span class="badge">New</span></a></li>
-                                                <li><a href="index-op-7.html">Consulting Business <span class="badge">New</span></a></li>
-                                                <li><a href="index-op-4.html">Tech Solution</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li class="">
+                                    <a href="{{route('fronted.index')}}" class="dropdown-toggle active" data-toggle="dropdown" >Home</a>
+
                                 </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Pages</a>
                                     <ul class="dropdown-menu">
                                         <li class="dropdown">
-                                            <a href="about-us.html" class="dropdown-toggle" data-toggle="dropdown" >About Us</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="about-us.html">About Style One</a></li>
-                                                <li><a href="about-us-2.html">About Style Two</a></li>
-                                                <li><a href="about-us-3.html">About Style Three</a></li>
-                                            </ul>
+                                            <a href="{{route('aboutus')}}" class="" data-toggle="dropdown" >About Us</a>
+
                                         </li>
-                                        <li><a href="team.html">Team</a></li>
-                                        <li><a href="team-details.html">Team Single</a></li>
-                                        <li><a href="why-choose-us.html">Why Choose Us</a></li>
-                                        <li><a href="contact-us.html">Contact Us</a></li>
-                                        <li><a href="contact-us-2.html">Contact Style Two</a></li>
-                                        <li><a href="404.html">Error Page</a></li>
+                                        <li><a href="{{route('oureTeam')}}">Team</a></li>
+                                        <li><a href="{{route('contact')}}">Contact Us</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Projects</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="project-2-colum.html">Projects two colum</a></li>
-                                        <li><a href="project.html">Projects three colum</a></li>
-                                        <li><a href="project-4-colum.html">Projects four colum</a></li>
-                                        <li><a href="project-details.html">Project Details</a></li>
-                                    </ul>
+                                <li class="">
+                                    <a href="{{route('projectus')}}" class="dropdown-toggle" data-toggle="dropdown" >Projects</a>
+
                                 </li>
-                                <li class="dropdown">
+                                {{-- <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Services</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="services.html">Services Version One</a></li>
                                         <li><a href="services-2.html">Services Version Two</a></li>
                                         <li><a href="services-details.html">Services Details</a></li>
                                     </ul>
+                                </li> --}}
+                                <li class="">
+                                    <a href="{{route('ourBlog')}}" class="dropdown-toggle" data-toggle="dropdown" >Blog</a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Blog</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="blog-standard.html">Blog Standard</a></li>
-                                        <li><a href="blog-with-sidebar.html">Blog With Sidebar</a></li>
-                                        <li><a href="blog-2-colum.html">Blog Grid Two Colum</a></li>
-                                        <li><a href="blog-3-colum.html">Blog Grid Three Colum</a></li>
-                                        <li><a href="blog-single.html">Blog Single</a></li>
-                                        <li><a href="blog-single-with-sidebar.html">Blog Single With Sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
+                                {{-- <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Shop</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="shop.html">Shop Product</a></li>
                                         <li><a href="shop-single.html">Shop Single</a></li>
                                         <li><a href="shop-single-thumb-only.html">Shop Single Version Two</a></li>
                                     </ul>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -186,7 +140,7 @@
                                 <ul>
                                     <li class="search"><a href="#"><i class="far fa-search"></i></a></li>
                                     <li class="button">
-                                        <a href="#">Get a Quote</a>
+                                        <a href="{{route('fronted.index')}}">Get a Quote</a>
                                     </li>
                                 </ul>
                             </div>

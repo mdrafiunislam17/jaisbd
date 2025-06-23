@@ -14,6 +14,19 @@
     <title>@yield('title')</title>
     @yield('css')
 
+  <style>
+    .se-pre-con {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        z-index: 9999;
+        background: url("{{ asset('assets/img/preloader.gif')}}") center no-repeat #fff !important;
+    }
+</style>
+
+
     <!-- ========== Favicon Icon ========== -->
     <link rel="shortcut icon" href="{{ asset("uploads/" . $settings["SETTING_SITE_FAVICON"]) }}" type="image/x-icon">
 
