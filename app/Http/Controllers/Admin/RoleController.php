@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use App\Models\Setting;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
@@ -62,7 +63,9 @@ public function index()
         ? Role::all()
         : Role::where('name', '!=', 'superadmin')->get();
 
-    return view('admin.roles.index', compact('roles'));
+    $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+
+    return view('admin.roles.index', compact('roles', 'settings'));
 }
 
 
@@ -81,7 +84,9 @@ public function index()
         } else {
             $permission = Permission::whereNotIn('name', ['page-list', 'page-create', 'page-edit', 'page-delete', 'page-content-create', 'page-content-delete'])->get();
         }
-        return view('admin.roles.create',compact('permission'));
+           $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+
+        return view('admin.roles.create',compact('permission', 'settings'));
     }
 
     /**
@@ -121,8 +126,9 @@ public function index()
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
             ->where("role_has_permissions.role_id",$id)
             ->get();
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
 
-        return view('admin.roles.show',compact('role','rolePermissions'));
+        return view('admin.roles.show',compact('role','rolePermissions', 'settings'));
     }
 
     /**
@@ -141,7 +147,7 @@ public function index()
         }
 
         if ($auth_user->hasRole('superadmin')) {
-            $permission = Permission::get();
+            $permission = Permission::all();
         } else {
             $permission = Permission::whereNotIn('name', ['page-list', 'page-create', 'page-edit', 'page-delete', 'page-content-create', 'page-content-delete'])->get();
         }
@@ -149,8 +155,10 @@ public function index()
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
 
-        return view('admin.roles.edit',compact('role','permission','rolePermissions'));
+
+        return view('admin.roles.edit',compact('role','permission','rolePermissions', 'settings'));
     }
 
     /**

@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +24,22 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
         PermissionSeeder::class,
+
+         CreateAdminUserSeeder::class,
+         RoleSeeder::class,
     ]);
+
+    // $adminRole = Role::create(['name' => 'admin']);
+    // $customerRole = Role::create(['name' => 'customer']);
+
+    // $user = User::find(1);
+    // $user->assignRole('admin');
+
+    // Permission::create(['name' => 'edit posts']);
+    // Permission::create(['name' => 'delete users']);
+
+    // $role = Role::findByName('admin');
+    // $role->givePermissionTo(['edit posts', 'delete users']);
+
     }
 }

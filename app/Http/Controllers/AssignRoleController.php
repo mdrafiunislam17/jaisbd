@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
@@ -60,8 +61,9 @@ class AssignRoleController extends Controller
 public function index()
 {
     $users = User::with('roles')->get(); // সব ইউজার এবং তাদের রোল আনা হচ্ছে
-    $roles = Role::pluck('name');        // সব রোল আনা হচ্ছে
-    return view('admin.assign-role.index', compact('users', 'roles'));
+    $roles = Role::pluck('name');
+    $settings = Setting::query()->pluck("value", "setting_name")->toArray();    // সব রোল আনা হচ্ছে
+    return view('admin.assign-role.index', compact('users', 'roles','settings'));
 }
 
 

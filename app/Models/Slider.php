@@ -14,6 +14,7 @@ class Slider extends Model
         "title",
         "subtitle",
         "sort",
+        'sulg',
         "status",
     ];
 }

@@ -57,7 +57,7 @@
                                                id="perm-{{ $value->id }}"
                                                {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="perm-{{ $value->id }}">
-                                            {{ $value->display_name }}
+                                            {{ $value->name }}
                                         </label>
                                     </div>
                                 </div>

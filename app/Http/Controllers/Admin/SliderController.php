@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
+use App\Models\Setting;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,12 +33,14 @@ class SliderController extends Controller
     public function index(): View
     {
         $sliders = Slider::all();
-        return view('admin.sliders.index', compact('sliders'));
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        return view('admin.sliders.index', compact('sliders','settings'));
     }
 
     public function create(): View
     {
-        return view('admin.sliders.create');
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        return view('admin.sliders.create', compact('settings'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -45,6 +48,7 @@ class SliderController extends Controller
         $validated = $request->validate([
             'title'    => 'nullable|string|max:255',
             'subtitle' => 'nullable|string|max:255',
+            'sulg'    => 'nullable|string|max:255',
             'sort'     => 'nullable|integer',
             'status'   => 'nullable|boolean',
             'image'    => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -67,18 +71,24 @@ class SliderController extends Controller
 
     public function show(Slider $slider): View
     {
-        return view('admin.sliders.show', compact('slider'));
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        return view('admin.sliders.show', compact('slider','settings'));
     }
 
     public function edit(Slider $slider): View
     {
-        return view('admin.sliders.edit', compact('slider'));
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        return view('admin.sliders.edit', compact('slider','settings'));
     }
 
     public function update(Request $request, Slider $slider): RedirectResponse
     {
         $validated = $request->validate([
-
+             'title'    => 'nullable|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
+            'sulg'    => 'nullable|string|max:255',
+            'sort'     => 'nullable|integer',
+            'status'   => 'nullable|boolean',
             'image'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 

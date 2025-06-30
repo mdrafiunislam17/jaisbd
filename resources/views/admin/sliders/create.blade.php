@@ -64,6 +64,14 @@
                         </div>
                     </div>
 
+                    {{-- <div class="form-group row">
+                        <label for="sulg" class="col-sm-3 col-form-label text-right font-weight-bold">Sulg</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="sulg" value="{{ old("sulg") }}"
+                                   name="sulg">
+                        </div>
+                    </div> --}}
+
                     <div class="form-group row">
                         <label for="sort"
                                class="col-sm-3 col-form-label text-right font-weight-bold">Sort</label>

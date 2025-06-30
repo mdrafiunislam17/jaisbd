@@ -65,7 +65,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="permission[]" value="{{ $value->id }}" id="perm-{{ $value->id }}">
                                             <label class="form-check-label" for="perm-{{ $value->id }}">
-                                                {{ $value->display_name }}
+                                                {{ $value->name }}
                                             </label>
                                         </div>
                                     </div>

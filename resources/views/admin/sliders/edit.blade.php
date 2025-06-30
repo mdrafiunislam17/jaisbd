@@ -64,11 +64,19 @@
                         </div>
                     </div>
 
+                    {{-- <div class="form-group row">
+                        <label for="sulg" class="col-sm-3 col-form-label text-right font-weight-bold">Sulg</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="sulg" value="{{ $slider->sulg }}"
+                                   name="sulg">
+                        </div>
+                    </div> --}}
+
                     <div class="form-group row">
                         <label for="image"
                                class="col-sm-3 col-form-label text-right font-weight-bold">Existing Image</label>
                         <div class="col-sm-6">
-                            <img src="{{ asset("storage/uploads/$slider->image") }}" width="120" alt="{{ $slider->image }}">
+                            <img src="{{ asset("uploads/slider/$slider->image") }}" width="120" alt="{{ $slider->image }}">
                         </div>
                     </div>
 

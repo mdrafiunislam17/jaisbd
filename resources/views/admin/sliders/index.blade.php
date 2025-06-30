@@ -57,9 +57,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route("sliders.show", $slider->id) }}" class="btn btn-sm btn-info">
+                                    {{-- <a href="{{ route("sliders.show", $slider->id) }}" class="btn btn-sm btn-info">
                                         <i class="fa fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route("sliders.edit", $slider->id) }}" class="btn btn-sm btn-warning">
                                         <i class="fa fa-edit"></i>
                                     </a>

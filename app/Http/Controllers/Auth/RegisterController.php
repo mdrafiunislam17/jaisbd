@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Setting;
 
 class RegisterController extends Controller
 {
@@ -46,12 +47,21 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+       public function showRegistrationForm()
+        {
+            $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+            return view('auth.register', compact('settings'));
+        }
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone_number' => ['nullable', 'string', 'max:15'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'image' => ['nullable', 'image', 'max:2048'], // Optional
         ]);
     }
 

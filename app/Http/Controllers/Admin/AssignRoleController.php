@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,8 @@ class AssignRoleController extends Controller
     foreach ($users as $user) {
         $user->role = $user->roles->pluck('name')->first(); // Single role per user
     }
-
-    return view('admin.assign-role.index', compact('users', 'roles'));
+    $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+    return view('admin.assign-role.index', compact('users', 'roles', 'settings'));
 }
 
     public function assignRole(Request $request)

@@ -5,7 +5,7 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-icon rotate-n-15">
 
-               {{-- <img src="{{ asset("storage/uploads/" . $settings["SETTING_SITE_LOGO"]) }}" class="w-75" alt=""> --}}
+               <img src="{{ asset("storage/uploads/" . $settings["SETTING_SITE_LOGO"]) }}" class="w-75" alt="">
 
             </div>
             <h6 class="sidebar-brand-text mx-3 mt-2 font-weight-bold" title="JA IT SOLUTION">jaisbd.com</h6>
@@ -31,7 +31,7 @@
             <span>career</span>
         </a>
     </li> --}}
-
+{{--
 
 @canany(['career-list', 'career-create', 'career-edit', 'career-delete'])
     <li class="nav-item {{
@@ -62,7 +62,7 @@
             <span>Career Apply</span>
         </a>
     </li>
-@endcanany
+@endcanany --}}
 
 @canany(['slider-list', 'slider-create', 'slider-edit', 'slider-delete'])
     <li class="nav-item {{
@@ -79,8 +79,43 @@
 @endcanany
 
 
+@canany(['tour-categorics-list', 'tour-categorics-create', 'tour-categorics-edit', 'tour-categorics-delete'])
 
-    @canany(['about-list', 'about-create', 'about-edit', 'about-delete'])
+
+    <li class="nav-item {{
+        request()->routeIs('tour-categorics.index') ||
+        request()->routeIs('tour-categorics.create') ||
+        request()->routeIs('tour-categorics.show') ||
+        request()->routeIs('tour-categorics.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('tour-categorics.index') }}">
+            <i class="fas fa-folder"></i>
+            <span>Tour Categories</span>
+        </a>
+    </li>
+
+
+@endcanany
+
+
+@canany(['tour-list', 'tour-create', 'tour-edit', 'tour-delete'])
+
+
+    <li class="nav-item {{
+        request()->routeIs('tours.index') ||
+        request()->routeIs('tours.create') ||
+        request()->routeIs('tours.show') ||
+        request()->routeIs('tours.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('tours.index') }}">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Tours</span>
+        </a>
+    </li>
+
+@endcanany
+
+
+
+    {{-- @canany(['about-list', 'about-create', 'about-edit', 'about-delete'])
     <li class="nav-item {{
         request()->routeIs('abouts.index') ||
         request()->routeIs('abouts.create') ||
@@ -270,7 +305,7 @@
             <span>Project</span>
         </a>
     </li>
-@endcanany
+@endcanany --}}
 
 
 @canany(['role-list', 'role-create', 'role-edit', 'role-delete'])
@@ -300,7 +335,14 @@
     </li>
 @endcanany
 
-
+ @if(auth()->user()->hasRole('superadmin'))
+        <li class="nav-item {{ request()->routeIs('setting.index') || request()->routeIs('setting.update') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('setting.index') }}">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+    @endif
 
 
 </ul>

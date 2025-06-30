@@ -13,7 +13,9 @@ git status
 git add .
 git commit -m ""
 git push origin main
-
+git checkout -b falconA
+git checkout main
+git branch
 ## Login
 composer require laravel/ui
 php artisan ui bootstrap --auth
@@ -30,6 +32,8 @@ composer require yajra/laravel-datatables-oracle:"^10.6"
 
 php artisan vendor:publish --provider="Yajra\DataTables\DataTablesServiceProvider"
 
+##Seed
+php artisan db:seed --class=PermissionSeeder
 
 
 
