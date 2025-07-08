@@ -45,8 +45,8 @@ class ToursController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
+         $request->validate([
+            'title' => 'required|string|max:255',
             'category_id' => 'required|exists:tour_categories,id',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
@@ -55,9 +55,9 @@ class ToursController extends Controller
         try{
             $tour = New Tours();
 
-            $tour->file([
-                'title' => $request->input('name'),
-                'slug' => $request->input('name'),
+            $tour->fill([
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug'),
                 'description' => $request->input('description'),
                 'category_id' => $request->input('category_id'),
                 'location' => $request->input('location'),
@@ -65,7 +65,9 @@ class ToursController extends Controller
                 'start_date' => $request->input('start_date'),
                 'end_date' => $request->input('end_date'),
                 'price' => $request->input('price'),
-                'status' => $request->input('status', 0),
+                'discount' => $request->input('discount'),
+                'guests' => $request->input('guests'),
+                'status' => $request->input('status'),
             ]);
             if ($request->hasFile('image')) {
                 $tour->image = $this->uploadImage($request->file('image'));
@@ -77,5 +79,64 @@ class ToursController extends Controller
             return redirect()->back()->with('error', 'Error creating tour: ' . $e->getMessage());
         }
         // return redirect()->route('tours.index')->with('success', 'Tour created successfully.');
+    }
+
+    public function edit(Tours $tour)
+    {
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        $categories = TourCategories::all();
+        return view('admin.tours.edit', compact('tour', 'settings', 'categories'));
+    }
+
+    public function update(Request $request, Tours $tour)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'category_id' => 'required|exists:tour_categories,id',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            // Add other validation rules as needed
+        ]);
+
+        try {
+            $tour->update([
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug'),
+                'description' => $request->input('description'),
+                'category_id' => $request->input('category_id'),
+                'location' => $request->input('location'),
+                'duration' => $request->input('duration'),
+                'start_date' => $request->input('start_date'),
+                'end_date' => $request->input('end_date'),
+                'price' => $request->input('price'),
+                'discount' => $request->input('discount'),
+                'guests' => $request->input('guests'),
+                'status' => $request->input('status'),
+            ]);
+
+            if ($request->hasFile('image')) {
+                if ($tour->image) {
+                    unlink(public_path('uploads/tour/' . $tour->image));
+                }
+                $tour->image = $this->uploadImage($request->file('image'));
+            }
+
+            return redirect()->route('tours.index')->with('success', 'Tour updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error updating tour: ' . $e->getMessage());
+        }
+    }
+
+    public function destroy(Tours $tour)
+    {
+        try {
+            if ($tour->image) {
+                unlink(public_path('uploads/tour/' . $tour->image));
+            }
+            $tour->delete();
+            return redirect()->route('tours.index')->with('success', 'Tour deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('tours.index')->with('error', 'Error deleting tour: ' . $e->getMessage());
+        }
     }
 }

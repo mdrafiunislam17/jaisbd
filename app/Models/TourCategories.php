@@ -14,4 +14,5 @@ class TourCategories extends Model
     {
         return $this->hasMany(Tours::class, 'category_id');
     }
+
 }

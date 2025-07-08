@@ -56,6 +56,16 @@
                     </div>
 
 
+                    <div class="form-group row">
+                        <label for="subtitle"
+                               class="col-sm-3 col-form-label text-right font-weight-bold">Subtitle</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="subtitle" value="{{ old("subtitle") }}"
+                                   name="subtitle">
+                        </div>
+                    </div>
+
+
 
 
 

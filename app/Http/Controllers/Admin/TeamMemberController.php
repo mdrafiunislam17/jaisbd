@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Designation;
 use App\Models\Management;
 use App\Models\TeamMember;
+use App\Models\Setting;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -31,14 +32,16 @@ class TeamMemberController extends Controller
     public function index()
     {
         $teamMembers = TeamMember::all();
-        return view('admin.teamMember.index',compact('teamMembers'));
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.teamMember.index',compact('teamMembers','settings'));
     }
 
     public function create()
     {
         $managements = Management::all();
         $designations = Designation::all();
-        return view('admin.teamMember.create',compact('managements','designations'));
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.teamMember.create',compact('managements','designations', 'settings'));
 
     }
     public function store(Request $request)
@@ -82,7 +85,8 @@ class TeamMemberController extends Controller
     {
         $managements = Management::all();
         $designations = Designation::all();
-        return view('admin.teamMember.edit',compact('team','managements','designations'));
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.teamMember.edit',compact('team','managements','designations','settings'));
     }
 
     public function update(Request $request, TeamMember $team)

@@ -13,6 +13,13 @@ use App\Http\Controllers\AssignRoleController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\TourCategoriesController;
 use App\Http\Controllers\Admin\ToursController;
+use App\Http\Controllers\Admin\VisaCategoriesController;
+use App\Http\Controllers\Admin\VisaController;
+use App\Http\Controllers\Admin\StudyAbroadCategoriesController;
+use App\Http\Controllers\Admin\StudyAbroadControlle;
+use App\Http\Controllers\Admin\ConsultancyMedicineCategoriesController;
+use App\Http\Controllers\Admin\ConsultancyMedicineController;
+use App\Http\Controllers\UserDashboardController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectCategoryController;
@@ -26,6 +33,7 @@ use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\CareerApplicationController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Models\Tours;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,13 +59,40 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',[FrontendController::class,'index'])->name('frontend.index');
+Route::get('/tour/{slug}', [FrontendController::class, 'show'])->name('tourDetails');
+Route::get('/toursCategory/{name}', [FrontendController::class, 'toursByCategory'])->name('categoryTours');
+Route::get('/visaCategory/{name}', [FrontendController::class, 'visaByCategory'])->name('categoryVisas');
+Route::get('/consultancyMedicineCategory/{name}', [FrontendController::class, 'consultancyMedicineByCategory'])->name('categoryConsultancyMedicine');
+Route::get('/studyAbroadCategory/{name}', [FrontendController::class, 'studyAbroadByCategory'])->name('categoryStudyAbroad');
+Route::get('/aboutUs', [FrontendController::class, 'aboutUs'])->name('frontendAbout');
+Route::get('/teamMember', [FrontendController::class, 'teamMember'])->name('frontendTeamMember');
+Route::get('teamMember/details/{name}', [FrontendController::class, 'teamMemberDetails'])->name('teamMemberDetails');
+Route::get('/blog', [FrontendController::class, 'blog'])->name('frontendBlog');
+Route::get('/blog/Details/{title}', [FrontendController::class, 'blogDetails'])->name('blogDetails');
+Route::get('visa/category/{name}', [FrontendController::class, 'visaByCategory'])->name('visa.by.category');
+Route::get('study-abroad/category/{name}', [FrontendController::class, 'studyAbroadByCategory'])->name('studyabroad.by.category');
+Route::get('consultancy/category/{name}', [FrontendController::class, 'consultancyByCategory'])->name('consultancy.by.category');
+Route::get('/consultancy/{slug}', [FrontendController::class, 'consultancyShow'])->name('consultancyShow');
+
+Route::get('contacts',[FrontendController::class, 'contact'])->name('frontendContact');
+Route::post('contacts', [FrontendController::class, 'store'])->name('frontend.contactstore');
+
+Route::get('/search/{name}', [FrontendController::class, 'search'])->name('tour.search');
+
+
 
 Auth::routes();
+
+// Route::middleware(['role:user'])->group(function () {
+
+// });
+
 // Protected routes (requires authentication)
 Route::middleware('auth')->group(function () {
 
     // Home Dashboard
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+     Route::get('/user', [UserDashboardController::class, 'index'])->name('user');
 
 
     // SliderController
@@ -66,6 +101,16 @@ Route::middleware('auth')->group(function () {
     Route::resource('tour-categorics',TourCategoriesController::class);
 
     Route::resource('tours', ToursController::class);
+
+    Route::resource('visa-categories', VisaCategoriesController::class);
+    Route::resource('visa', VisaController::class);
+    Route::resource('consultancy-medicine-categories', ConsultancyMedicineCategoriesController::class);
+    Route::resource('consultancy-medicine', ConsultancyMedicineController::class);
+
+    Route::resource('study-abroad-categories', StudyAbroadCategoriesController::class);
+    Route::resource('study-abroad', StudyAbroadControlle::class);
+
+
 
     //AboutController
     Route::resource('abouts',AboutController::class);
@@ -112,6 +157,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('career', CareerController::class);
 
     Route::resource('career-apply', CareerApplicationController::class);
+
+    Route ::resource('contact', ContactController::class);
 
 
     // Role Route

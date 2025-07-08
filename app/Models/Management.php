@@ -13,6 +13,9 @@ class Management extends Model
         'name',
     ];
 
+
+    protected $table = 'managements';
+
     public function teamMembers()
     {
         return $this->hasMany(TeamMember::class);

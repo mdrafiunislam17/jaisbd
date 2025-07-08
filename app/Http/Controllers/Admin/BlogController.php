@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Setting;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -28,14 +29,16 @@ class BlogController extends Controller
 
       public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::latest()->get();
+        $settings = Setting::pluck("value", "setting_name")->toArray();
 
-        return view("admin.blogs.index", compact("blogs"));
+        return view("admin.blogs.index", compact("blogs", "settings"));
     }
 
      public function create()
     {
-        return view("admin.blogs.create");
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view("admin.blogs.create", compact("settings"));
     }
 
 
@@ -82,7 +85,8 @@ class BlogController extends Controller
 
       public function edit(Blog $blog)
     {
-        return view("admin.blogs.edit", compact("blog"));
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view("admin.blogs.edit", compact("blog", "settings"));
     }
 
 

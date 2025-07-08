@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Setting;
+use App\Enums\UserRole; // ✅ Correct
+use App\Models\User;
+
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,19 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+       public function redirectTo(){
+        $user = auth()->user();
+
+        if ($user->hasRole('admin')) {
+            return route('home'); // Admin dashboard
+        } elseif ($user->hasRole('superadmin')) {
+            return route('home');
+        } elseif ($user->hasRole('user')) {
+            return route('user');
+        }
+
+        return route('user'); // fallback
+    }
 
     /**
      * Create a new controller instance.
@@ -78,5 +92,9 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+         $user->assignRole(UserRole::USER);
+
+         return $user;
     }
 }

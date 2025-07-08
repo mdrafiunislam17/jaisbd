@@ -21,7 +21,9 @@ class Tours extends Model
         'start_date',
         'end_date',
         'price',
+        'discount',
         'image',
+        'guests',
         'status',
     ];
 

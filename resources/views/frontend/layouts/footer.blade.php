@@ -3,7 +3,7 @@
                     <div class="footer-main">
                         <div class="footer-logo">
                             <div class="logo-footer">
-                                <img src="./assets/images/logo1.png" alt="">
+                               <a href="{{route('frontend.index')}}"> <img src="{{asset("uploads/" . $settings["SETTING_SITE_LOGO"])}}" alt=""></a>
                             </div>
                             <p class="des-footer">The world’s first and largest digital market
                                 for crypto collectibles and non-fungible
@@ -11,15 +11,15 @@
                             <ul class="footer-info">
                                 <li class="flex-three">
                                     <i class="icon-noun-mail-5780740-1"></i>
-                                    <p>Info@webmail.com</p>
+                                    <p>{!! $settings["CONTACT_EMAIL"] !!}</p>
                                 </li>
                                 <li class="flex-three">
                                     <i class="icon-Group-9"></i>
-                                    <p>684 555-0102 490</p>
+                                    <p>{!! $settings["CONTACT_PHONE"] !!}</p>
                                 </li>
                                 <li class="flex-three">
                                     <i class="icon-Layer-19"></i>
-                                    <p>6391 Elgin St. Celina, NYC 10299</p>
+                                    <p>{{ $settings["CONTACT_ADDRESS"] }}</p>
                                 </li>
                             </ul>
 
@@ -29,24 +29,24 @@
 
                             <ul class="footer-menu">
                                 <li>
-                                    <a href="about-us.html">About Us</a>
+                                    <a href="{{route('frontendAbout')}}">About Us</a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="gallery.html">Gallery</a>
+                                </li> --}}
+                                <li>
+                                    <a href="{{route('frontendTeamMember')}}">Our Team</a>
                                 </li>
                                 <li>
-                                    <a href="team.html">Our Team</a>
+                                    <a href="{{route('frontendBlog')}}">Blog </a>
                                 </li>
                                 <li>
-                                    <a href="blog.html">Blog Insights</a>
-                                </li>
-                                <li>
-                                    <a href="contact/">Contact</a>
+                                    <a href="{{route('frontendContact')}}">Contact</a>
                                 </li>
                             </ul>
 
                         </div>
-                        <div class="footer-gallery">
+                        {{-- <div class="footer-gallery">
                             <h5 class="title">Gallery</h5>
 
                             <div class="gallery-img">
@@ -70,7 +70,7 @@
                                 </a>
                             </div>
 
-                        </div>
+                        </div> --}}
                         <div class="footer-newsletter">
                             <h5 class="title">Newsletter</h5>
                             <form action="/" id="footer-form">
@@ -84,7 +84,7 @@
                                 </div>
 
                             </form>
-                            <ul class="social-ft flex-three">
+                            {{-- <ul class="social-ft flex-three">
                                 <li>
                                     <a href="#">
                                         <i class="icon-icon-2"></i>
@@ -105,7 +105,7 @@
                                         <i class="icon-2"></i>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> --}}
 
                         </div>
                     </div>

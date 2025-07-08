@@ -52,8 +52,8 @@
                                         </div>
                                         <div class="logo-box">
                                             <div class="logo">
-                                                <a href="index.html">
-                                                    <img src="assets/images/logo1.png" alt="Logo">
+                                                <a href="{{route('frontend.index')}}">
+                                                    <img src="{{asset("uploads/" . $settings["SETTING_SITE_LOGO"])}}" alt="Logo">
                                                 </a>
                                             </div>
                                         </div>
@@ -76,40 +76,57 @@
                                                         </li>
                                                         <li class="dropdown2">
                                                             <a href="#">Tours</a>
-                                                            <!-- <ul>
-                                                                <li><a href="archieve-tour.html">Archieve tour</a>
 
-                                                                </li>
-                                                                <li><a href="tour-package-v2.html">Tour left sidebar</a>
+                                                             <ul>
+                                                                @foreach($tourCategories as $category)
+                                                                    <li>
+                                                                        <a href="{{ route('categoryTours', $category->name) }}">
+                                                                            {{ Str::limit($category->name, 25) }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
 
-                                                                </li>
-                                                                <li><a href="tour-package-v4.html">Tour package </a>
 
-                                                                </li>
-                                                                <li><a href="tour-single.html">Tour Single </a>
-
-                                                                </li>
-                                                            </ul> -->
                                                         </li>
                                                         <li class="dropdown2"><a href="#">Visa</a>
-                                                            <!-- <ul>
-                                                                <li><a href="tour-destination-v1.html">Destination
-                                                                        V1</a></li>
-                                                                <li><a href="tour-destination-v2.html">Destination
-                                                                        V2</a></li>
-                                                                <li><a href="tour-destination-v3.html">Destination
-                                                                        V3</a></li>
-                                                                <li><a href="single-destination.html">Destination
-                                                                        Single</a></li>
-                                                            </ul> -->
+
+                                                             <ul>
+                                                                @foreach($visaCategories as $category)
+                                                                    <li>
+                                                                        <a href="{{ route('categoryVisas', $category->name) }}">
+                                                                            {{ Str::limit($category->name, 25) }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+
                                                         </li>
 
                                                         <li class="dropdown2" >
-                                                            <a href="#">consultancy medicine</a>
+                                                            <a href="#">Medical Consultancy</a>
+                                                              <ul>
+                                                                @foreach($consultancyMedicineCategories as $category)
+                                                                    <li>
+                                                                        <a href="{{ route('consultancy.by.category', $category->name) }}">
+                                                                            {{ Str::limit($category->name, 25) }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
                                                         </li>
 
                                                           <li class="dropdown2" >
                                                             <a href="#">Study Abroad </a>
+                                                              <ul>
+                                                                @foreach($studyAbroadCategories as $category)
+                                                                    <li>
+                                                                        <a href="{{ route('categoryStudyAbroad', $category->name) }}">
+                                                                            {{ Str::limit($category->name, 25) }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
                                                         </li>
 
                                                         <!-- <li class="">
@@ -133,12 +150,12 @@
 
                                                         <li class="dropdown2"><a href="#">Pages</a>
                                                             <ul>
-                                                                <li><a href="about-us.html">About Us</a></li>
-                                                                <li><a href="team.html">Team member</a></li>
-                                                                <li><a href="gallery.html">Blog</a></li>
-                                                                <li><a href="terms-condition.html">Terms & Condition</a>
+                                                                <li><a href="{{route('frontendAbout')}}">About Us</a></li>
+                                                                <li><a href="{{route('frontendTeamMember')}}">Team member</a></li>
+                                                                <li><a href="{{route('frontendBlog')}}">Blog</a></li>
+                                                                {{-- <li><a href="terms-condition.html">Terms & Condition</a>
                                                                 </li>
-                                                                <li><a href="help-center.html">Help center</a></li>
+                                                                <li><a href="help-center.html">Help center</a></li> --}}
                                                             </ul>
                                                         </li>
                                                         <!-- <li class="dropdown2"><a href="#">Dashboard</a>
@@ -155,7 +172,7 @@
                                                          <!-- <li class="">
                                                             <a href = "#">About </a>
                                                         </li> -->
-                                                        <li><a href="contact-us.html">Contact</a></li>
+                                                        <li><a href="{{route('frontendContact')}}">Contact</a></li>
                                                     </ul>
                                                 </div>
                                             </nav>
@@ -172,15 +189,6 @@
                                                         </li>
                                                         <li data-value="Vietnam" class="option"><img
                                                                 src="./assets/images/page/language.svg" alt="">Vietnam
-                                                        </li>
-                                                        <li data-value="German" class="option"><img
-                                                                src="./assets/images/page/language.svg" alt="">German
-                                                        </li>
-                                                        <li data-value="Russian" class="option"><img
-                                                                src="./assets/images/page/language.svg" alt="">Russian
-                                                        </li>
-                                                        <li data-value="Canada" class="option"><img
-                                                                src="./assets/images/page/language.svg" alt="">Canada
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -210,11 +218,19 @@
                                             </div>
                                             <div class="register">
                                                 <ul class="flex align-center">
-                                                    <li>
-                                                        <a href="login.html" class="flex-three">
-                                                           <img src="./assets/images/avata/images4.jpeg" alt="image">
+                                                  {{-- <li>
+                                                    @auth
+                                                        {{ auth()->user()->name }}
+                                                        <a href="{{ route('login') }}" class="flex-three">
+                                                            <img src="{{ asset('assets/images/avata/images4.jpeg') }}" alt="image">
                                                         </a>
-                                                    </li>
+                                                    @else
+                                                        <a href="{{ route('login') }}" class="flex-three">
+                                                            Login
+                                                        </a>
+                                                    @endauth
+                                                </li> --}}
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -237,8 +253,8 @@
                 <div class="mobile-menu">
                     <div class="menu-backdrop"></div>
                     <nav class="menu-box">
-                        <div class="nav-logo"><a href="index.html">
-                                <img src="assets/images/logo2.png" alt=""></a></div>
+                        <div class="nav-logo"><a href="{{route('frontend.index')}}">
+                                <img src="{{asset("uploads/" . $settings["SETTING_SITE_LOGO"])}}" alt=""></a></div>
                         <div class="bottom-canvas">
                             <div class="menu-outer">
                             </div>

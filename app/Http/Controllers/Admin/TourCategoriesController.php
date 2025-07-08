@@ -36,7 +36,7 @@ class TourCategoriesController extends Controller
         ]);
 
         TourCategories::create($validated);
-        return redirect()->route('tour-categorics.index')->with('success', 'Tour Category created successfully.');
+        return redirect()->route('visa-categories.index')->with('success', 'Tour Category created successfully.');
     }
 
     // public function edit(TourCategories  $tourCategories){
@@ -57,15 +57,15 @@ class TourCategoriesController extends Controller
         ]);
 
         $tour_categoric->update($validated);
-        return redirect()->route('tour-categorics.index')->with('success', 'Tour Category updated successfully.');
+        return redirect()->route('visa-categories.index')->with('success', 'Tour Category updated successfully.');
     }
 
     public function destroy(TourCategories $tour_categoric){
         try {
             $tour_categoric->delete();
-            return redirect()->route('tour-categorics.index')->with('success', 'Tour Category deleted successfully.');
+            return redirect()->route('visa-categories.index')->with('success', 'Tour Category deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('tour-categorics.index')->with('error', 'Error deleting Tour Category: ' . $e->getMessage());
+            return redirect()->route('visa-categories.index')->with('error', 'Error deleting Tour Category: ' . $e->getMessage());
         }
     }
 }

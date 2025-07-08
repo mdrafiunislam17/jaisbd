@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Designation;
 use Illuminate\Database\QueryException;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class DesignationController extends Controller
@@ -22,12 +23,14 @@ class DesignationController extends Controller
     public function index()
     {
         $designations = Designation::all();
-        return view('admin.designation.index',compact('designations'));
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.designation.index',compact('designations', 'settings'));
     }
 
     public function create()
     {
-        return view('admin.designation.create');
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.designation.create',compact('settings'));
 
     }
     public function store(Request $request)
@@ -61,7 +64,8 @@ class DesignationController extends Controller
 
     public function edit (Designation $designation)
     {
-        return view('admin.designation.edit',compact('designation'));
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.designation.edit',compact('designation', 'settings'));
     }
 
     public function update(Request $request, Designation $designation)

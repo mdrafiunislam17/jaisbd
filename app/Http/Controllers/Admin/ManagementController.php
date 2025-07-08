@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Management;
+use App\Models\Setting;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -23,12 +24,14 @@ class ManagementController extends Controller
     public function index()
     {
         $managements = Management::all();
-        return view('admin.management.index',compact('managements'));
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.management.index',compact('managements', 'settings'));
     }
 
     public function create()
     {
-        return view('admin.management.create');
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.management.create',compact('settings'));
 
     }
     public function store(Request $request)
@@ -62,7 +65,8 @@ class ManagementController extends Controller
 
     public function edit (Management $management)
     {
-        return view('admin.management.edit',compact('management'));
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.management.edit',compact('management','settings'));
     }
 
     public function update(Request $request, Management $management)

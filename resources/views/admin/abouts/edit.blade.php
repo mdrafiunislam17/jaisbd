@@ -48,6 +48,15 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="subtitle"
+                               class="col-sm-3 col-form-label text-right font-weight-bold">Subtitle</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="subtitle" name="subtitle"
+                                   value="{{ old('subtitle', $about->subtitle) }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="description"
                                class="col-sm-3 col-form-label text-right font-weight-bold">Description *</label>
                         <div class="col-sm-6">
@@ -78,7 +87,7 @@
                                class="col-sm-3 col-form-label text-right font-weight-bold">Existing Image1</label>
                         <div class="col-sm-6">
                             <img src="{{ asset('uploads/about/' . $about->image1) }}" width="120"
-                                 alt="{{ $about->image }}">
+                                 alt="{{ $about->image1 }}">
                         </div>
                     </div>
 

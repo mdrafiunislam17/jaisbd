@@ -18,4 +18,16 @@ class Blog extends Model
         "posted_on",
         "status",
     ];
+
+
+    // app/Models/Blog.php
+
+public function getReadTimeAttribute()
+{
+    // Estimate: average person reads 200 words per minute
+    $words = str_word_count(strip_tags($this->detail));
+    $minutes = ceil($words / 200);
+    return $minutes;
+}
+
 }

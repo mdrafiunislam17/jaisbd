@@ -113,6 +113,179 @@
 
 @endcanany
 
+@canany(['visa-categories-list', 'visa-categories-create', 'visa-categories-edit', 'visa-categories-delete'])
+    <li class="nav-item {{
+        request()->routeIs('visa-categories.index') ||
+        request()->routeIs('visa-categories.create') ||
+        request()->routeIs('visa-categories.show') ||
+        request()->routeIs('visa-categories.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('visa-categories.index') }}">
+            <i class="fas fa-folder"></i>
+            <span>Visa Categories</span>
+        </a>
+    </li>
+@endcanany
+
+@canany(['visa-list', 'visa-create', 'visa-edit', 'visa-delete'])
+    <li class="nav-item {{
+        request()->routeIs('visa.index') ||
+        request()->routeIs('visa.create') ||
+        request()->routeIs('visa.show') ||
+        request()->routeIs('visa.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('visa.index') }}">
+            <i class="fas fa-passport"></i>
+            <span>Visa</span>
+        </a>
+    </li>
+@endcanany
+
+
+
+@canany(['consultancy-medicine-categories-list', 'consultancy-medicine-categories-create', 'consultancy-medicine-categories-edit', 'consultancy-medicine-categories-delete'])
+    <li class="nav-item {{
+        request()->routeIs('consultancy-medicine-categories.index') ||
+        request()->routeIs('consultancy-medicine-categories.create') ||
+        request()->routeIs('consultancy-medicine-categories.show') ||
+        request()->routeIs('consultancy-medicine-categories.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('consultancy-medicine-categories.index') }}">
+            <i class="fas fa-folder"></i>
+            <span>Medical Consultancy Categories</span>
+        </a>
+    </li>
+@endcanany
+
+@canany(['consultancy-medicine-list', 'consultancy-medicine-create', 'consultancy-medicine-edit', 'consultancy-medicine-delete'])
+    <li class="nav-item {{
+        request()->routeIs('consultancy-medicine.index') ||
+        request()->routeIs('consultancy-medicine.create') ||
+        request()->routeIs('consultancy-medicine.show') ||
+        request()->routeIs('consultancy-medicine.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('consultancy-medicine.index') }}">
+            <i class="fas fa-stethoscope"></i>
+            <span>Medical Consultancy</span>
+        </a>
+    </li>
+@endcanany
+
+
+@canany(['study-abroad-categories-list', 'study-abroad-categories-create', 'study-abroad-categories-edit', 'study-abroad-categories-delete'])
+    <li class="nav-item {{
+        request()->routeIs('study-abroad-categories.index') ||
+        request()->routeIs('study-abroad-categories.create') ||
+        request()->routeIs('study-abroad-categories.show') ||
+        request()->routeIs('study-abroad-categories.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('study-abroad-categories.index') }}">
+            <i class="fas fa-folder"></i>
+            <span>Study Abroad Categories</span>
+        </a>
+    </li>
+@endcanany
+
+
+@canany(['study-abroad-list', 'study-abroad-create', 'study-abroad-edit', 'study-abroad-delete'])
+    <li class="nav-item {{
+        request()->routeIs('study-abroad.index') ||
+        request()->routeIs('study-abroad.create') ||
+        request()->routeIs('study-abroad.show') ||
+        request()->routeIs('study-abroad.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('study-abroad.index') }}">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Study Abroad</span>
+        </a>
+    </li>
+@endcanany
+
+
+@canany(['about-list', 'about-create', 'about-edit', 'about-delete'])
+    <li class="nav-item {{
+        request()->routeIs('abouts.index') ||
+        request()->routeIs('abouts.create') ||
+        request()->routeIs('abouts.show') ||
+        request()->routeIs('abouts.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('abouts.index') }}">
+            <i class="fas fa-fw fa-info-circle"></i>
+            <span>About</span>
+        </a>
+    </li>
+@endcanany
+
+
+
+@canany(['management-list', 'management-create', 'management-edit', 'management-delete'])
+    <li class="nav-item {{
+        request()->routeIs('managements.index') ||
+        request()->routeIs('managements.create') ||
+        request()->routeIs('managements.show') ||
+        request()->routeIs('managements.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('managements.index') }}">
+            <i class="fas fa-users-cog me-2"></i>
+            <span>Management</span>
+        </a>
+    </li>
+@endcanany
+
+
+  @canany(['designation-list', 'designation-create', 'designation-edit', 'designation-delete'])
+    <li class="nav-item {{
+        request()->routeIs('designations.index') ||
+        request()->routeIs('designations.create') ||
+        request()->routeIs('designations.show') ||
+        request()->routeIs('designations.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('designations.index') }}">
+            <i class="fas fa-id-badge me-2"></i>
+            <span>Designation</span>
+        </a>
+    </li>
+@endcanany
+
+
+  @canany(['team-member-list', 'team-member-create', 'team-member-edit', 'team-member-delete'])
+    <li class="nav-item {{
+        request()->routeIs('teams.index') ||
+        request()->routeIs('teams.create') ||
+        request()->routeIs('teams.show') ||
+        request()->routeIs('teams.edit') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('teams.index') }}">
+            <i class="fas fa-users me-2"></i>
+            <span>Team</span>
+        </a>
+    </li>
+@endcanany
+
+
+ @canany(['blog-list', 'blog-create', 'blog-edit', 'blog-delete'])
+    <li class="nav-item {{
+        request()->routeIs("blogs.index") ||
+        request()->routeIs("blogs.create") ||
+        request()->routeIs("blogs.show") ||
+        request()->routeIs("blogs.edit")
+        ? "active" : "" }}">
+        <a class="nav-link" href="{{ route("blogs.index") }}">
+            <i class="fas fa-fw fa-newspaper"></i>
+            <span>Blogs</span>
+        </a>
+    </li>
+@endcanany
+
+@canany(['contact-list', 'contact-create', 'contact-edit','contact-delete'])
+
+  <li class="nav-item {{
+    request()->routeIs("contact.index") ||
+    request()->routeIs("contact.create") ||
+    request()->routeIs("contact.show") ||
+    request()->routeIs("contact.edit")
+    ? "active" : "" }}">
+        <a class="nav-link" href="{{ route("contact.index") }}">
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+    </li>
+
+@endcanany
+
+
+
+
 
 
     {{-- @canany(['about-list', 'about-create', 'about-edit', 'about-delete'])

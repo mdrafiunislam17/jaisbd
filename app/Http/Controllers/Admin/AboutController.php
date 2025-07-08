@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Slider;
+use App\Models\Setting;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -29,15 +30,19 @@ class AboutController extends Controller
     }
 
 
+
+
     public function index()
     {
         $abouts = About::all();
-        return view('admin.abouts.index',compact('abouts'));
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        return view('admin.abouts.index',compact('abouts', 'settings'));
     }
 
     public function create()
     {
-        return view('admin.abouts.create');
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        return view('admin.abouts.create',compact('settings'));
 
     }
 
@@ -45,6 +50,7 @@ class AboutController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -54,6 +60,7 @@ class AboutController extends Controller
             $about = new About();
 
             $about->title = $validated['title'];
+            $about->subtitle = $request->input('subtitle', ''); // Optional subtitle
             $about->description = $validated['description'];
 
             if ($request->hasFile('image')) {
@@ -75,7 +82,8 @@ class AboutController extends Controller
 
     public function edit(About $about)
     {
-        return view('admin.abouts.edit',compact('about'));
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        return view('admin.abouts.edit',compact('about', 'settings'));
 
     }
 
@@ -83,6 +91,7 @@ class AboutController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -90,6 +99,7 @@ class AboutController extends Controller
 
         try {
             $about->title = $validated['title'];
+            $about->subtitle = $request->input('subtitle', ''); // Optional subtitle
             $about->description = $validated['description'];
 
             if ($request->hasFile('image')) {
