@@ -40,7 +40,12 @@ class FrontendController extends Controller
         $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
         $studyAbroad = StudyAbroad::with('category')->get();
         $studyAbroadCategories = StudyAbroadCategories::all();
-        return view('frontend.index', compact('sliders', 'tours','tourCategories','consultancyMedicine','consultancyMedicineCategories','studyAbroad', 'settings','studyAbroadCategories', 'visa', 'visaCategories'));
+         $blogs = Blog::where('status', 1)
+             ->orderBy('posted_on', 'desc')
+             ->paginate(3);
+        // $tours = Tours::all();
+        return view('frontend.index', compact('sliders', 'tours','tourCategories','consultancyMedicine','consultancyMedicineCategories',
+        'studyAbroad', 'settings','studyAbroadCategories', 'visa', 'visaCategories','blogs',));
     }
 
 

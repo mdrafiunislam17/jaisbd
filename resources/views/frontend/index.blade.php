@@ -361,9 +361,9 @@
                 <!-- Widget Select Form -->
 
                 <!-- Widget Aboutus -->
-                <section class="about-us pb-150">
+                {{-- <section class="about-us pb-150">
                     <div class="tf-container">
-                        <!-- <div class="row pt-35">
+                   <div class="row pt-35">
                             <div class="col-lg-12 flex">
                                 <div class="image-list flex-three">
                                     <img src="./assets/images/avata/6.jpg" alt="Image" class="item">
@@ -379,7 +379,7 @@
                                 <p class="client fadeInUp wow">2,500 people booked Tommorow land Event in last 24
                                     hours</p>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="row pt-115">
                             <div class="col-lg-6">
                                 <div class="travel-video relative">
@@ -391,10 +391,10 @@
                                         </a>
                                     </div>
 
-                                    <!-- <img src="./assets/images/about-us/vali.png" alt="Image"
+                                   <img src="./assets/images/about-us/vali.png" alt="Image"
                                         class="mask-video tf-anime-rorate">
                                         <img src="./assets/images/page/enjoy.png" alt="Image"
-                                        class="mask-enjoy "> -->
+                                        class="mask-enjoy ">
                                 </div>
 
                             </div>
@@ -536,11 +536,11 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> --}}
                 <!-- Widget Aboutus -->
 
                 <!-- Widget Tourpackage -->
-                <section class="tour-package pd-main">
+                {{-- <section class="tour-package pd-main">
                     <div class="tf-container w-1456">
                         <div class="row">
                             <div class="col-lg-12">
@@ -2225,11 +2225,11 @@
                         </div>
 
                     </div>
-                </section>
+                </section> --}}
                 <!-- Widget Tourpackage -->
 
                 <!-- Widget activities -->
-                <section class="relative tf-widget-activities pd-main overflow-hidden">
+                {{-- <section class="relative tf-widget-activities pd-main overflow-hidden">
                     <img src="./assets/images/page/mask-activiti.png" alt="image" class="mask-top">
                     <img src="./assets/images/page/mask-print-2.png" alt="image" class="mask-bottom">
                     <div class="tf-container">
@@ -2535,11 +2535,11 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> --}}
                 <!-- Widget activities -->
 
                 <!-- Widget Offer Package -->
-                <section class="offer-package pd-main bg-1 relative">
+                {{-- <section class="offer-package pd-main bg-1 relative">
                     <img src="./assets/images/page/feature.jpg" alt="image" class="feature-ofer">
                     <div class="tf-container">
                         <div class="row align-center z-index3 relative">
@@ -3044,12 +3044,12 @@
                         </div>
                     </div>
 
-                </section>
+                </section> --}}
 
                 <!-- Widget Offer Package -->
 
                 <!-- Widget Counter -->
-                <section class="widget-counter relative">
+                {{-- <section class="widget-counter relative">
                     <img src="./assets/images/page/couter-top.png" alt="image" class="counter-top">
                     <img src="./assets/images/page/counter-bottom.png" alt="image" class="counter-bottom">
                     <div class="tf-container">
@@ -3191,125 +3191,180 @@
                         </div>
 
                     </div>
-                </section>
+                </section> --}}
                 <!-- Widget Counter -->
 
                 <!-- Widget destination -->
-                <section class="widget-destination">
+               <section class="widget-destination" style="margin-top: -210px;">
                     <div class="tf-container">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="center m0-auto w-text-heading mb-40">
-                                    <span class="sub-title-heading text-main mb-15 fadeInUp wow">Explore the
-                                        world</span>
+                                    <span class="sub-title-heading text-main mb-15 fadeInUp wow">Explore the world</span>
                                     <h2 class="title-heading fadeInUp wow">We provide top tourist destinations</h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="grid-three-destination">
-                            <div class="tf-widget-destination wow fadeInUp animated " data-wow-delay="0.1s">
-                                <a href="single-destination.html" class="destination-imgae">
-                                    <span class="tour">3 tours</span>
-                                    <img src="./assets/images/destination/a (1).jpeg" alt="">
-                                </a>
-                                <div class="destination-content">
-                                    <span class="nation">Switzerland</span>
-                                    <div class="flex-two btn-destination">
-                                        <h6 class="title"><a href="single-destination.html">View all tours</a></h6>
-                                        <a href="single-destination.html" class="flex-five btn-view">
-                                            <i class="icon-Vector-32"></i>
-                                        </a>
-                                    </div>
 
+                        <div class="row"> <!-- ✅ এই নতুন row এর মধ্যে সকল ট্যুর card থাকবে -->
+                            @forelse ($tours as $item)
+                                <div class="col-sm-6 col-lg-4 mb-37">
+                                    <div class="tf-widget-destination">
+                                        <a href="{{ route('tourDetails', $item->slug) }}" class="destination-imgae">
+                                            <span class="tour">{{ $item->duration }}</span>
+                                            <img src="{{ asset("uploads/tour/$item->image") }}" alt="{{ $item->title }}">
+                                        </a>
+                                        <div class="destination-content">
+                                            <span class="nation">{{ $item->title }}</span>
+                                            <div class="flex-two btn-destination">
+                                                <h6 class="title">
+                                                    <a href="{{ route('tourDetails', $item->slug) }}">View tours</a>
+                                                </h6>
+                                                <a href="{{ route('tourDetails', $item->slug) }}" class="flex-five btn-view">
+                                                    <i class="icon-Vector-32"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="tf-widget-destination wow fadeInUp animated " data-wow-delay="0.2s">
-                                <a href="single-destination.html" class="destination-imgae">
-                                    <span class="tour">7 tours</span>
-                                    <img src="./assets/images/destination/a (2).jpeg" alt="">
-                                </a>
-                                <div class="destination-content">
-                                    <span class="nation">Thailand</span>
-                                    <div class="flex-two btn-destination">
-                                        <h6 class="title"><a href="single-destination.html">View all tours</a></h6>
-                                        <a href="single-destination.html" class="flex-five btn-view">
-                                            <i class="icon-Vector-32"></i>
-                                        </a>
-                                    </div>
-
+                            @empty
+                                <div class="col-12">
+                                    <p>No tours found for this category.</p>
                                 </div>
-                            </div>
-                            <div class="tf-widget-destination wow fadeInUp animated " data-wow-delay="0.3s">
-                                <a href="single-destination.html" class="destination-imgae">
-                                    <span class="tour">9 tours</span>
-                                    <img src="./assets/images/destination/a (3).jpeg" alt="">
-                                </a>
-                                <div class="destination-content">
-                                    <span class="nation">united kingdom</span>
-                                    <div class="flex-two btn-destination">
-                                        <h6 class="title"><a href="single-destination.html">View all tours</a></h6>
-                                        <a href="single-destination.html" class="flex-five btn-view">
-                                            <i class="icon-Vector-32"></i>
-                                        </a>
-                                    </div>
+                            @endforelse
+                        </div> <!-- ✅ row end -->
+                    </div>
+                </section>
 
-                                </div>
-                            </div>
-                            <div class="tf-widget-destination wow fadeInUp animated " data-wow-delay="0.4s">
-                                <a href="single-destination.html" class="destination-imgae">
-                                    <span class="tour">4 tours</span>
-                                    <img src="./assets/images/destination/a (4).jpeg" alt="">
-                                </a>
-                                <div class="destination-content">
-                                    <span class="nation">Hongkong</span>
-                                    <div class="flex-two btn-destination">
-                                        <h6 class="title"><a href="single-destination.html">View all tours</a></h6>
-                                        <a href="single-destination.html" class="flex-five btn-view">
-                                            <i class="icon-Vector-32"></i>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="tf-widget-destination wow fadeInUp animated " data-wow-delay="0.5s">
-                                <a href="single-destination.html" class="destination-imgae">
-                                    <span class="tour">3 tours</span>
-                                    <img src="./assets/images/destination/a (6).jpeg" alt="">
-                                </a>
-                                <div class="destination-content">
-                                    <span class="nation">Sri lanka</span>
-                                    <div class="flex-two btn-destination">
-                                        <h6 class="title"><a href="single-destination.html">View all tours</a></h6>
-                                        <a href="single-destination.html" class="flex-five btn-view">
-                                            <i class="icon-Vector-32"></i>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="tf-widget-destination wow fadeInUp animated " data-wow-delay="0.6s">
-                                <a href="single-destination.html" class="destination-imgae">
-                                    <span class="tour">3 tours</span>
-                                    <img src="./assets/images/destination/a (7).jpeg" alt="">
-                                </a>
-                                <div class="destination-content">
-                                    <span class="nation">Singapore</span>
-                                    <div class="flex-two btn-destination">
-                                        <h6 class="title"><a href="single-destination.html">View all tours</a></h6>
-                                        <a href="single-destination.html" class="flex-five btn-view">
-                                            <i class="icon-Vector-32"></i>
-                                        </a>
-                                    </div>
-
+                <section class="widget-destination" style="margin-top: -210px;">
+                    <div class="tf-container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="center m0-auto w-text-heading mb-40">
+                                    <span class="sub-title-heading text-main mb-15 fadeInUp wow">Visa Services</span>
+                                    <h2 class="title-heading fadeInUp wow">We provide visa assistance</h2>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row"> <!-- ✅ এই নতুন row এর মধ্যে সকল ট্যুর card থাকবে -->
+                            @forelse ($visa as $item)
+                                <div class="col-sm-6 col-lg-4 mb-37">
+                                    <div class="tf-widget-destination">
+                                        <a href="#" class="destination-imgae">
+                                            <span class="tour">{{ $item->duration }}</span>
+                                            <img src="{{ asset("uploads/visa/$item->image") }}" alt="{{ $item->title }}">
+                                        </a>
+                                        <div class="destination-content">
+                                            <span class="nation">{{ $item->title }}</span>
+                                            <div class="flex-two btn-destination">
+                                                <h6 class="title">
+                                                    <a href="#">View tours</a>
+                                                </h6>
+                                                <a href="#" class="flex-five btn-view">
+                                                    <i class="icon-Vector-32"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col-12">
+                                    <p>No tours found for this category.</p>
+                                </div>
+                            @endforelse
+                        </div> <!-- ✅ row end -->
                     </div>
                 </section>
+
+
+                <section class="widget-destination" style="margin-top: -210px;">
+                    <div class="tf-container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="center m0-auto w-text-heading mb-40">
+                                    <span class="sub-title-heading text-main mb-15 fadeInUp wow">Medical Consultancy</span>
+                                    <h2 class="title-heading fadeInUp wow">Get expert consultation</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row"> <!-- ✅ এই নতুন row এর মধ্যে সকল ট্যুর card থাকবে -->
+                            @forelse ($consultancyMedicine as $item)
+                                <div class="col-sm-6 col-lg-4 mb-37">
+                                    <div class="tf-widget-destination">
+                                        <a href="#" class="destination-imgae">
+                                            <span class="tour">{{ $item->duration }}</span>
+                                            <img src="{{ asset('uploads/consultancyMedicine/' . $item->image) }}" alt="{{ $item->title }}">
+                                        </a>
+                                        <div class="destination-content">
+                                            <span class="nation">{{ $item->title }}</span>
+                                            <div class="flex-two btn-destination">
+                                                <h6 class="title">
+                                                    <a href="#">View tours</a>
+                                                </h6>
+                                                <a href="#" class="flex-five btn-view">
+                                                    <i class="icon-Vector-32"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col-12">
+                                    <p>No tours found for this category.</p>
+                                </div>
+                            @endforelse
+                        </div> <!-- ✅ row end -->
+                    </div>
+                </section>
+
+
+                <section class="widget-destination" style="margin-top: -210px;">
+                    <div class="tf-container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="center m0-auto w-text-heading mb-40">
+                                    <span class="sub-title-heading text-main mb-15 fadeInUp wow">Study Abroad</span>
+                                    <h2 class="title-heading fadeInUp wow">Opportunities to study Abroad</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row"> <!-- ✅ এই নতুন row এর মধ্যে সকল ট্যুর card থাকবে -->
+                            @forelse ($studyAbroad as $item)
+                                <div class="col-sm-6 col-lg-4 mb-37">
+                                    <div class="tf-widget-destination">
+                                        <a href="#" class="destination-imgae">
+                                            <span class="tour">{{ $item->duration }}</span>
+                                            <img src="{{ asset("uploads/studyAbroad/$item->image") }}" alt="{{ $item->title }}">
+                                        </a>
+                                        <div class="destination-content">
+                                            <span class="nation">{{ $item->title }}</span>
+                                            <div class="flex-two btn-destination">
+                                                <h6 class="title">
+                                                    <a href="#">View tours</a>
+                                                </h6>
+                                                <a href="#" class="flex-five btn-view">
+                                                    <i class="icon-Vector-32"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col-12">
+                                    <p>No tours found for this category.</p>
+                                </div>
+                            @endforelse
+                        </div> <!-- ✅ row end -->
+                    </div>
+                </section>
+
                 <!-- Widget destination -->
 
                 <!-- Widget Brand logo -->
-                <section class="relative">
+                {{-- <section class="relative">
                     <div class="tf-container">
                         <div class="row">
                             <div class="col-lg-12 relative center line-brand-logo mt-20">
@@ -3342,11 +3397,11 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> --}}
                 <!-- Widget Brand logo -->
 
                 <!-- Widget Adventure -->
-                <section class="widget-adventure">
+                {{-- <section class="widget-adventure">
                     <div class="tf-container">
                         <div class="row">
                             <div class="col-lg-12">
@@ -3827,11 +3882,11 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> --}}
                 <!-- Widget Adventure -->
 
                 <!-- Widget Testimonial -->
-                <section class="widget-testimonial-style01">
+                {{-- <section class="widget-testimonial-style01">
                     <div class="tf-container">
                         <div class="row">
                             <div class="col-md-5 relative">
@@ -3920,11 +3975,11 @@
                         </div>
 
                     </div>
-                </section>
+                </section> --}}
                 <!-- Widget Testimonial -->
 
                 <!-- Widget Banner Contact -->
-                <section class="widget-banner-contact relative">
+                {{-- <section class="widget-banner-contact relative">
                     <div class="tf-container">
                         <div class="row z-index3 relative">
                             <div class="col-lg-7 content-banner-contact">
@@ -3957,7 +4012,7 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> --}}
                 <!-- Widget Banner Contact -->
 
                 <!-- Widget Banner Blog -->
@@ -3974,96 +4029,40 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 wow fadeInUp animated " data-wow-delay="0.1s">
+
+                            @foreach ($blogs as $blog )
+                                <div class="col-md-4 wow fadeInUp animated " data-wow-delay="0.1s">
                                 <div class="tf-widget-blog blog-style">
-                                    <a href="blog-details.html" class="blog-image">
-                                        <img src="./assets/images/blog/a (1).jpeg" alt="">
-                                        <div class="category-blog">
+                                    <a href="#" class="blog-image">
+                                        <img src="{{asset("uploads/blog/$blog->image")}}" alt="">
+                                        {{-- <div class="category-blog">
                                             <i class="icon-Group-8"></i>
                                             <span>Traveling</span>
-                                        </div>
+                                        </div> --}}
                                     </a>
                                     <div class="blog-content">
                                         <ul class="meta-list flex-three">
                                             <li>
                                                 <i class="icon-4"></i>
-                                                <a href="blog-details.html"><span>02 Apr 2021</span></a>
+                                                <a href="#"><span>{{ \Carbon\Carbon::parse($blog->posted_on)->format('d F') }}</span></a>
                                             </li>
                                             <li>
                                                 <i class="icon-7"></i>
-                                                <a href="blog-details.html"><span>Coments (03)</span></a>
+                                                {{-- <a href="#"><span>Coments (03)</span></a> --}}
                                             </li>
                                         </ul>
-                                        <h3 class="entry-title"><a href="blog-details.html">The 8 best things about
-                                                Touristy</a></h3>
-                                        <p class="des">Business is the activity of making on cing or buying and selling
+                                        <h3 class="entry-title"><a href="#">{{$blog->title}}</a></h3>
+                                        {{-- <p class="des">Business is the activity of making on cing or buying and selling
                                             pro
-                                        </p>
-                                        <a href="blog-details.html" class="btn-read-more">Read More <i
+                                        </p> --}}
+                                        <a href="{{ route('blogDetails', ['title' => $blog->title]) }}" class="btn-read-more">Read More <i
                                                 class="icon-Vector-4"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 wow fadeInUp animated " data-wow-delay="0.2s">
-                                <div class="tf-widget-blog blog-style">
-                                    <a href="blog-details.html" class="blog-image">
-                                        <img src="./assets/images/blog/a (2).jpeg" alt="">
-                                        <div class="category-blog">
-                                            <i class="icon-Group-8"></i>
-                                            <span>Business</span>
-                                        </div>
-                                    </a>
-                                    <div class="blog-content">
-                                        <ul class="meta-list flex-three">
-                                            <li>
-                                                <i class="icon-4"></i>
-                                                <a href="blog-details.html"><span>02 Apr 2021</span></a>
-                                            </li>
-                                            <li>
-                                                <i class="icon-7"></i>
-                                                <a href="blog-details.html"><span>Coments (03)</span></a>
-                                            </li>
-                                        </ul>
-                                        <h3 class="entry-title"><a href="blog-details.html">The 8 best things about
-                                                Touristy</a></h3>
-                                        <p class="des">Business is the activity of making on cing or buying and selling
-                                            pro
-                                        </p>
-                                        <a href="blog-details.html" class="btn-read-more">Read More <i
-                                                class="icon-Vector-4"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 wow fadeInUp animated " data-wow-delay="0.3s">
-                                <div class="tf-widget-blog blog-style">
-                                    <a href="blog-details.html" class="blog-image">
-                                        <img src="./assets/images/blog/a (3).jpeg" alt="">
-                                        <div class="category-blog">
-                                            <i class="icon-Group-8"></i>
-                                            <span>Cavesse</span>
-                                        </div>
-                                    </a>
-                                    <div class="blog-content">
-                                        <ul class="meta-list flex-three">
-                                            <li>
-                                                <i class="icon-4"></i>
-                                                <a href="blog-details.html"><span>02 Apr 2021</span></a>
-                                            </li>
-                                            <li>
-                                                <i class="icon-7"></i>
-                                                <a href="blog-details.html"><span>Coments (03)</span></a>
-                                            </li>
-                                        </ul>
-                                        <h3 class="entry-title"><a href="blog-details.html">The 8 best things about
-                                                Touristy</a></h3>
-                                        <p class="des">Business is the activity of making on cing or buying and selling
-                                            pro
-                                        </p>
-                                        <a href="blog-details.html" class="btn-read-more">Read More <i
-                                                class="icon-Vector-4"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
+
                         </div>
 
                     </div>

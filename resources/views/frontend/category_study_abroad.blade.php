@@ -30,7 +30,7 @@
             <div class="tf-widget-destination">
               <a href="{{ route('study-abroad.show', $item->slug) }}" class="destination-imgae">
                 <span class="tour">{{ $item->duration }}</span>
-                <img src="{{ asset('uploads/study_abroad/'.$item->image) }}" alt="">
+                <img src="{{ asset('uploads/studyAbroad/'.$item->image) }}" alt="">
               </a>
               <div class="destination-content">
                 <span class="nation">{{ $item->title }}</span>
