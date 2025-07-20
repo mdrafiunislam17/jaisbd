@@ -34,6 +34,8 @@ use App\Http\Controllers\Admin\CareerApplicationController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\BookingController;
+use App\Models\Booking;
 use App\Models\Tours;
 use Illuminate\Support\Facades\Auth;
 
@@ -94,6 +96,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
      Route::get('/user', [UserDashboardController::class, 'index'])->name('user');
 
+    Route::resource('bookings',BookingController::class);
 
     // SliderController
     Route::resource("sliders", SliderController::class);
@@ -101,6 +104,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('tour-categorics',TourCategoriesController::class);
 
     Route::resource('tours', ToursController::class);
+    // Route::post('/book/service', [BookingController::class, 'store'])->name('book.service');
+
 
     Route::resource('visa-categories', VisaCategoriesController::class);
     Route::resource('visa', VisaController::class);

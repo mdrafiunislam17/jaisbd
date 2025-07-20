@@ -8,15 +8,15 @@
                                 <ul class=" flex-three">
                                     <li class="flex-three">
                                         <i class="icon-day"></i>
-                                        <span>Thursday, Mar 26, 2021</span>
+                                       <span id="current-date"></span>
                                     </li>
                                     <li class="flex-three">
                                         <i class="icon-mail"></i>
-                                        <span>Info@Webmail.Com</span>
+                                        <span> falcondreams25@gmail.com</span>
                                     </li>
                                     <li class="flex-three">
                                         <i class="icon-phone"></i>
-                                        <span>684 555-0102 490</span>
+                                        <span>+8801979200300 </span>
                                     </li>
 
 
@@ -187,9 +187,9 @@
                                                         <li data-value class="option selected"><img
                                                                 src="./assets/images/page/language.svg" alt="">English
                                                         </li>
-                                                        <li data-value="Vietnam" class="option"><img
+                                                        {{-- <li data-value="Vietnam" class="option"><img
                                                                 src="./assets/images/page/language.svg" alt="">Vietnam
-                                                        </li>
+                                                        </li> --}}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -265,3 +265,13 @@
 
             </header>
             <!-- End Main Header -->
+<script>
+  // তারিখ ফরম্যাট ফাংশন
+  function formatDate(date) {
+    const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  }
+
+  // তারিখ বসানো
+  document.getElementById("current-date").innerText = formatDate(new Date());
+</script>

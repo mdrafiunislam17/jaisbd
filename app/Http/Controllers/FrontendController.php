@@ -32,14 +32,14 @@ class FrontendController extends Controller
             // ->orderBy('sort', 'asc')
             ->get();
         $tours = Tours::with('category')->get();
-        $tourCategories = TourCategories::all();
+        $tourCategories = TourCategories::latest()->get();
         $settings = Setting::query()->pluck("value", "setting_name")->toArray();
         $visa = Visa::with('category')->get();
-        $visaCategories = VisaCategories::all();
+        $visaCategories = VisaCategories::latest()->get();
         $consultancyMedicine = ConsultancyMedicine::with('category')->get();
-        $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
+        $consultancyMedicineCategories = ConsultancyMedicineCategories::latest()->get();
         $studyAbroad = StudyAbroad::with('category')->get();
-        $studyAbroadCategories = StudyAbroadCategories::all();
+        $studyAbroadCategories = StudyAbroadCategories::latest()->get();
          $blogs = Blog::where('status', 1)
              ->orderBy('posted_on', 'desc')
              ->paginate(3);

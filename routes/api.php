@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\Admin\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/chatbot', [ChatbotController::class, 'respond']);
+
+
+Route::prefix('admin')->middleware(['auth:sanctum'])->group(function () {
+    Route::apiResource('bookings', BookingController::class);
+});

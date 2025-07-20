@@ -84,95 +84,45 @@
                                 <div class="side-bar-right">
                                     <div class="sidebar-widget">
                                         <h6 class="block-heading">Book This Tour</h6>
-                                        <form action="/" id="form-book-tour">
+                                        <form action="{{ route('bookings.store') }}" method="POST" id="form-book-tour">
+                                            @csrf
+
+                                            <!-- Hidden user_id, bookable_id, bookable_type -->
+                                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                            <input type="hidden" name="bookable_id" value="{{ $tour->id }}">
+                                            <input type="hidden" name="bookable_type" value="{{ $tour->title }}">
+                                             <input type="hidden" name="status" value="pending">
+
+                                            <!-- Booking Date -->
                                             <div class="input-wrap mb-30">
-                                                <input type="date">
+                                                <label for="booking_date">Booking Date</label>
+                                                <input type="date" name="booking_date" id="booking_date" required>
                                             </div>
-                                            <div class="flex-two mb-30">
-                                                <span class="label">Time:</span>
-                                                <div class="radio">
-                                                    <input id="first" type="radio" name="numbers"
-                                                        value="first" checked>
-                                                    <label for="first">14.00</label>
-                                                    <input id="second" type="radio" name="numbers"
-                                                        value="second">
-                                                    <label for="second">16.00</label>
-                                                </div>
+
+                                            <!-- Notes -->
+                                            <div class="input-wrap mb-30">
+                                                <label for="notes">Notes</label>
+                                                <textarea name="notes" id="notes" rows="4" placeholder="Add any notes..."></textarea>
                                             </div>
-                                            <div class="input-wrap-sellect mb-30">
-                                                <span class="label">Tickets:</span>
-                                                <div class="flex-two mb-15">
-                                                    <p>Children (0-12 years)$129.00</p>
-                                                    <div class="nice-select" tabindex="0">
-                                                        <span class="current">1</span>
-                                                        <ul class="list">
-                                                            <li data-value=""
-                                                                class="option selected focus">1</li>
-                                                            <li data-value="2" class="option">2</li>
-                                                            <li data-value="3" class="option">3</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-two mb-15">
-                                                    <p>Youth (13-17 years)$169.00</p>
-                                                    <div class="nice-select" tabindex="0">
-                                                        <span class="current">1</span>
-                                                        <ul class="list">
-                                                            <li data-value=""
-                                                                class="option selected focus">1</li>
-                                                            <li data-value="2" class="option">2</li>
-                                                            <li data-value="3" class="option">3</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-two">
-                                                    <p>Adult (18+ years)$189.00</p>
-                                                    <div class="nice-select" tabindex="0">
-                                                        <span class="current">1</span>
-                                                        <ul class="list">
-                                                            <li data-value=""
-                                                                class="option selected focus">1</li>
-                                                            <li data-value="2" class="option">2</li>
-                                                            <li data-value="3" class="option">3</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="input-wrap-checkbox mb-30">
-                                                <span class="label">Add Extra</span>
-                                                <div class="checkbox">
-                                                    <input id="check" type="checkbox" name="check"
-                                                        value="check">
-                                                    <label for="check">Service per booking</label>
-                                                </div>
-                                                <div class="checkbox">
-                                                    <input id="check1" type="checkbox" name="check"
-                                                        value="check">
-                                                    <label for="check1">Service per person</label>
-                                                </div>
-                                                <div class="extra">
-                                                    <div class="flex-three">
-                                                        <span class="name">Adult:</span>
-                                                        <span class="price">$18.00</span>
-                                                    </div>
-                                                    <div class="flex-three">
-                                                        <span class="name">Youth:</span>
-                                                        <span class="price">$16.00</span>
-                                                    </div>
-                                                    <div class="flex-three">
-                                                        <span class="name">Children:</span>
-                                                        <span class="price">$16.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                             <div class="flex-two mb-40">
                                                 <span class="label">Total:</span>
-                                                <span class="total text-main">$130.00</span>
+                                                <span class="total text-main">
+                                                    @if($tour->discount)
+                                                        ৳ {{ $tour->discount }}
+                                                    @else
+                                                        ৳ {{ $tour->price }}
+                                                    @endif
+                                                </span>
+                                                <input type="hidden" name="booking_amount"
+                                                    value="{{ $tour->discount ?: $tour->price }}">
                                             </div>
-                                            <button type="submit">Procced Booking</button>
 
+
+                                            <button type="submit">Proceed Booking</button>
                                         </form>
                                     </div>
+
                                     <div class="sidebar-widget">
                                         <h6 class="block-heading">Book With Confidence</h6>
                                         <ul class="category-confidence">

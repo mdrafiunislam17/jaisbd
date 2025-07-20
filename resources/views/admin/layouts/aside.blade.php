@@ -284,6 +284,18 @@
 @endcanany
 
 
+   <li class="nav-item {{
+    request()->routeIs("bookings.index") ||
+    request()->routeIs("bookings.create") ||
+    request()->routeIs("bookings.show") ||
+    request()->routeIs("bookings.edit")
+    ? "active" : "" }}">
+        <a class="nav-link" href="{{ route("bookings.index") }}">
+            <i class="fas fa-envelope"></i>
+            <span>bookings</span>
+        </a>
+    </li>
+
 
 
 

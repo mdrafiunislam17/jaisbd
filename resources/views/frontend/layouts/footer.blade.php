@@ -5,9 +5,33 @@
                             <div class="logo-footer">
                                <a href="{{route('frontend.index')}}"> <img src="{{asset("uploads/" . $settings["SETTING_SITE_LOGO"])}}" alt=""></a>
                             </div>
-                            <p class="des-footer">The world’s first and largest digital market
+                            {{-- <p class="des-footer">The world’s first and largest digital market
                                 for crypto collectibles and non-fungible
-                            </p>
+                            </p> --}}
+                            {{-- <ul class="footer-info">
+                                <li class="flex-three">
+                                    <i class="icon-noun-mail-5780740-1"></i>
+                                    <p>{!! $settings["CONTACT_EMAIL"] !!}</p>
+                                </li>
+                                <li class="flex-three">
+                                    <i class="icon-Group-9"></i>
+                                    <p>{!! $settings["CONTACT_PHONE"] !!}</p>
+                                </li>
+                                <li class="flex-three">
+                                    <i class="icon-Layer-19"></i>
+                                    <p>{{ $settings["CONTACT_ADDRESS"] }}</p>
+                                </li>
+                            </ul> --}}
+
+                        </div>
+
+                              <div class="footer-logo">
+                            {{-- <div class="logo-footer">
+                               <a href="{{route('frontend.index')}}"> <img src="{{asset("uploads/" . $settings["SETTING_SITE_LOGO"])}}" alt=""></a>
+                            </div> --}}
+                            {{-- <p class="des-footer">The world’s first and largest digital market
+                                for crypto collectibles and non-fungible
+                            </p> --}}
                             <ul class="footer-info">
                                 <li class="flex-three">
                                     <i class="icon-noun-mail-5780740-1"></i>
@@ -112,8 +136,9 @@
 
                     <div class="row footer-bottom">
                         <div class="col-md-6">
-                            <p class="copy-right">Copyright © 2024 by <a href="#" class="text-main">Themesflat.</a> All
-                                Rights Reserved</p>
+                            <p class="copy-right">
+                            Copyright © <span id="year"></span> by <a href="#" class="text-main">Rafiun.</a> All Rights Reserved
+                            </p>
                         </div>
                         <div class="col-md-6">
                             <ul class="social flex-six">
@@ -142,3 +167,7 @@
                     </div>
                 </div>
             </footer>
+<script>
+  // বর্তমান সাল বসানো
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
