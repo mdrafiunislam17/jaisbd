@@ -34,4 +34,9 @@ class Visa extends Model
         return $this->belongsTo(VisaCategories::class, 'category_id');
     }
 
+    public function bookings()
+{
+    return $this->morphMany(Booking::class, 'bookable');
+}
+
 }

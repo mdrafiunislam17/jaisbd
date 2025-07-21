@@ -99,6 +99,11 @@ class PermissionSeeder extends Seeder
             'contact-create',
             'contact-edit',
             'contact-delete',
+
+            'bookings-list',
+            'bookings-create',
+            'bookings-edit',
+            'bookings-delete',
         ];
 
         foreach ($permissions as $permission) {

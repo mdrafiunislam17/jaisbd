@@ -1,10 +1,10 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Tours')
+@section('title', 'medicine')
 
 @section('content')
 
-<section class="tour-single">
+<section class="medicine-single">
     <div class="tf-container">
 
         <div class="row pd-main">
@@ -17,19 +17,19 @@
                                 <div class="inner-heading-wrap flex-two">
                                     <div class="inner-heading">
                                         {{-- <span class="feature">Featured</span> --}}
-                                        <h2 class="title">{{$tour->title}}</h2>
+                                        <h2 class="title">{{$medicine->title}}</h2>
                                         <ul class="flex-three list-wrap-heading">
                                             <li class="flex-three">
                                                 <i class="icon-time-left"></i>
-                                                <span>{{$tour->duration }}</span>
+                                                <span>{{$medicine->duration }}</span>
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-user"></i>
-                                                <span>Guests: {{ $tour->guests }}</span>
+                                                <span>Guests: {{ $medicine->guests }}</span>
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-18"></i>
-                                                <span>{{$tour->location}}</span>
+                                                <span>{{$medicine->location}}</span>
                                             </li>
 
 
@@ -48,11 +48,11 @@
                                             <span class="review">(1 Review)</span>
                                         </div> --}}
                                       <p class="price-sale text-main">
-                                        @if($tour->discount)
-                                            ৳ {{ $tour->discount }}
-                                            <span class="price line-through">৳ {{ $tour->price }}</span>
+                                        @if($medicine->discount)
+                                            ৳ {{ $medicine->discount }}
+                                            <span class="price line-through">৳ {{ $medicine->price }}</span>
                                         @else
-                                            ৳ {{ $tour->price }}
+                                            ৳ {{ $medicine->price }}
                                         @endif
                                     </p>
 
@@ -65,16 +65,16 @@
                         <div class="row mb-40 image-gallery-single">
 
                             <div class="col-12 col-sm-12">
-                                <img src="{{ asset('uploads/tour/' . $tour->image)}}" alt="image" style="height: 450px">
+                                <img src="{{ asset('uploads/consultancyMedicine/' . $medicine->image) }}" alt="image" style="height: 450px">
                             </div>
 
                         </div>
                         <div class="row">
                             <div class="col-lg-8">
-                                <div class="information-content-tour">
+                                <div class="information-content-medicine">
                                     <div class="description-wrap mb-40">
                                         <span class="description">Description:</span>
-                                        <p class="des">{!! $tour->description !!}</p>
+                                        <p class="des">{!! $medicine->description !!}</p>
                                     </div>
 
 
@@ -83,15 +83,14 @@
                             <div class="col-lg-4">
                                 <div class="side-bar-right">
                                     <div class="sidebar-widget">
-                                        <h6 class="block-heading">Book This Tour</h6>
-                                        <form action="{{ route('bookings.store') }}" method="POST" id="form-book-tour">
+                                        <h6 class="block-heading">Book This medicine</h6>
+                                        <form action="{{ route('bookings.store') }}" method="POST" id="form-book-medicine">
                                             @csrf
 
                                             <!-- Hidden user_id, bookable_id, bookable_type -->
                                             <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                                            <input type="hidden" name="bookable_id" value="{{ $tour->id }}">
-                                            {{-- <input type="hidden" name="bookable_type" value="{{ $tour->title }}"> --}}
-                                            <input type="hidden" name="bookable_type" value="{{ get_class($tour) }}">
+                                            <input type="hidden" name="bookable_id" value="{{ $medicine->id }}">
+                                             <input type="hidden" name="bookable_type" value="{{ get_class($medicine) }}">
                                              <input type="hidden" name="status" value="pending">
 
                                             <!-- Booking Date -->
@@ -109,86 +108,19 @@
                                             <div class="flex-two mb-40">
                                                 <span class="label">Total:</span>
                                                 <span class="total text-main">
-                                                    @if($tour->discount)
-                                                        ৳ {{ $tour->discount }}
+                                                    @if($medicine->discount)
+                                                        ৳ {{ $medicine->discount }}
                                                     @else
-                                                        ৳ {{ $tour->price }}
+                                                        ৳ {{ $medicine->price }}
                                                     @endif
                                                 </span>
                                                 <input type="hidden" name="booking_amount"
-                                                    value="{{ $tour->discount ?: $tour->price }}">
+                                                    value="{{ $medicine->discount ?: $medicine->price }}">
                                             </div>
 
 
                                             <button type="submit">Proceed Booking</button>
                                         </form>
-
-
-                                        {{-- <form action="{{ route('bookings.store') }}" method="POST" id="form-book-tour">
-                                                @csrf
-
-                                                <!-- Hidden fields -->
-                                                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                                                <input type="hidden" name="bookable_id" value="{{ $tour->id }}">
-                                                <input type="hidden" name="bookable_type" value="{{ get_class($tour) }}">
-                                                <input type="hidden" name="status" value="pending">
-                                                <input type="hidden" name="booking_amount" value="{{ $tour->discount ?: $tour->price }}">
-
-                                                <!-- Booking Date -->
-                                                <div class="input-wrap mb-30">
-                                                    <label for="booking_date">Booking Date*</label>
-                                                    <input type="date" name="booking_date" id="booking_date"
-                                                        min="{{ date('Y-m-d') }}"
-                                                        required
-                                                        class="@error('booking_date') is-invalid @enderror">
-                                                    @error('booking_date')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Number of Guests -->
-                                                <div class="input-wrap mb-30">
-                                                    <label for="guests">Number of Guests*</label>
-                                                    <input type="number" name="guests" id="guests"
-                                                        min="1" max="{{ $tour->guests }}"
-                                                        required
-                                                        class="@error('guests') is-invalid @enderror">
-                                                    @error('guests')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Notes -->
-                                                <div class="input-wrap mb-30">
-                                                    <label for="notes">Notes</label>
-                                                    <textarea name="notes" id="notes" rows="4"
-                                                            class="@error('notes') is-invalid @enderror"
-                                                            placeholder="Add any notes..."></textarea>
-                                                    @error('notes')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <!-- Display Price -->
-                                                <div class="flex-two mb-40">
-                                                    <span class="label">Total:</span>
-                                                    <span class="total text-main">
-                                                        @if($tour->discount)
-                                                            ৳ {{ $tour->discount }}
-                                                        @else
-                                                            ৳ {{ $tour->price }}
-                                                        @endif
-                                                    </span>
-                                                </div>
-
-                                                <button type="submit">Proceed Booking</button>
-                                            </form> --}}
                                     </div>
 
                                     <div class="sidebar-widget">
@@ -200,7 +132,7 @@
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-Vector-6"></i>
-                                                <span>Hand-picked Tours & Activities</span>
+                                                <span>Hand-picked medicines & Activities</span>
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>
@@ -218,13 +150,13 @@
                         </div>
 
                     </div>
-                    <div class="tab-pane fade" id="pills-tour-planing" role="tabpanel"
-                        aria-labelledby="pills-tour-planing-tab" tabindex="0">
+                    <div class="tab-pane fade" id="pills-medicine-planing" role="tabpanel"
+                        aria-labelledby="pills-medicine-planing-tab" tabindex="0">
                         <div class="row">
                             <div class="col-lg-8">
-                                <div class="planing-content-tour">
-                                    <h3 class="title-plan">Tour Plan :</h3>
-                                    <div class="tour-planing-section flex">
+                                <div class="planing-content-medicine">
+                                    <h3 class="title-plan">medicine Plan :</h3>
+                                    <div class="medicine-planing-section flex">
                                         <div class="number-box flex-five">01</div>
                                         <div class="content-box">
                                             <h5 class="title">Day 1: Arrive in Zürich, Switzerland</h5>
@@ -238,7 +170,7 @@
                                                 (2 nights). No bus. Walk</p>
                                         </div>
                                     </div>
-                                    <div class="tour-planing-section flex">
+                                    <div class="medicine-planing-section flex">
                                         <div class="number-box flex-five">02</div>
                                         <div class="content-box">
                                             <h5 class="title">Day 2: Zürich–Biel/BienneNeuchâtel–Geneva
@@ -265,7 +197,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="tour-planing-section flex">
+                                    <div class="medicine-planing-section flex">
                                         <div class="number-box flex-five">03</div>
                                         <div class="content-box">
                                             <h5 class="title">Day 3: Enchanting Engelberg</h5>
@@ -294,7 +226,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="tour-planing-section flex">
+                                    <div class="medicine-planing-section flex">
                                         <div class="number-box flex-five">04</div>
                                         <div class="content-box">
                                             <h5 class="title">Day 4: Arrive in Zürich, Switzerland</h5>
@@ -328,8 +260,8 @@
                             <div class="col-lg-4">
                                 <div class="side-bar-right">
                                     <div class="sidebar-widget">
-                                        <h6 class="block-heading">Book This Tour</h6>
-                                        <form action="/" id="form-book-tour">
+                                        <h6 class="block-heading">Book This medicine</h6>
+                                        <form action="/" id="form-book-medicine">
                                             <div class="input-wrap mb-30">
                                                 <input type="date">
                                             </div>
@@ -427,7 +359,7 @@
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-Vector-6"></i>
-                                                <span>Hand-picked Tours & Activities</span>
+                                                <span>Hand-picked medicines & Activities</span>
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>
@@ -513,7 +445,7 @@
                         aria-labelledby="pills-location-share-tab" tabindex="0">
                         <div class="row">
                             <div class="col-lg-8">
-                                <div class="localtion-content-tour">
+                                <div class="localtion-content-medicine">
                                     <div class="map2 relative mb-32">
                                         <div id="map2"></div>
                                     </div>
@@ -553,8 +485,8 @@
                             <div class="col-lg-4">
                                 <div class="side-bar-right">
                                     <div class="sidebar-widget">
-                                        <h6 class="block-heading">Book This Tour</h6>
-                                        <form action="/" id="form-book-tour">
+                                        <h6 class="block-heading">Book This medicine</h6>
+                                        <form action="/" id="form-book-medicine">
                                             <div class="input-wrap mb-30">
                                                 <input type="date">
                                             </div>
@@ -652,7 +584,7 @@
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-Vector-6"></i>
-                                                <span>Hand-picked Tours & Activities</span>
+                                                <span>Hand-picked medicines & Activities</span>
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>
@@ -738,7 +670,7 @@
                         aria-labelledby="pills-reviews-tab" tabindex="0">
                         <div class="row">
                             <div class="col-lg-8">
-                                <div class="review-content-tour">
+                                <div class="review-content-medicine">
                                     <div class="custom-review mb-80">
                                         <h4 class="title-review mb-37">Customer Review</h4>
                                         <div class="flex card-list">
@@ -1041,8 +973,8 @@
                             <div class="col-lg-4">
                                 <div class="side-bar-right">
                                     <div class="sidebar-widget">
-                                        <h6 class="block-heading">Book This Tour</h6>
-                                        <form action="/" id="form-book-tour">
+                                        <h6 class="block-heading">Book This medicine</h6>
+                                        <form action="/" id="form-book-medicine">
                                             <div class="input-wrap mb-30">
                                                 <input type="date">
                                             </div>
@@ -1140,7 +1072,7 @@
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-Vector-6"></i>
-                                                <span>Hand-picked Tours & Activities</span>
+                                                <span>Hand-picked medicines & Activities</span>
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>
@@ -1226,7 +1158,7 @@
                         aria-labelledby="pills-shot-gallery-tab" tabindex="0">
                         <div class="row">
                             <div class="col-lg-8">
-                                <div class="gallery-content-tour">
+                                <div class="gallery-content-medicine">
                                     <div class="image-gallery1 image">
                                         <img src="./assets/images/gallery/gallery.jpg" alt="image"
                                             class="item1">
@@ -1262,8 +1194,8 @@
                             <div class="col-lg-4">
                                 <div class="side-bar-right">
                                     <div class="sidebar-widget">
-                                        <h6 class="block-heading">Book This Tour</h6>
-                                        <form action="/" id="form-book-tour">
+                                        <h6 class="block-heading">Book This medicine</h6>
+                                        <form action="/" id="form-book-medicine">
                                             <div class="input-wrap mb-30">
                                                 <input type="date">
                                             </div>
@@ -1361,7 +1293,7 @@
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-Vector-6"></i>
-                                                <span>Hand-picked Tours & Activities</span>
+                                                <span>Hand-picked medicines & Activities</span>
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>

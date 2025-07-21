@@ -3259,9 +3259,9 @@
                                             <span class="nation">{{ $item->title }}</span>
                                             <div class="flex-two btn-destination">
                                                 <h6 class="title">
-                                                    <a href="#">View tours</a>
+                                                    <a href="{{ route('visaDetail', $item->slug) }}">View Visa</a>
                                                 </h6>
-                                                <a href="#" class="flex-five btn-view">
+                                                <a href="{{ route('visaDetail', $item->slug) }}" class="flex-five btn-view">
                                                     <i class="icon-Vector-32"></i>
                                                 </a>
                                             </div>
@@ -3301,9 +3301,9 @@
                                             <span class="nation">{{ $item->title }}</span>
                                             <div class="flex-two btn-destination">
                                                 <h6 class="title">
-                                                    <a href="#">View tours</a>
+                                                    <a href="{{ route('medicineDetail', $item->slug) }}">View Medical Consultancy</a>
                                                 </h6>
-                                                <a href="#" class="flex-five btn-view">
+                                                <a href="{{ route('medicineDetail', $item->slug) }}" class="flex-five btn-view">
                                                     <i class="icon-Vector-32"></i>
                                                 </a>
                                             </div>
@@ -3343,9 +3343,9 @@
                                             <span class="nation">{{ $item->title }}</span>
                                             <div class="flex-two btn-destination">
                                                 <h6 class="title">
-                                                    <a href="#">View tours</a>
+                                                    <a href="{{ route('StudyDetail', $item->slug) }}">View Study Abroad</a>
                                                 </h6>
-                                                <a href="#" class="flex-five btn-view">
+                                                <a href="{{ route('StudyDetail', $item->slug) }}" class="flex-five btn-view">
                                                     <i class="icon-Vector-32"></i>
                                                 </a>
                                             </div>

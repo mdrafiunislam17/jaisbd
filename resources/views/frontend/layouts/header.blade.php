@@ -64,7 +64,7 @@
                                                     id="navbarSupportedContent">
                                                     <ul class="navigation clearfix">
                                                         <li class=" current">
-                                                            <a href="#">Home</a>
+                                                            <a href="{{route('frontend.index')}}">Home</a>
                                                             <!-- <ul>
                                                                 <li class="current"><a href="index.html">Home Page
                                                                         01</a></li>

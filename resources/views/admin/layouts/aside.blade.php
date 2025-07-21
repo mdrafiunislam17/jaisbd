@@ -14,7 +14,7 @@
 
 
     <li class="nav-item ">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('home')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -283,6 +283,7 @@
 
 @endcanany
 
+@canany(['bookings-list', 'bookings-create', 'bookings-edit','bookings-delete'])
 
    <li class="nav-item {{
     request()->routeIs("bookings.index") ||
@@ -296,7 +297,7 @@
         </a>
     </li>
 
-
+@endcanany
 
 
 

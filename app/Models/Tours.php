@@ -36,4 +36,15 @@ class Tours extends Model
     {
         return $this->belongsTo(TourCategories::class, 'category_id');
     }
+
+//     public function bookings()
+// {
+//     return $this->morphMany(Booking::class, 'bookable');
+// }
+
+public function bookable()
+    {
+        return $this->morphTo();
+    }
+
 }

@@ -281,6 +281,48 @@ class FrontendController extends Controller
 
 
 
+     public function VisaDetail($slug   )
+    {
+        $visa = Visa::where('slug', $slug)->firstOrFail();
+          $tourCategories = TourCategories::all();
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        $category = TourCategories::all();
+        $visaCategories = VisaCategories::all();
+        $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
+        $studyAbroadCategories = StudyAbroadCategories::all();
+        return view('frontend.visaDetails', compact('visa','tourCategories','settings', 'category',
+        'visaCategories', 'consultancyMedicineCategories', 'studyAbroadCategories'));
+    }
+
+     public function MedicineDetail($slug   )
+    {
+        $medicine = ConsultancyMedicine::where('slug', $slug)->firstOrFail();
+          $tourCategories = TourCategories::all();
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        $category = TourCategories::all();
+        $visaCategories = VisaCategories::all();
+        $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
+        $studyAbroadCategories = StudyAbroadCategories::all();
+        return view('frontend.medicineDetails', compact('medicine','tourCategories','settings', 'category',
+        'visaCategories', 'consultancyMedicineCategories', 'studyAbroadCategories'));
+    }
+
+     public function studyDetail($slug   )
+    {
+        $studyAbroad = StudyAbroad::where('slug', $slug)->firstOrFail();
+          $tourCategories = TourCategories::all();
+        $settings = Setting::query()->pluck("value", "setting_name")->toArray();
+        $category = TourCategories::all();
+        $visaCategories = VisaCategories::all();
+        $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
+        $studyAbroadCategories = StudyAbroadCategories::all();
+        return view('frontend.studyAbroadDetails', compact('studyAbroad','tourCategories','settings', 'category',
+        'visaCategories', 'consultancyMedicineCategories', 'studyAbroadCategories'));
+    }
+
+
+
+
     public function aboutUs()
     {
         $settings = Setting::query()->pluck("value", "setting_name")->toArray();

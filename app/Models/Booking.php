@@ -37,8 +37,14 @@ class Booking extends Model
     /**
      * The polymorphic bookable model.
      */
-    public function bookable(): MorphTo
-    {
-        return $this->morphTo();
-    }
+    // public function bookable(): MorphTo
+    // {
+    //     return $this->morphTo();
+    // }
+
+    public function bookings()
+{
+    return $this->morphMany(Booking::class, 'bookable');
+}
+
 }

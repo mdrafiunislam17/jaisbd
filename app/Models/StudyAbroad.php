@@ -33,4 +33,9 @@ class StudyAbroad extends Model
     {
         return $this->belongsTo(StudyAbroadCategories::class, 'category_id');
     }
+
+    public function bookings()
+{
+    return $this->morphMany(Booking::class, 'bookable');
+}
 }

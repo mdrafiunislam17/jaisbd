@@ -28,15 +28,15 @@
         @foreach ($studyAbroad as $item)
           <div class="col-sm-6 col-lg-4 mb-37">
             <div class="tf-widget-destination">
-              <a href="{{ route('study-abroad.show', $item->slug) }}" class="destination-imgae">
+              <a href="{{ route('StudyDetail', $item->slug) }}" class="destination-imgae">
                 <span class="tour">{{ $item->duration }}</span>
                 <img src="{{ asset('uploads/studyAbroad/'.$item->image) }}" alt="">
               </a>
               <div class="destination-content">
                 <span class="nation">{{ $item->title }}</span>
                 <div class="flex-two btn-destination">
-                  <h6 class="title"><a href="{{ route('study-abroad.show', $item->slug) }}">View Details</a></h6>
-                  <a href="{{ route('study-abroad.show', $item->slug) }}" class="flex-five btn-view">
+                  <h6 class="title"><a href="{{ route('StudyDetail', $item->slug) }}">View Details</a></h6>
+                  <a href="{{ route('StudyDetail', $item->slug) }}" class="flex-five btn-view">
                     <i class="icon-Vector-32"></i>
                   </a>
                 </div>

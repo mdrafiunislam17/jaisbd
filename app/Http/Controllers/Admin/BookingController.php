@@ -16,12 +16,15 @@ use Illuminate\Support\Facades\Log;
 
 class BookingController extends Controller
 {
-    // protected BookingRepository $bookingRepository;
 
-    // public function __construct(BookingRepository $bookingRepository)
-    // {
-    //     $this->bookingRepository = $bookingRepository;
-    // }
+
+      public function __construct()
+        {
+            $this->middleware('permission:bookings-list|bookings-edit')->only('index');
+            // $this->middleware('permission:bookings-create')->only(['create', 'store']);
+            $this->middleware('permission:bookings-edit')->only(['edit', 'update']);
+            // $this->middleware('permission:bookings-delete')->only('destroy');
+        }
 
     public function index()
     {
@@ -84,7 +87,7 @@ public function edit(Booking $booking)
 
         $booking->save();
 
-        return redirect()->back()->with('success', 'Booking updated successfully.');
+        return redirect()->route('bookings.index')->with('success', 'Booking updated successfully.');
     } catch (\Exception $e) {
         Log::error('Booking update failed', [
             'error' => $e->getMessage(),
@@ -97,66 +100,4 @@ public function edit(Booking $booking)
 
 
 
-    // public function show(int $id): JsonResponse
-    // {
-    //     try {
-    //         $booking = $this->bookingRepository->findById($id);
-
-    //         if (!$booking) {
-    //             return response()->json(['message' => 'Booking not found'], 404);
-    //         }
-
-    //         return response()->json(['data' => $booking]);
-    //     } catch (\Exception $e) {
-    //         Log::error('Failed to fetch booking', ['id' => $id, 'error' => $e->getMessage()]);
-    //         return response()->json(['message' => 'Failed to fetch booking'], 500);
-    //     }
-    // }
-
-    // public function store(StoreBookingRequest $request): JsonResponse
-    // {
-    //     try {
-    //         $booking = $this->bookingRepository->create($request->validated());
-    //         return response()->json(['message' => 'Booking created successfully', 'data' => $booking], 201);
-    //     } catch (\Exception $e) {
-    //         Log::error('Failed to create booking', ['error' => $e->getMessage()]);
-    //         return response()->json(['message' => 'Failed to create booking'], 500);
-    //     }
-    // }
-
-    // public function update(UpdateBookingRequest $request, int $id): JsonResponse
-    // {
-    //     try {
-    //         $booking = $this->bookingRepository->findById($id);
-
-    //         if (!$booking) {
-    //             return response()->json(['message' => 'Booking not found'], 404);
-    //         }
-
-    //         $this->bookingRepository->update($booking, $request->validated());
-
-    //         return response()->json(['message' => 'Booking updated successfully', 'data' => $booking]);
-    //     } catch (\Exception $e) {
-    //         Log::error('Failed to update booking', ['id' => $id, 'error' => $e->getMessage()]);
-    //         return response()->json(['message' => 'Failed to update booking'], 500);
-    //     }
-    // }
-
-    // public function destroy(int $id): JsonResponse
-    // {
-    //     try {
-    //         $booking = $this->bookingRepository->findById($id);
-
-    //         if (!$booking) {
-    //             return response()->json(['message' => 'Booking not found'], 404);
-    //         }
-
-    //         $this->bookingRepository->delete($booking);
-
-    //         return response()->json(['message' => 'Booking deleted successfully']);
-    //     } catch (\Exception $e) {
-    //         Log::error('Failed to delete booking', ['id' => $id, 'error' => $e->getMessage()]);
-    //         return response()->json(['message' => 'Failed to delete booking'], 500);
-    //     }
-    // }
 }

@@ -35,6 +35,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Models\Booking;
 use App\Models\Tours;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FrontendController::class,'index'])->name('frontend.index');
 Route::get('/tour/{slug}', [FrontendController::class, 'show'])->name('tourDetails');
+Route::get('/visas/{slug}',[FrontendController::class,'VisaDetail'])->name('visaDetail');
+Route::get('/MedicineConsultancy/{slug}',[FrontendController::class,'MedicineDetail'])->name('medicineDetail');
+Route::get('/studyAbroa/{slug}',[FrontendController::class,'studyDetail'])->name('StudyDetail');
 Route::get('/toursCategory/{name}', [FrontendController::class, 'toursByCategory'])->name('categoryTours');
 Route::get('/visaCategory/{name}', [FrontendController::class, 'visaByCategory'])->name('categoryVisas');
 Route::get('/consultancyMedicineCategory/{name}', [FrontendController::class, 'consultancyMedicineByCategory'])->name('categoryConsultancyMedicine');
@@ -71,7 +75,7 @@ Route::get('/teamMember', [FrontendController::class, 'teamMember'])->name('fron
 Route::get('teamMember/details/{name}', [FrontendController::class, 'teamMemberDetails'])->name('teamMemberDetails');
 Route::get('/blog', [FrontendController::class, 'blog'])->name('frontendBlog');
 Route::get('/blog/Details/{title}', [FrontendController::class, 'blogDetails'])->name('blogDetails');
-Route::get('visa/category/{name}', [FrontendController::class, 'visaByCategory'])->name('visa.by.category');
+// Route::get('visa/category/{name}', [FrontendController::class, 'visaByCategory'])->name('visa.by.category');
 Route::get('study-abroad/category/{name}', [FrontendController::class, 'studyAbroadByCategory'])->name('studyabroad.by.category');
 Route::get('consultancy/category/{name}', [FrontendController::class, 'consultancyByCategory'])->name('consultancy.by.category');
 Route::get('/consultancy/{slug}', [FrontendController::class, 'consultancyShow'])->name('consultancyShow');
@@ -96,6 +100,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
      Route::get('/user', [UserDashboardController::class, 'index'])->name('user');
 
+     Route::get('tourBookingsReport', [ReportController::class,'tourBookingsReport'])->name('tourBookingsReport');
+     Route::get('/admin/reports/tour-bookings/export', [ReportController::class, 'exportTourBookings'])
+                ->name('admin.reports.tour-bookings.export');
     Route::resource('bookings',BookingController::class);
 
     // SliderController

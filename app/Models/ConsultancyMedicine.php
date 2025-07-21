@@ -32,4 +32,9 @@ class ConsultancyMedicine extends Model
     {
         return $this->belongsTo(ConsultancyMedicineCategories::class, 'category_id');
     }
+
+    public function bookings()
+{
+    return $this->morphMany(Booking::class, 'bookable');
+}
 }
