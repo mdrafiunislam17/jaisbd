@@ -30,6 +30,7 @@ use App\Http\Controllers\WorkProcessController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\CareerController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CareerApplicationController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\FrontendController;
@@ -99,8 +100,9 @@ Route::middleware('auth')->group(function () {
     // Home Dashboard
     Route::get('/home', [HomeController::class, 'index'])->name('home');
      Route::get('/user', [UserDashboardController::class, 'index'])->name('user');
+     Route::get('tourBookingsReport', [HomeController::class,'BookingsReport'])->name('admin.reports.tours');
 
-     Route::get('tourBookingsReport', [ReportController::class,'tourBookingsReport'])->name('tourBookingsReport');
+    //  Route::get('tourBookingsReport', [ReportController::class,'tourBookingsReport'])->name('tourBookingsReport');
      Route::get('/admin/reports/tour-bookings/export', [ReportController::class, 'exportTourBookings'])
                 ->name('admin.reports.tour-bookings.export');
     Route::resource('bookings',BookingController::class);
@@ -122,6 +124,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('study-abroad-categories', StudyAbroadCategoriesController::class);
     Route::resource('study-abroad', StudyAbroadControlle::class);
 
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile/update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
 
 
     //AboutController

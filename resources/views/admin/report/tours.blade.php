@@ -31,8 +31,8 @@
                             <td>{{ \Carbon\Carbon::parse($booking->booking_date)->format('d M Y') }}</td>
                             <td>{{ number_format($booking->booking_amount, 2) }}</td>
                             <td>
-                                @if ($booking->status === 'confirmed')
-                                    <span class="badge bg-success">Confirmed</span>
+                                @if ($booking->status === 'successful')
+                                    <span class="badge bg-success text-light">successful</span>
                                 @elseif ($booking->status === 'pending')
                                     <span class="badge bg-warning text-dark">Pending</span>
                                 @elseif ($booking->status === 'cancelled')
@@ -60,10 +60,12 @@
     <div class="mb-3 d-flex justify-content-end gap-2">
     <a href="{{ route('admin.reports.tour-bookings.export', ['format' => 'csv']) }}" class="btn btn-sm btn-primary">
         <i class="bi bi-file-earmark-spreadsheet"></i> Download CSV
-    </a>
+    </a>&nbsp;
+
     <a href="{{ route('admin.reports.tour-bookings.export', ['format' => 'pdf']) }}" class="btn btn-sm btn-danger">
         <i class="bi bi-file-earmark-pdf"></i> Download PDF
-    </a>
+    </a>&nbsp;
+
     <button onclick="window.print()" class="btn btn-sm btn-secondary">
         <i class="bi bi-printer"></i> Print Report
     </button>

@@ -2,13 +2,13 @@
 
     <!-- Sidebar - Brand -->
     <li>
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('frontend.index')}}">
             <div class="sidebar-brand-icon rotate-n-15">
 
                <img src="{{ asset("storage/uploads/" . $settings["SETTING_SITE_LOGO"]) }}" class="w-75" alt="">
 
             </div>
-            <h6 class="sidebar-brand-text mx-3 mt-2 font-weight-bold" title="JA IT SOLUTION">jaisbd.com</h6>
+            <h6 class="sidebar-brand-text mx-3 mt-2 font-weight-bold" title="JA IT SOLUTION">falcondreams</h6>
         </a>
     </li>
 

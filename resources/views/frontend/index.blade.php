@@ -44,12 +44,12 @@
                                                     company that offers a wide range of printing services to
                                                 </p> --}}
                                                 <div class="btn-group">
-                                                    <a href="#" class="btn-main fadeInDown wow">
+                                                    {{-- <a href="#" class="btn-main fadeInDown wow">
                                                         <p class="btn-main-text">Booking</p>
                                                         <p class="iconer">
                                                             <i class="icon-arrow-right"></i>
                                                         </p>
-                                                    </a>
+                                                    </a> --}}
                                                     {{-- <a href="#" class="btn-w-wa fadeInDown wow">Who we are <i
                                                             class="icon-Group-13"></i></a> --}}
                                                 </div>

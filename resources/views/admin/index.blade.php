@@ -14,44 +14,78 @@
 
    <div class="container">
     <div class="row">
-        <div class="col-12 mb-4">
-            <form method="GET" action="#" class="row g-3">
-                <!-- Start Date -->
-                <div class="col-md-3">
-                    <label for="start_date" class="form-label">Start Date</label>
-                    <input type="date" name="start_date" id="start_date"
-                           value="{{ request('start_date') }}"
-                           class="form-control">
-                </div>
-
-                <!-- End Date -->
-                <div class="col-md-3">
-                    <label for="end_date" class="form-label">End Date</label>
-                    <input type="date" name="end_date" id="end_date"
-                           value="{{ request('end_date') }}"
-                           class="form-control">
-                </div>
-
-                <!-- Report Buttons - Horizontal -->
-                <div class="col-md-6">
-                    <label class="form-label d-block">Reports</label>
-                    <div class="btn-group" role="group">
-                        <button type="submit" name="report_type" value="tour" class="btn btn-primary">
-                            <i class="fas fa-plane me-1"></i> Tour
-                        </button>&nbsp;
-                        <button type="submit" name="report_type" value="visa" class="btn btn-secondary">
-                            <i class="fas fa-passport me-1"></i> Visa
-                        </button>&nbsp;
-                        <button type="submit" name="report_type" value="medical" class="btn btn-success">
-                            <i class="fas fa-heartbeat me-1"></i> Medical
-                        </button>&nbsp;
-                        <button type="submit" name="report_type" value="study_abroad" class="btn btn-info">
-                            <i class="fas fa-graduation-cap me-1"></i> Study
-                        </button>
-                    </div>
-                </div>
-            </form>
+      <div class="col-12 mb-4">
+    <form method="GET" action="{{ route('admin.reports.tours') }}" class="row g-3">
+        <!-- Start Date -->
+        <div class="col-md-3">
+            <label for="start_date" class="form-label">Start Date</label>
+            <input
+                type="date"
+                name="start_date"
+                id="start_date"
+                value="{{ request('start_date') }}"
+                class="form-control">
         </div>
+
+        <!-- End Date -->
+        <div class="col-md-3">
+            <label for="end_date" class="form-label">End Date</label>
+            <input
+                type="date"
+                name="end_date"
+                id="end_date"
+                value="{{ request('end_date') }}"
+                class="form-control">
+        </div>
+
+        <!-- Report Buttons -->
+        <div class="col-md-6">
+            <label class="form-label d-block">Reports</label>
+            <div class="btn-group" role="group">
+                <button
+                    type="submit"
+                    name="report_type"
+                    value="tour"
+                    class="btn btn-primary">
+                    <i class="fas fa-plane me-1"></i> Tour
+                </button>&nbsp;
+
+                <button
+                    type="submit"
+                    name="report_type"
+                    value="visa"
+                    class="btn btn-secondary">
+                    <i class="fas fa-passport me-1"></i> Visa
+                </button>&nbsp;
+
+                <button
+                    type="submit"
+                    name="report_type"
+                    value="medical"
+                    class="btn btn-success">
+                    <i class="fas fa-heartbeat me-1"></i> Medical
+                </button>&nbsp;
+
+                <button
+                    type="submit"
+                    name="report_type"
+                    value="study_abroad"
+                    class="btn btn-info">
+                    <i class="fas fa-graduation-cap me-1"></i> Study
+                </button>&nbsp;
+
+                      <button
+                        type="submit"
+                        name="report_type"
+                        value="all"
+                        class="btn btn-dark">
+                        <i class="fas fa-list me-1"></i> All Reports
+                    </button>
+            </div>
+        </div>
+    </form>
+</div>
+
     </div>
 </div>
 

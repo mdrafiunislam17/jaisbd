@@ -8,7 +8,7 @@
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link" target="_blank" href="{{ route("home") }}"><i class="fa fa-globe"></i>&nbsp;jaisbd.com</a>
+            <a class="nav-link" target="_blank" href="{{ route('frontend.index') }}"><i class="fa fa-globe"></i>&nbsp;falcondreams</a>
         </li>
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -16,14 +16,20 @@
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                     {{ auth()->user()["name"] }}
                 </span>
-                <img class="img-profile rounded-circle"
-                     src="{{ asset("img/undraw_profile.svg") }}" alt="">
+
+               @if (auth()->user()->image)
+                    <img class="img-profile rounded-circle" src="{{ asset('uploads/user/' . auth()->user()->image) }}" alt="Profile Image">
+                @else
+                    <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}" alt="Profile Image">
+                @endif
+
+
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
 {{--                <a class="dropdown-item" href="{{ route("admin.auth.profile") }}">--}}
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ route("profile") }}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>
