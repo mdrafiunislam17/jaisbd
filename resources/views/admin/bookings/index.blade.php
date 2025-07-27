@@ -62,6 +62,10 @@
                                     <a href="{{ route("bookings.edit", $career->id) }}" class="btn btn-sm btn-warning"><i
                                             class="fa fa-edit"></i></a>
 
+                                            <!-- Edit Button -->
+
+
+
 
                                      <form action="{{ route('bookings.destroy', $career->id) }}" method="post" class="d-inline delete-form" data-id="{{ $career->id }}">
                                         @csrf
@@ -79,6 +83,8 @@
             </div>
         </div>
     </div>
+
+
 
 
       <!-- Delete Confirmation Modal -->
@@ -106,5 +112,7 @@
 
 
 @endsection
+
+
 
 

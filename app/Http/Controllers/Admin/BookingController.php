@@ -29,7 +29,7 @@ class BookingController extends Controller
     public function index()
     {
         $settings = Setting::query()->pluck("value", "setting_name")->toArray();
-        $booking = Booking::all();
+        $booking = Booking::latest()->get();
         return view('admin.bookings.index', compact('booking','settings'));
 
 

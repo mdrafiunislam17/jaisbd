@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Tour Bookings Report - {{ now()->format('Y-m-d') }}</title>
+    <title>Bookings Report - {{ now()->format('Y-m-d') }}</title>
     <style>
         body {
             font-family: 'DejaVu Sans', Arial, sans-serif;
@@ -78,7 +78,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>Tour Bookings Report</h1>
+        <h1>Bookings Report</h1>
         <div class="subtitle">
             Generated on: {{ now()->format('d M Y, h:i A') }} |
             Total Records: {{ $bookings->count() }}
@@ -108,8 +108,8 @@
                         <td>{{ \Carbon\Carbon::parse($booking->booking_date)->format('d M Y') }}</td>
                         <td class="text-right">{{ number_format($booking->booking_amount, 2) }}</td>
                         <td>
-                            @if ($booking->status === 'confirmed')
-                                <span class="badge bg-success">Confirmed</span>
+                            @if ($booking->status === 'successful')
+                                <span class="badge bg-success" >Successful</span>
                             @elseif ($booking->status === 'pending')
                                 <span class="badge bg-warning">Pending</span>
                             @elseif ($booking->status === 'cancelled')
@@ -124,7 +124,7 @@
         </table>
     @else
         <div class="no-data">
-            No tour bookings found for the selected criteria
+            No bookings found for the selected criteria
         </div>
     @endif
 

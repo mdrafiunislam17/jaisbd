@@ -99,8 +99,14 @@ Route::middleware('auth')->group(function () {
 
     // Home Dashboard
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-     Route::get('/user', [UserDashboardController::class, 'index'])->name('user');
-     Route::get('tourBookingsReport', [HomeController::class,'BookingsReport'])->name('admin.reports.tours');
+    Route::get('/user', [UserDashboardController::class, 'index'])->name('user');
+    Route::get('/user Edit',[UserDashboardController::class,'editUser'])->name('editUser');
+    Route::post('user/profile/update', [UserDashboardController::class, 'userProfileUpdate'])->name('userProfile.update');
+    Route::get('user/Booking',[UserDashboardController::class,'userBooking'])->name('userBooking');
+
+    Route::delete('/user/bookings/{booking}', [UserDashboardController::class, 'userDestroy'])
+    ->name('userDestroy');
+     Route::get('BookingsReport', [HomeController::class,'BookingsReport'])->name('admin.reports.tours');
 
     //  Route::get('tourBookingsReport', [ReportController::class,'tourBookingsReport'])->name('tourBookingsReport');
      Route::get('/admin/reports/tour-bookings/export', [ReportController::class, 'exportTourBookings'])

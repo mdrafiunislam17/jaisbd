@@ -103,12 +103,23 @@
                 </div>
 
                 {{-- Status --}}
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="status" class="col-sm-3 col-form-label text-right font-weight-bold">Status *</label>
                     <div class="col-sm-6">
                         <input type="text" name="status" id="status" class="form-control" value="{{ old('status', $booking->status) }}" required>
                     </div>
+                </div> --}}
+
+                <div class="form-group row">
+                    <label for="status" class="col-sm-3 col-form-label text-right font-weight-bold">Status *</label>
+                    <div class="col-sm-6">
+                        <select name="status" id="status" class="form-control" required>
+                            <option value="Pending" {{ old('status', $booking->status) == 'Pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="successful" {{ old('status', $booking->status) == 'successful' ? 'selected' : '' }}>Successful</option>
+                        </select>
+                    </div>
                 </div>
+
 
                 <div class="form-group row">
                     <div class="offset-3 col-sm-6">

@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container py-4">
-    <h1 class="mb-4">Tour Bookings Report</h1>
+    <h1 class="mb-4">Bookings Report</h1>
 
     @if($bookings->count())
         <div class="table-responsive">
@@ -48,7 +48,7 @@
         </div>
     @else
         <div class="alert alert-info">
-            No bookings found for tours.
+            No bookings found for .
         </div>
     @endif
 
@@ -58,20 +58,27 @@
 
 
     <div class="mb-3 d-flex justify-content-end gap-2">
-    <a href="{{ route('admin.reports.tour-bookings.export', ['format' => 'csv']) }}" class="btn btn-sm btn-primary">
+    {{-- <a href="{{ route('admin.reports.tour-bookings.export', ['format' => 'csv']) }}" class="btn btn-sm btn-primary">
         <i class="bi bi-file-earmark-spreadsheet"></i> Download CSV
-    </a>&nbsp;
+    </a>&nbsp; --}}
 
     <a href="{{ route('admin.reports.tour-bookings.export', ['format' => 'pdf']) }}" class="btn btn-sm btn-danger">
         <i class="bi bi-file-earmark-pdf"></i> Download PDF
     </a>&nbsp;
 
-    <button onclick="window.print()" class="btn btn-sm btn-secondary">
-        <i class="bi bi-printer"></i> Print Report
-    </button>
+{{-- <button onclick="printPDF()" class="btn btn-sm btn-secondary">
+    <i class="bi bi-printer"></i> Print Report
+</button> --}}
 </div>
 
 </div>
 
 
 @endsection
+
+<script>
+    // function printPDF() {
+    //     // Open PDF in a new tab
+    //     window.open("{{ route('admin.reports.tour-bookings.export', ['format' => 'pdf']) }}", "_blank");
+    // }
+</script>
