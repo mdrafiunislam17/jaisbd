@@ -63,13 +63,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="subject" class="col-sm-3 col-form-label text-right font-weight-bold">Subject</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="subject" name="subject"
                                    value="{{ old('subject', $contact->subject) }}">
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group row">
                         <label for="message" class="col-sm-3 col-form-label text-right font-weight-bold">Message</label>

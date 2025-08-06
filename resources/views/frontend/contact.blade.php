@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Blog')
+@section('title', 'Contact')
 
 @section('content')
 
@@ -101,24 +101,24 @@
                                     @csrf
                                         <div class="input-wrap relative">
                                             <i class="icon-user-1-1"></i>
-                                            <input type="text" name="name" placeholder="Your Name*">
+                                            <input type="text" name="name" id="name" placeholder="Your Name*">
                                         </div>
                                         <div class="input-wrap relative">
                                             <i class="icon-Group-51"></i>
-                                            <input type="email" name="email" placeholder="Email Address*">
+                                            <input type="email" name="email" id="email" placeholder="Email Address*">
                                         </div>
 
                                         <div class="input-wrap relative">
                                             <i class="icon-phone"></i>
-                                            <input type="text" name="phone" placeholder="Phone Number*" required>
+                                            <input type="text" name="phone" id="phone" placeholder="Phone Number*" required>
                                         </div>
                                         <div class="input-wrap relative">
                                              <i class="icon-Group-51"></i>
-                                            <input type="subject" name="subject" placeholder="Subject" required>
+                                            <input type="hidden" name="subject" id="subject" placeholder="Subject" required>
                                         </div>
                                         <div class="input-wrap relative">
                                             <i class="icon-content"></i>
-                                            <textarea name="text-write" rows="7" cols="30"
+                                            <textarea name="message" id="message" rows="7" cols="30"
                                                 placeholder="Enter Your Messege here"></textarea>
                                         </div>
                                         <input type="hidden" name="status" value="1">

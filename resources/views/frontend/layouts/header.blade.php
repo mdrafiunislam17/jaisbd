@@ -23,7 +23,7 @@
                                 </ul>
                             </div>
                             <div class="header-top-left flex-two">
-                                <a href="contact-us.html" class="booking">
+                                <a href="{{route('login')}}" class="booking">
                                     <i class="icon-19"></i>
                                     <span>Booking Now</span>
                                 </a>
@@ -148,7 +148,7 @@
                                                             </ul>
                                                         </li> -->
 
-                                                        <li class="dropdown2"><a href="#">Pages</a>
+                                                        <li class="dropdown2"><a href="#">falcondreams</a>
                                                             <ul>
                                                                 <li><a href="{{route('frontendAbout')}}">About Us</a></li>
                                                                 <li><a href="{{route('frontendTeamMember')}}">Team member</a></li>

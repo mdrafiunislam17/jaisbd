@@ -54,12 +54,16 @@
 
                                 <td>
 
-                                    {{-- <a href="{{ route("contact.create.edit", $item->id) }}" class="btn btn-sm btn-warning">
+                                     {{-- <a href="{{ route("contact.edit", $item->id) }}" class="btn btn-sm btn-warning">
                                         <i class="fa fa-edit"></i>
                                     </a> --}}
+                                    <a href="{{ route("contact.show", $item->id) }}" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
 
 
-                                    <form action="{{ route('contact.create.destroy', $item->id) }}" method="post" class="d-inline delete-form" data-id="{{ $item->id }}">
+
+                                    <form action="{{ route('contact.destroy', $item->id) }}" method="post" class="d-inline delete-form" data-id="{{ $item->id }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-sm btn-danger delete-btn h-100" data-id="{{ $item->id }}">
