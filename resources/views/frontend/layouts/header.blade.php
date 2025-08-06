@@ -1,3 +1,46 @@
+
+ <style>
+
+@media screen and (max-width: 1280px) {
+
+.navigation {
+    display: inherit;
+}
+    .main-header .main-menu .navigation > li > a {
+    position: relative;
+    display: block;
+    text-align: center;
+    line-height: 26px;
+    font-weight: 600;
+    padding: 33px 0px;
+    letter-spacing: 0px;
+    color: #081E2A;
+    font-size: 15px;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+
+.main-header .main-menu .navigation > li.dropdown2 > a::after {
+    content: "";
+    font-family: "icomoon";
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 5px;
+    vertical-align: bottom;
+    display: inline-block;
+}
+}
+
+
+    </style>
+
+
+
+
  <!-- Main Header -->
             <header class="main-header flex">
                 <!-- Header Lower -->
@@ -41,6 +84,7 @@
                         </div>
 
                     </div>
+
                     <div class="header-lower">
                         <div class="tf-container full">
                             <div class="row">
@@ -148,7 +192,7 @@
                                                             </ul>
                                                         </li> -->
 
-                                                        <li class="dropdown2"><a href="#">falcondreams</a>
+                                                        <li class="dropdown2"><a href="#">Falcon Dreams</a>
                                                             <ul>
                                                                 <li><a href="{{route('frontendAbout')}}">About Us</a></li>
                                                                 <li><a href="{{route('frontendTeamMember')}}">Team member</a></li>
@@ -240,6 +284,8 @@
                         </div>
                         <img src="./assets/images/page/fl1.png" alt="" class="fly-ab">
                     </div>
+
+
                 </div>
 
                 <!-- End Header Lower -->

@@ -137,7 +137,7 @@
                     <div class="row footer-bottom">
                         <div class="col-md-6">
                             <p class="copy-right">
-                            Copyright © <span id="year"></span> by <a href="#" class="text-main">Rafiun.</a> All Rights Reserved
+                            Copyright © <span id="year"></span> by <a href="#" class="text-main">Falcon Dreams.</a> All Rights Reserved
                             </p>
                         </div>
                         <div class="col-md-6">
