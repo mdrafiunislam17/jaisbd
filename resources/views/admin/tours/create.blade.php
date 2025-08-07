@@ -50,14 +50,24 @@
                       <div class="form-group row">
                         <label for="category_id" class="col-sm-3 col-form-label text-right font-weight-bold">Category *</label>
                         <div class="col-sm-6">
-                            <select name="category_id" id="category_id" class="form-control">
-                                <option value="">Select Category</option>
+                            <select name="category_id[]" id="category_id" class="form-control">
+                                  <option value="all" {{ is_array(old('category_id')) && in_array('all', old('category_id')) ? 'selected' : '' }}>
+                                    All
+                                </option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old("category_id") == $category->id ? "selected" : "" }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}"
+                                        {{ is_array(old('category_id')) && in_array($category->id, old('category_id')) ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
                     </div>
                     </div>
+
+
+
+
+
 
                     <div class="form-group row">
                         <label for="title" class="col-sm-3 col-form-label text-right font-weight-bold">Title</label>
@@ -177,12 +187,33 @@
 
     <script>
         tinymce.init({
-            selector: '#description',  // Use textarea as the editor
-            height: 300,           // Set the height of the editor
+            selector: '#description',
+            height: 300,
             plugins: 'advlist autolink lists link image charmap print preview anchor',
             toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image link',
             menubar: false,
         });
-    </script>
 
+        // Category dropdown logic
+        document.addEventListener('DOMContentLoaded', function () {
+            const categorySelect = document.getElementById('category_id');
+
+            categorySelect.addEventListener('change', function () {
+                const selectedOptions = Array.from(this.selectedOptions).map(o => o.value);
+
+                if (selectedOptions.includes('all')) {
+                    // If 'All' is selected, deselect others
+                    Array.from(this.options).forEach(option => {
+                        if (option.value !== 'all') {
+                            option.selected = false;
+                        }
+                    });
+                } else {
+                    // If any category selected, deselect 'All'
+                    this.querySelector('option[value="all"]').selected = false;
+                }
+            });
+        });
+    </script>
 @endpush
+

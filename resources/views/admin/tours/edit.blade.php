@@ -48,7 +48,7 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="category_id" class="col-sm-3 col-form-label text-right font-weight-bold">Category *</label>
                         <div class="col-sm-6">
                             <select name="category_id" id="category_id" class="form-control">
@@ -60,6 +60,23 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div> --}}
+
+                         <div class="form-group row">
+                        <label for="category_id" class="col-sm-3 col-form-label text-right font-weight-bold">Category *</label>
+                        <div class="col-sm-6">
+                            <select name="category_id[]" id="category_id" class="form-control">
+                                  <option value="all" {{ is_array(old('category_id')) && in_array('all', old('category_id')) ? 'selected' : '' }}>
+                                    All
+                                </option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ is_array(old('category_id')) && in_array($category->id, old('category_id')) ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                    </div>
                     </div>
 
                     <div class="form-group row">
@@ -173,8 +190,12 @@
     </div>
 @endsection
 
+
+
+
 @push("scripts")
-    <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js') }}" referrerpolicy="origin"></script>
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js')}}" referrerpolicy="origin"></script>
+
     <script>
         tinymce.init({
             selector: '#description',
@@ -183,5 +204,27 @@
             toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image link',
             menubar: false,
         });
+
+        // Category dropdown logic
+        document.addEventListener('DOMContentLoaded', function () {
+            const categorySelect = document.getElementById('category_id');
+
+            categorySelect.addEventListener('change', function () {
+                const selectedOptions = Array.from(this.selectedOptions).map(o => o.value);
+
+                if (selectedOptions.includes('all')) {
+                    // If 'All' is selected, deselect others
+                    Array.from(this.options).forEach(option => {
+                        if (option.value !== 'all') {
+                            option.selected = false;
+                        }
+                    });
+                } else {
+                    // If any category selected, deselect 'All'
+                    this.querySelector('option[value="all"]').selected = false;
+                }
+            });
+        });
     </script>
 @endpush
+
