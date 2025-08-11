@@ -3340,7 +3340,7 @@
                                             <img src="{{ asset("uploads/studyAbroad/$item->image") }}" alt="{{ $item->title }}">
                                         </a>
                                         <div class="destination-content">
-                                            <span class="nation">{{ $item->title }}</span>
+                                            <span class="nation">{{ $item->category->name }}</span>
                                             <div class="flex-two btn-destination">
                                                 <h6 class="title">
                                                     <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}">View Study Abroad</a>
