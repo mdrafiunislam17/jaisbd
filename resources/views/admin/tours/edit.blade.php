@@ -69,9 +69,8 @@
                                   <option value="all" {{ is_array(old('category_id')) && in_array('all', old('category_id')) ? 'selected' : '' }}>
                                     All
                                 </option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ is_array(old('category_id')) && in_array($category->id, old('category_id')) ? 'selected' : '' }}>
+                               @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id', $tour->category_id) == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach

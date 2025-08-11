@@ -3335,7 +3335,7 @@
                             @forelse ($studyAbroad as $item)
                                 <div class="col-sm-6 col-lg-4 mb-37">
                                     <div class="tf-widget-destination">
-                                        <a href="{{ route('StudyDetail', $item->slug) }}" class="destination-imgae">
+                                        <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}" class="destination-imgae">
                                             <span class="tour">{{ $item->duration }}</span>
                                             <img src="{{ asset("uploads/studyAbroad/$item->image") }}" alt="{{ $item->title }}">
                                         </a>
@@ -3343,9 +3343,9 @@
                                             <span class="nation">{{ $item->title }}</span>
                                             <div class="flex-two btn-destination">
                                                 <h6 class="title">
-                                                    <a href="{{ route('StudyDetail', $item->slug) }}">View Study Abroad</a>
+                                                    <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}">View Study Abroad</a>
                                                 </h6>
-                                                <a href="{{ route('StudyDetail', $item->slug) }}" class="flex-five btn-view">
+                                                <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}" class="flex-five btn-view">
                                                     <i class="icon-Vector-32"></i>
                                                 </a>
                                             </div>

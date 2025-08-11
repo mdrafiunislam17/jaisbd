@@ -62,16 +62,15 @@
                         </div>
                     </div> --}}
 
-                         <div class="form-group row">
+                          <div class="form-group row">
                         <label for="category_id" class="col-sm-3 col-form-label text-right font-weight-bold">Category *</label>
                         <div class="col-sm-6">
                             <select name="category_id[]" id="category_id" class="form-control">
                                   <option value="all" {{ is_array(old('category_id')) && in_array('all', old('category_id')) ? 'selected' : '' }}>
                                     All
                                 </option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ is_array(old('category_id')) && in_array($category->id, old('category_id')) ? 'selected' : '' }}>
+                               @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id', $tour->category_id) == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
