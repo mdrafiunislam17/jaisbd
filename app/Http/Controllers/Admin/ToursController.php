@@ -91,7 +91,7 @@ public function store(Request $request)
         'category_id' => 'required|array|min:1',
         'category_id.*' => 'required|string',
         'description' => 'nullable|string',
-        'price' => 'required|numeric',
+        'price' => 'nullable|numeric',
         'image' => 'required|image|max:10240',
         // other validations...
     ]);
@@ -213,7 +213,7 @@ public function update(Request $request, Tours $tour)
         'category_id' => 'required|array|min:1',
         'category_id.*' => 'required|string',
         'description' => 'nullable|string',
-        'price' => 'required|numeric',
+        'price' => 'nullable|numeric',
         'image' => 'nullable|image|max:10240',
         'location' => 'nullable|string|max:255',
         'duration' => 'nullable|string|max:255',
@@ -328,4 +328,5 @@ public function destroy(Tours $tour)
         return redirect()->route('tours.index')->with('error', 'Error deleting tour: ' . $e->getMessage());
     }
 }
+
 }

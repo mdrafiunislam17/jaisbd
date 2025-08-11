@@ -57,7 +57,7 @@
     <!-- End Tour List -->
 
     <!-- Call to Action -->
-    <section class="mb--93">
+    {{-- <section class="mb--93">
         <div class="tf-container">
             <div class="callt-to-action flex-two">
                 <div class="callt-to-action-content flex-three">
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Call to Action -->
 </main>
 @endsection

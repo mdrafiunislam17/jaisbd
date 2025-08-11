@@ -3251,7 +3251,7 @@
                             @forelse ($visa as $item)
                                 <div class="col-sm-6 col-lg-4 mb-37">
                                     <div class="tf-widget-destination">
-                                        <a href="#" class="destination-imgae">
+                                        <a href="{{ route('visaDetail', $item->slug) }}" class="destination-imgae">
                                             <span class="tour">{{ $item->duration }}</span>
                                             <img src="{{ asset("uploads/visa/$item->image") }}" alt="{{ $item->title }}">
                                         </a>
@@ -3293,7 +3293,7 @@
                             @forelse ($consultancyMedicine as $item)
                                 <div class="col-sm-6 col-lg-4 mb-37">
                                     <div class="tf-widget-destination">
-                                        <a href="#" class="destination-imgae">
+                                        <a href="{{ route('medicineDetail', $item->slug) }}" class="destination-imgae">
                                             <span class="tour">{{ $item->duration }}</span>
                                             <img src="{{ asset('uploads/consultancyMedicine/' . $item->image) }}" alt="{{ $item->title }}">
                                         </a>
@@ -3335,7 +3335,7 @@
                             @forelse ($studyAbroad as $item)
                                 <div class="col-sm-6 col-lg-4 mb-37">
                                     <div class="tf-widget-destination">
-                                        <a href="#" class="destination-imgae">
+                                        <a href="{{ route('StudyDetail', $item->slug) }}" class="destination-imgae">
                                             <span class="tour">{{ $item->duration }}</span>
                                             <img src="{{ asset("uploads/studyAbroad/$item->image") }}" alt="{{ $item->title }}">
                                         </a>
@@ -4033,7 +4033,7 @@
                             @foreach ($blogs as $blog )
                                 <div class="col-md-4 wow fadeInUp animated " data-wow-delay="0.1s">
                                 <div class="tf-widget-blog blog-style">
-                                    <a href="#" class="blog-image">
+                                    <a href="{{ route('blogDetails', ['title' => $blog->title]) }}" class="blog-image">
                                         <img src="{{asset("uploads/blog/$blog->image")}}" alt="">
                                         {{-- <div class="category-blog">
                                             <i class="icon-Group-8"></i>
@@ -4051,7 +4051,7 @@
                                                 {{-- <a href="#"><span>Coments (03)</span></a> --}}
                                             </li>
                                         </ul>
-                                        <h3 class="entry-title"><a href="#">{{$blog->title}}</a></h3>
+                                        <h3 class="entry-title"><a href="{{ route('blogDetails', ['title' => $blog->title]) }}">{{$blog->title}}</a></h3>
                                         {{-- <p class="des">Business is the activity of making on cing or buying and selling
                                             pro
                                         </p> --}}

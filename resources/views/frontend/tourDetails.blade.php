@@ -2,6 +2,13 @@
 
 @section('title', 'Tours')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/your-stylesheet.css') }}">
+<style>
+
+</style>
+@endpush
+
 @section('content')
 
 <section class="tour-single">
@@ -74,7 +81,11 @@
                                 <div class="information-content-tour">
                                     <div class="description-wrap mb-40">
                                         <span class="description">Description:</span>
-                                        <p class="des">{!! $tour->description !!}</p>
+                                      <p>{!! $tour->description !!}
+                                        </p>
+
+
+
                                     </div>
 
 

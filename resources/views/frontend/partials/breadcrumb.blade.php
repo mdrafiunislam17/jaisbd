@@ -1,4 +1,4 @@
-<section class="breadcumb-section">
+<section class="breadcumb-section" style="background-image: url('{{ asset("uploads/" . $settings["SETTING_PAGE_BANNER"]) }}'); background-size: cover; background-position: center;">
   <div class="tf-container">
     <div class="row">
       <div class="col-lg-12 center z-index1">
