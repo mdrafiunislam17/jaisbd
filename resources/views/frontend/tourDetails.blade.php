@@ -72,7 +72,7 @@
                         <div class="row mb-40 image-gallery-single">
 
                             <div class="col-12 col-sm-12">
-                                <img src="{{ asset('uploads/tour/' . $tour->image)}}" alt="image" style="height: 450px">
+                                <img src="{{ asset('uploads/tour/' . $tour->image) }}" alt="image" style="max-width: 100%; height: auto; max-height: 450px;">
                             </div>
 
                         </div>
@@ -213,10 +213,10 @@
                                                 <i class="icon-Vector-6"></i>
                                                 <span>Hand-picked Tours & Activities</span>
                                             </li>
-                                            <li class="flex-three">
+                                            {{-- <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>
                                                 <span>Free Travel Insureance</span>
-                                            </li>
+                                            </li> --}}
                                             <li class="flex-three">
                                                 <i class="icon-price-tag-1-1"></i>
                                                 <span>No-hassle best price guarantee</span>
@@ -440,10 +440,10 @@
                                                 <i class="icon-Vector-6"></i>
                                                 <span>Hand-picked Tours & Activities</span>
                                             </li>
-                                            <li class="flex-three">
+                                            {{-- <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>
                                                 <span>Free Travel Insureance</span>
-                                            </li>
+                                            </li> --}}
                                             <li class="flex-three">
                                                 <i class="icon-price-tag-1-1"></i>
                                                 <span>No-hassle best price guarantee</span>
@@ -665,10 +665,10 @@
                                                 <i class="icon-Vector-6"></i>
                                                 <span>Hand-picked Tours & Activities</span>
                                             </li>
-                                            <li class="flex-three">
+                                            {{-- <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>
                                                 <span>Free Travel Insureance</span>
-                                            </li>
+                                            </li> --}}
                                             <li class="flex-three">
                                                 <i class="icon-price-tag-1-1"></i>
                                                 <span>No-hassle best price guarantee</span>
@@ -1153,10 +1153,10 @@
                                                 <i class="icon-Vector-6"></i>
                                                 <span>Hand-picked Tours & Activities</span>
                                             </li>
-                                            <li class="flex-three">
+                                            {{-- <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>
                                                 <span>Free Travel Insureance</span>
-                                            </li>
+                                            </li> --}}
                                             <li class="flex-three">
                                                 <i class="icon-price-tag-1-1"></i>
                                                 <span>No-hassle best price guarantee</span>
@@ -1374,10 +1374,10 @@
                                                 <i class="icon-Vector-6"></i>
                                                 <span>Hand-picked Tours & Activities</span>
                                             </li>
-                                            <li class="flex-three">
+                                            {{-- <li class="flex-three">
                                                 <i class="icon-insurance-1"></i>
                                                 <span>Free Travel Insureance</span>
-                                            </li>
+                                            </li> --}}
                                             <li class="flex-three">
                                                 <i class="icon-price-tag-1-1"></i>
                                                 <span>No-hassle best price guarantee</span>

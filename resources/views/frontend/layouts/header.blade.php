@@ -1,3 +1,5 @@
+<!-- FontAwesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
  <style>
 
@@ -36,6 +38,8 @@
 }
 
 
+
+
     </style>
 
 
@@ -69,6 +73,11 @@
                                 <a href="{{route('login')}}" class="booking">
                                     <i class="icon-19"></i>
                                     <span>Booking Now</span>
+                                </a>
+
+                                 <a href="{{ route('login') }}" class="booking">
+                                    <i class="fas fa-sign-in-alt"></i>  <!-- FontAwesome লগইন আইকন -->
+                                    <span>Login</span>
                                 </a>
                                 <div class="follow-social flex-two">
                                     <span>Follow Us :</span>
