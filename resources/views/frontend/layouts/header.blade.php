@@ -1,0 +1,332 @@
+<!-- FontAwesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+ <style>
+
+@media screen and (max-width: 1280px) {
+
+.navigation {
+    display: inherit;
+}
+    .main-header .main-menu .navigation > li > a {
+    position: relative;
+    display: block;
+    text-align: center;
+    line-height: 26px;
+    font-weight: 600;
+    padding: 33px 0px;
+    letter-spacing: 0px;
+    color: #081E2A;
+    font-size: 15px;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+
+.main-header .main-menu .navigation > li.dropdown2 > a::after {
+    content: "";
+    font-family: "icomoon";
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 5px;
+    vertical-align: bottom;
+    display: inline-block;
+}
+}
+
+
+
+
+    </style>
+
+
+
+
+ <!-- Main Header -->
+            <header class="main-header flex">
+                <!-- Header Lower -->
+                <div id="header">
+                    <div class="header-top">
+                        <div class="header-top-wrap flex-two">
+                            <div class="header-top-right">
+                                <ul class=" flex-three">
+                                    <li class="flex-three">
+                                        <i class="icon-day"></i>
+                                       <span id="current-date"></span>
+                                    </li>
+                                    <li class="flex-three">
+                                        <i class="icon-mail"></i>
+                                        <span> falcondreams25@gmail.com</span>
+                                    </li>
+                                    <li class="flex-three">
+                                        <i class="icon-phone"></i>
+                                        <span>+8801979200300 </span>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                            <div class="header-top-left flex-two">
+                                <a href="{{route('login')}}" class="booking">
+                                    <i class="icon-19"></i>
+                                    <span>Booking Now</span>
+                                </a>
+
+                                 <a href="{{ route('login') }}" class="booking">
+                                    <i class="fas fa-sign-in-alt"></i>  <!-- FontAwesome লগইন আইকন -->
+                                    <span>Login</span>
+                                </a>
+                                <div class="follow-social flex-two">
+                                    <span>Follow Us :</span>
+                                    <ul class="flex-two">
+                                        <li><a href="{{ $settings["SETTING_SOCIAL_FACEBOOK"] }}"><i class="icon-icon-2"></i></a></li>
+                                        <li><a href="{{ $settings["SETTING_SOCIAL_YOUTUBE"] }}"><i class="fab fa-youtube"></i></a></li>
+                                        <li><a href="{{ $settings["SETTING_SOCIAL_TWITTER"] }}"><i class="icon-x"></i></a></li>
+                                        <li><a href="{{ $settings["SETTING_SOCIAL_LINKEDIN"] }}"><i class="icon-icon"></i></a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="header-lower">
+                        <div class="tf-container full">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="inner-container flex justify-space align-center">
+                                        <!-- Logo Box -->
+                                        <div class="mobile-nav-toggler mobie-mt mobile-button">
+                                            <i class="icon-Vector3"></i>
+                                        </div>
+                                        <div class="logo-box">
+                                            <div class="logo">
+                                                <a href="{{route('frontend.index')}}">
+                                                    <img src="{{asset("uploads/" . $settings["SETTING_SITE_LOGO"])}}" alt="Logo">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="nav-outer flex align-center">
+                                            <!-- Main Menu -->
+                                            <nav class="main-menu show navbar-expand-md">
+                                                <div class="navbar-collapse collapse clearfix"
+                                                    id="navbarSupportedContent">
+                                                    <ul class="navigation clearfix">
+                                                        <li class=" current">
+                                                            <a href="{{route('frontend.index')}}">Home</a>
+                                                            <!-- <ul>
+                                                                <li class="current"><a href="index.html">Home Page
+                                                                        01</a></li>
+                                                                <li><a href="home2.html">Home Page 02</a></li>
+                                                                <li><a href="home3.html">Home Page 03</a></li>
+                                                                <li><a href="home4.html">Home Page 04</a></li>
+                                                                <li><a href="home5.html">Home Page 05</a></li>
+                                                            </ul> -->
+                                                        </li>
+                                                        <li class="dropdown2">
+                                                            <a href="#">Tours</a>
+
+                                                             <ul>
+                                                                @foreach($tourCategories as $category)
+                                                                    <li>
+                                                                        <a href="{{ route('categoryTours', $category->name) }}">
+                                                                            {{ Str::limit($category->name, 25) }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+
+
+                                                        </li>
+                                                        <li class="dropdown2"><a href="#">Visa</a>
+
+                                                             <ul>
+                                                                @foreach($visaCategories as $category)
+                                                                    <li>
+                                                                        <a href="{{ route('categoryVisas', $category->name) }}">
+                                                                            {{ Str::limit($category->name, 25) }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+
+                                                        </li>
+
+                                                        <li class="dropdown2" >
+                                                            <a href="#">Medical Consultancy</a>
+                                                              <ul>
+                                                                @foreach($consultancyMedicineCategories as $category)
+                                                                    <li>
+                                                                        <a href="{{ route('consultancy.by.category', $category->name) }}">
+                                                                            {{ Str::limit($category->name, 25) }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+
+                                                          <li class="dropdown2" >
+                                                            <a href="#">Study Abroad </a>
+                                                              <ul>
+                                                                @foreach($studyAbroadCategories as $category)
+                                                                    <li>
+                                                                        <a href="{{ route('categoryStudyAbroad', $category->name) }}">
+                                                                            {{ Str::limit($category->name, 25) }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+
+                                                        <!-- <li class="">
+                                                            <a href = "#">Bookings </a>
+                                                        </li> -->
+
+                                                          <!-- <li class="">
+                                                            <a href = "#">Resources </a>
+                                                        </li> -->
+
+
+
+
+
+                                                        <!-- <li class="#"><a href="#">Blog</a>
+                                                            <ul>
+                                                                <li><a href="blog.html">Blog</a></li>
+                                                                <li><a href="blog-details.html">Blog Detail</a></li>
+                                                            </ul>
+                                                        </li> -->
+
+                                                        <li class="dropdown2"><a href="#">Falcon Dreams</a>
+                                                            <ul>
+                                                                <li><a href="{{route('frontendAbout')}}">About Us</a></li>
+                                                                <li><a href="{{route('frontendTeamMember')}}">Team member</a></li>
+                                                                <li><a href="{{route('frontendBlog')}}">Blog</a></li>
+                                                                {{-- <li><a href="terms-condition.html">Terms & Condition</a>
+                                                                </li>
+                                                                <li><a href="help-center.html">Help center</a></li> --}}
+                                                            </ul>
+                                                        </li>
+                                                        <!-- <li class="dropdown2"><a href="#">Dashboard</a>
+                                                            <ul>
+                                                                <li><a href="dashboard.html">Dashboard</a></li>
+                                                                <li><a href="my-booking.html">My booking</a></li>
+                                                                <li><a href="my-listing.html">My Listing</a></li>
+                                                                <li><a href="add-tour.html">Add Tour</a></li>
+                                                                <li><a href="my-favorite.html">My Favorites</a></li>
+                                                                <li><a href="my-profile.html">My profile</a></li>
+                                                            </ul>
+                                                        </li> -->
+
+                                                         <!-- <li class="">
+                                                            <a href = "#">About </a>
+                                                        </li> -->
+                                                        <li><a href="{{route('frontendContact')}}">Contact</a></li>
+                                                    </ul>
+                                                </div>
+                                            </nav>
+                                            <!-- Main Menu End-->
+                                        </div>
+                                        <div class="header-account flex align-center">
+                                            <div class="language">
+                                                <div class="nice-select" tabindex="0">
+                                                    <img src="./assets/images/page/language.svg" alt=""><span
+                                                        class="current">English</span>
+                                                    <ul class="list">
+                                                        <li data-value class="option selected"><img
+                                                                src="./assets/images/page/language.svg" alt="">English
+                                                        </li>
+                                                        {{-- <li data-value="Vietnam" class="option"><img
+                                                                src="./assets/images/page/language.svg" alt="">Vietnam
+                                                        </li> --}}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="currency">
+                                                <div class="nice-select" tabindex="0">
+                                                    <span class="current">USD</span>
+                                                    <ul class="list">
+                                                        <li data-value class="option selected">USD</li>
+                                                        <li data-value="vnd" class="option">VND</li>
+                                                        <li data-value="ero" class="option">ERO</li>
+                                                    </ul>
+                                                </div>
+                                            </div>                                          -->
+                                            <div class="search-mobie relative">
+                                                <div class="dropdown">
+                                                    <a  type="button" class="show-search" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="icon-Vector5"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu top-search">
+                                                        <form action="/" id="search-bar-widget">
+                                                            <input type="text" placeholder="Search here...">
+                                                            <button type="button"><i class="icon-search-2"></i></button>
+                                                        </form>
+                                                    </ul>
+                                                  </div>
+                                            </div>
+                                            <div class="register">
+                                                <ul class="flex align-center">
+                                                  {{-- <li>
+                                                    @auth
+                                                        {{ auth()->user()->name }}
+                                                        <a href="{{ route('login') }}" class="flex-three">
+                                                            <img src="{{ asset('assets/images/avata/images4.jpeg') }}" alt="image">
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('login') }}" class="flex-three">
+                                                            Login
+                                                        </a>
+                                                    @endauth
+                                                </li> --}}
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="./assets/images/page/fl1.png" alt="" class="fly-ab">
+                    </div>
+
+
+                </div>
+
+                <!-- End Header Lower -->
+                <a href="#" class="header-sidebar flex-three" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <i class="icon-Bars"></i>
+                </a>
+
+                <!-- Mobile Menu  -->
+                <div class="close-btn"><span class="icon flaticon-cancel-1"></span></div>
+                <div class="mobile-menu">
+                    <div class="menu-backdrop"></div>
+                    <nav class="menu-box">
+                        <div class="nav-logo"><a href="{{route('frontend.index')}}">
+                                <img src="{{asset("uploads/" . $settings["SETTING_SITE_LOGO"])}}" alt=""></a></div>
+                        <div class="bottom-canvas">
+                            <div class="menu-outer">
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <!-- End Mobile Menu -->
+
+            </header>
+            <!-- End Main Header -->
+<script>
+  // তারিখ ফরম্যাট ফাংশন
+  function formatDate(date) {
+    const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  }
+
+  // তারিখ বসানো
+  document.getElementById("current-date").innerText = formatDate(new Date());
+</script>

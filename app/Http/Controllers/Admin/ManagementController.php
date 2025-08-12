@@ -1,0 +1,102 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Management;
+use App\Models\Setting;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+
+class ManagementController extends Controller
+{
+    //
+
+    public function __construct()
+        {
+            $this->middleware('permission:management-list|management-create|management-edit|management-delete')->only('index');
+            $this->middleware('permission:management-create')->only(['create', 'store']);
+            $this->middleware('permission:management-edit')->only(['edit', 'update']);
+            $this->middleware('permission:management-delete')->only('destroy');
+        }
+
+
+    public function index()
+    {
+        $managements = Management::all();
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.management.index',compact('managements', 'settings'));
+    }
+
+    public function create()
+    {
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.management.create',compact('settings'));
+
+    }
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            "name" => "required",
+        ]);
+
+        try {
+            $management = new Management();
+            $management->fill([
+                "name" => $request->input("name"),
+            ]);
+
+
+
+
+
+            $management->save();
+        } catch (QueryException $exception) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with("error", "QueryException code: " . $exception->getCode());
+        }
+
+        return redirect()->route("managements.index")->with("success", "management has been inserted successfully.");
+
+    }
+
+    public function edit (Management $management)
+    {
+        $settings = Setting::pluck("value", "setting_name")->toArray();
+        return view('admin.management.edit',compact('management','settings'));
+    }
+
+    public function update(Request $request, Management $management)
+    {
+        try {
+            $management->fill([
+                'name' => $request->input('name'),
+            ]);
+
+
+
+            $management->save();
+
+            return redirect()->route('managements.index')->with('success', 'management updated successfully.');
+
+        } catch (QueryException $e) {
+            return back()->withInput()->with('error', 'DB Error: ' . $e->getCode());
+        }
+    }
+
+
+    public function destroy(Management $management)
+    {
+        try {
+
+            $management->delete();
+
+            return redirect()->route('managements.index')->with('success', 'Management deleted successfully.');
+        } catch (QueryException $e) {
+            return back()->with('error', 'Database error: ' . $e->getCode());
+        }
+    }
+}

@@ -1,0 +1,40 @@
+
+
+##  Laravel Install
+composer create-project "laravel/laravel:^10.0" jaisbd.com
+composer require spatie/laravel-permission
+
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider
+
+## Git 
+
+
+git status
+git add .
+git commit -m ""
+git push origin main
+git checkout -b falconA
+git checkout main
+git branch
+## Login
+composer require laravel/ui
+php artisan ui bootstrap --auth
+npm install && npm run dev
+
+
+## AssignRole
+composer require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+
+## Step-by-Step DataTables Integration
+composer require yajra/laravel-datatables-oracle:"^10.6"
+
+php artisan vendor:publish --provider="Yajra\DataTables\DataTablesServiceProvider"
+
+##Seed
+php artisan db:seed --class=PermissionSeeder
+
+
+
+
