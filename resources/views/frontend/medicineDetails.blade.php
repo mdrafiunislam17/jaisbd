@@ -64,9 +64,14 @@
                         </div>
                         <div class="row mb-40 image-gallery-single">
 
-                            <div class="col-12 col-sm-12">
-                                <img src="{{ asset('uploads/consultancyMedicine/' . $medicine->image) }}" alt="image" style="max-width: 100%; height: auto; max-height: 450px;">
-                            </div>
+                          <div class="col-12 col-sm-12">
+    @if(!empty($medicine->image) && file_exists(public_path('uploads/consultancyMedicine/' . $medicine->image)))
+        <img src="{{ asset('uploads/consultancyMedicine/' . $medicine->image) }}" alt="image" style="max-width: 100%; height: auto; max-height: 450px;">
+    @else
+        <p>No image</p>
+    @endif
+</div>
+
 
                         </div>
                         <div class="row">

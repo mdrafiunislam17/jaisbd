@@ -46,7 +46,14 @@
                         @foreach($studyAbroads as $i => $item)
                             <tr>
                                <td>{{ ++$i }}</td>
-                                <td><img src="{{ asset("uploads/studyAbroad/$item->image") }}" width="100" alt=""></td>
+                                <td>
+    @if(!empty($item->image) && file_exists(public_path("uploads/studyAbroad/$item->image")))
+        <img src="{{ asset("uploads/studyAbroad/$item->image") }}" width="100" alt="Image">
+    @else
+        <span>No image</span>
+    @endif
+</td>
+
                                 <td>{{ $item->title }}</td>
                                 {{-- <td>{{ $item->subtitle }}</td> --}}
                                 <td>

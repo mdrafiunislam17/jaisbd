@@ -25,13 +25,16 @@ class VisaController extends Controller
     }
 
 
-    private function uploadImage($image): string
+   private function uploadImage($image): ?string
     {
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('uploads/visa'), $imageName);
-        return $imageName;
-    }
+        if ($image && $image->isValid()) {
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/visa'), $imageName);
+            return $imageName;
+        }
 
+        return null;  // return null if no image or invalid file
+    }
 
     public function index()
     {
@@ -94,7 +97,7 @@ class VisaController extends Controller
             'category_id.*' => 'required|string',
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
-            'image' => 'required|image|max:10240',
+            'image' => 'nullable|image|max:10240',
         ]);
 
         try {

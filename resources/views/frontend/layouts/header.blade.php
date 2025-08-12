@@ -82,10 +82,10 @@
                                 <div class="follow-social flex-two">
                                     <span>Follow Us :</span>
                                     <ul class="flex-two">
-                                        <li><a href="#"><i class="icon-icon-2"></i></a></li>
-                                        <li><a href="#"><i class="icon-icon_03"></i></a></li>
-                                        <li><a href="#"><i class="icon-x"></i></a></li>
-                                        <li><a href="#"><i class="icon-icon"></i></a></li>
+                                        <li><a href="{{ $settings["SETTING_SOCIAL_FACEBOOK"] }}"><i class="icon-icon-2"></i></a></li>
+                                        <li><a href="{{ $settings["SETTING_SOCIAL_YOUTUBE"] }}"><i class="fab fa-youtube"></i></a></li>
+                                        <li><a href="{{ $settings["SETTING_SOCIAL_TWITTER"] }}"><i class="icon-x"></i></a></li>
+                                        <li><a href="{{ $settings["SETTING_SOCIAL_LINKEDIN"] }}"><i class="icon-icon"></i></a></li>
                                     </ul>
                                 </div>
 

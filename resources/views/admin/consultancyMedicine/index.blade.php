@@ -45,7 +45,14 @@
                         @foreach($consultancyMedicines as $i => $item)
                             <tr>
                                <td>{{ ++$i }}</td>
-                                <td><img src="{{ asset("uploads/consultancyMedicine/$item->image") }}" width="100" alt=""></td>
+                                <td>
+    @if(!empty($item->image) && file_exists(public_path("uploads/consultancyMedicine/$item->image")))
+        <img src="{{ asset("uploads/consultancyMedicine/$item->image") }}" width="100" alt="Image">
+    @else
+        <span>No image</span>
+    @endif
+</td>
+
                                 <td>{{ $item->title }}</td>
                                 {{-- <td>{{ $item->subtitle }}</td> --}}
                                 <td>

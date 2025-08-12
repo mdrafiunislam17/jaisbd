@@ -143,23 +143,25 @@
                         <div class="col-md-6">
                             <ul class="social flex-six">
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ $settings["SETTING_SOCIAL_FACEBOOK"] }}">
                                         <i class="icon-icon-2"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ $settings["SETTING_SOCIAL_TWITTER"] }}">
                                         <i class="icon-x"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
-                                        <i class="icon-icon_03"></i>
+                                    <a href="{{ $settings["SETTING_SOCIAL_YOUTUBE"] }}">
+                                        <i class="fab fa-youtube"></i>
+
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
-                                        <i class="icon-2"></i>
+                                    <a href="{{ $settings["SETTING_SOCIAL_INSTAGRAM"] }}">
+                                       <i class="fab fa-instagram"></i>
+
                                     </a>
                                 </li>
                             </ul>

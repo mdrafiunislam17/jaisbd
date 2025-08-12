@@ -24,12 +24,17 @@ class ToursController extends Controller
         $this->middleware('permission:tour-delete', ['only' => ['destroy']]);
     }
 
-      private function uploadImage($image): string
-        {
+     private function uploadImage($image): ?string
+    {
+        if ($image && $image->isValid()) {
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/tour'), $imageName);
             return $imageName;
         }
+
+        // Return null or empty string when no image uploaded
+        return null;
+    }
 
     public function index()
     {
@@ -92,7 +97,7 @@ public function store(Request $request)
         'category_id.*' => 'required|string',
         'description' => 'nullable|string',
         'price' => 'nullable|numeric',
-        'image' => 'required|image|max:10240',
+        'image' => 'nullable|image|max:10240',
         // other validations...
     ]);
 

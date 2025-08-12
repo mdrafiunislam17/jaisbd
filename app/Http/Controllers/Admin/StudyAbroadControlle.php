@@ -23,13 +23,16 @@ class StudyAbroadControlle extends Controller
         $this->middleware('permission:study-abroad-delete', ['only' => ['destroy']]);
     }
 
-    private function uploadImage($image): string
-        {
+    private function uploadImage($image): ?string
+    {
+        if ($image && $image->isValid()) {
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/studyAbroad'), $imageName);
             return $imageName;
         }
 
+        return null;  // No image uploaded or invalid file
+    }
 
     public function index()
     {
@@ -92,7 +95,7 @@ class StudyAbroadControlle extends Controller
             'category_id.*' => 'required|string',
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
-            'image' => 'required|image|max:10240',
+            'image' => 'nullable|image|max:10240',
         ]);
 
         try {

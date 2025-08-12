@@ -24,12 +24,16 @@ class ConsultancyMedicineController extends Controller
         $this->middleware('permission:consultancy-medicine-delete', ['only' => ['destroy']]);
     }
 
-       private function uploadImage($image): string
-    {
+   private function uploadImage($image): ?string
+{
+    if ($image && $image->isValid()) {
         $imageName = time() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('uploads/consultancyMedicine'), $imageName);
         return $imageName;
     }
+
+    return null;  // Return null if no image uploaded or invalid
+}
 
 
     public function index(){
@@ -94,7 +98,7 @@ class ConsultancyMedicineController extends Controller
             'category_id.*' => 'required|string',
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
-            'image' => 'required|image|max:10240',
+            'image' => 'nullable|image|max:10240',
         ]);
 
         try {
