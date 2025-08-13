@@ -17,8 +17,11 @@ class Booking extends Model
         'bookable_type',
         'booking_date',
         'booking_amount',
+        'adult',
+        'child',
         'notes',
         'status',
+        'booking_time',
     ];
 
     // protected $casts = [

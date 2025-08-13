@@ -25,6 +25,7 @@ class Tours extends Model
         'image',
         'guests',
         'status',
+        'sort',
     ];
 
 

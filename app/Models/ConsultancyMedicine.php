@@ -23,6 +23,7 @@ class ConsultancyMedicine extends Model
         'image',
         'guests',
         'status',
+        'sort',
     ];
 
     /**

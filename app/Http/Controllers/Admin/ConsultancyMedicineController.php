@@ -38,7 +38,7 @@ class ConsultancyMedicineController extends Controller
 
     public function index(){
         $settings = Setting::pluck("value", "setting_name")->toArray();
-        $consultancyMedicines = ConsultancyMedicine::with('category')->latest()->get();
+        $consultancyMedicines = ConsultancyMedicine::with('category')->orderBy('sort', 'asc')->get();
         return view('admin.consultancyMedicine.index', compact('consultancyMedicines', 'settings'));
 
     }
@@ -141,6 +141,7 @@ class ConsultancyMedicineController extends Controller
                     'discount'    => $request->input('discount'),
                     'guests'      => $request->input('guests'),
                     'status'      => $request->input('status'),
+                     'sort' => $request->input('sort'),
                     'image'       => $imagePath,
                 ]);
 
@@ -297,6 +298,7 @@ public function update(Request $request, ConsultancyMedicine $consultancy_medici
                 'discount' => $request->input('discount'),
                 'guests' => $request->input('guests'),
                 'status' => $request->input('status'),
+                 'sort' => $request->input('sort'),
                 'image' => $imagePath,
             ]);
 

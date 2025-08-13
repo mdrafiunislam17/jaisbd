@@ -24,6 +24,7 @@ class StudyAbroad extends Model
         'image',
         'guests',
         'status',
+        'sort',
     ];
 
     /**

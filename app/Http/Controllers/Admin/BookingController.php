@@ -49,6 +49,9 @@ class BookingController extends Controller
             'booking_amount' => $request->input('booking_amount'),
             'notes' => $request->input('notes'),
             'status' => $request->input('status'),
+            'adult' => $request->input('adult'),
+            'child' => $request->input('child'),
+            'booking_time' => $request->input('booking_time'),
         ]);
         $booking->save();
 
@@ -83,6 +86,9 @@ public function edit(Booking $booking)
             'booking_amount' => $request->input('booking_amount'),
             'notes' => $request->input('notes'),
             'status' => $request->input('status'),
+            'adult' => $request->input('adult'),
+            'child' => $request->input('child'),
+            'booking_time' => $request->input('booking_time'),
         ]);
 
         $booking->save();

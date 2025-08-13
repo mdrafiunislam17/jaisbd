@@ -160,6 +160,15 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="sort"
+                               class="col-sm-3 col-form-label text-right font-weight-bold">Sort</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" id="sort"   value="{{ old('sort', $newSort) }}"
+                                   name="sort">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="status" class="col-sm-3 col-form-label text-right font-weight-bold">Status</label>
                         <div class="col-sm-6">
                             <select name="status" id="status" class="form-control">
@@ -183,37 +192,41 @@
 
 
 @push("scripts")
-    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js')}}" referrerpolicy="origin"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
 
-    <script>
-        tinymce.init({
-            selector: '#description',
-            height: 300,
-            plugins: 'advlist autolink lists link image charmap print preview anchor',
-            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image link',
-            menubar: false,
-        });
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // TinyMCE Initialization
+    tinymce.init({
+        selector: '#description',
+        height: 300,
+        plugins: 'advlist autolink lists link image charmap print preview anchor',
+        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image link',
+        menubar: false,
+    });
 
-        // Category dropdown logic
-        document.addEventListener('DOMContentLoaded', function () {
-            const categorySelect = document.getElementById('category_id');
+    // Category dropdown logic
+    const categorySelect = document.getElementById('category_id');
+    const sortInput = document.getElementById('sort');
 
-            categorySelect.addEventListener('change', function () {
-                const selectedOptions = Array.from(this.selectedOptions).map(o => o.value);
+    const categorySorts = @json($categories->pluck('next_sort', 'id'));
 
-                if (selectedOptions.includes('all')) {
-                    // If 'All' is selected, deselect others
-                    Array.from(this.options).forEach(option => {
-                        if (option.value !== 'all') {
-                            option.selected = false;
-                        }
-                    });
-                } else {
-                    // If any category selected, deselect 'All'
-                    this.querySelector('option[value="all"]').selected = false;
-                }
+    categorySelect.addEventListener('change', function () {
+        const selectedOptions = Array.from(this.selectedOptions).map(o => o.value);
+
+        if (selectedOptions.includes('all')) {
+            // Deselect other options
+            Array.from(this.options).forEach(option => {
+                if (option.value !== 'all') option.selected = false;
             });
-        });
-    </script>
+            sortInput.value = "{{ $newSort }}"; // Global sort
+        } else {
+            // Deselect 'all'
+            this.querySelector('option[value="all"]').selected = false;
+            const firstCategory = selectedOptions[0];
+            sortInput.value = categorySorts[firstCategory] || 1;
+        }
+    });
+});
+</script>
 @endpush
-

@@ -46,7 +46,20 @@
                         @foreach($booking as $i => $career)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td>{{$career->bookable_type}}</td>
+
+
+
+                                @php
+                                $bookableNames = [
+                                    'App\Models\StudyAbroad' => 'Study Abroad',
+                                    'App\Models\ConsultancyMedicine' => 'Medical',
+                                    'App\Models\Visa' => 'Visa',
+                                    'App\Models\Tours' => 'Tours',
+                                ];
+                            @endphp
+
+                            <td>{{ $bookableNames[$career->bookable_type] ?? $career->bookable_type }}</td>
+
                                 <td>{{ $career->booking_amount }}</td>
                                 {{-- <td>{{ $career->vacancies }}</td> --}}
                              <td>

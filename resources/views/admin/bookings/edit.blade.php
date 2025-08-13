@@ -58,6 +58,7 @@
                 </div>
 
                 {{-- Bookable ID --}}
+                @if(isset($booking->bookable_id))
                 <div class="form-group row">
                     <label for="bookable_id" class="col-sm-3 col-form-label text-right font-weight-bold">Bookable ID *</label>
                     <div class="col-sm-6">
@@ -65,8 +66,10 @@
                         <input type="hidden" name="bookable_id" value="{{ $booking->bookable_id }}">
                     </div>
                 </div>
+                @endif
 
                 {{-- Bookable Type --}}
+                {{-- @if(isset($booking->bookable_type))
                 <div class="form-group row">
                     <label for="bookable_type" class="col-sm-3 col-form-label text-right font-weight-bold">Bookable Type *</label>
                     <div class="col-sm-6">
@@ -74,8 +77,34 @@
                         <input type="hidden" name="bookable_type" value="{{ $booking->bookable_type }}">
                     </div>
                 </div>
+                @endif --}}
+
+
+                @php
+                    $mapping = [
+                        'Tours' => 'Tours',
+                        'Visa' => 'Visa',
+                        'ConsultancyMedicine' => 'Medical',
+                        'StudyAbroad' => 'Study Abroad',
+                    ];
+
+                    $modelName = class_basename($booking->bookable_type);
+                    $displayType = $mapping[$modelName] ?? $modelName;
+                @endphp
+
+                @if(isset($booking->bookable_type))
+                    <div class="form-group row">
+                        <label for="bookable_type" class="col-sm-3 col-form-label text-right font-weight-bold">Bookable Type *</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" value="{{ $displayType }}" readonly>
+                            <input type="hidden" name="bookable_type" value="{{ $booking->bookable_type }}">
+                        </div>
+                    </div>
+                @endif
+
 
                 {{-- Booking Date --}}
+                @if(isset($booking->booking_date))
                 <div class="form-group row">
                     <label for="booking_date" class="col-sm-3 col-form-label text-right font-weight-bold">Booking Date *</label>
                     <div class="col-sm-6">
@@ -83,8 +112,21 @@
                         <input type="hidden" name="booking_date" value="{{ $booking->booking_date }}">
                     </div>
                 </div>
+                @endif
+
+                {{-- Booking Time --}}
+                @if(isset($booking->booking_time))
+                <div class="form-group row">
+                    <label for="booking_time" class="col-sm-3 col-form-label text-right font-weight-bold">Booking Time *</label>
+                    <div class="col-sm-6">
+                        <input type="time" class="form-control" value="{{ $booking->booking_time }}" readonly>
+                        <input type="hidden" name="booking_time" value="{{ $booking->booking_time }}">
+                    </div>
+                </div>
+                @endif
 
                 {{-- Booking Amount --}}
+                @if(isset($booking->booking_amount))
                 <div class="form-group row">
                     <label for="booking_amount" class="col-sm-3 col-form-label text-right font-weight-bold">Booking Amount *</label>
                     <div class="col-sm-6">
@@ -92,8 +134,10 @@
                         <input type="hidden" name="booking_amount" value="{{ $booking->booking_amount }}">
                     </div>
                 </div>
+                @endif
 
                 {{-- Notes --}}
+                @if(!empty($booking->notes))
                 <div class="form-group row">
                     <label for="notes" class="col-sm-3 col-form-label text-right font-weight-bold">Notes</label>
                     <div class="col-sm-6">
@@ -101,15 +145,33 @@
                         <input type="hidden" name="notes" value="{{ $booking->notes }}">
                     </div>
                 </div>
+                @endif
+
+                {{-- Adult --}}
+           @if(isset($booking->adult) && $booking->adult > 0)
+            <div class="form-group row">
+                <label for="adult" class="col-sm-3 col-form-label text-right font-weight-bold">Adults *</label>
+                <div class="col-sm-6">
+                    <input type="number" name="adult" id="adult" class="form-control"
+                        value="{{ old('adult', $booking->adult) }}" min="0" required readonly>
+                </div>
+            </div>
+        @endif
+
+
+                {{-- Child --}}
+                @if(isset($booking->child) && $booking->child > 0)
+                    <div class="form-group row">
+                        <label for="child" class="col-sm-3 col-form-label text-right font-weight-bold">Children *</label>
+                        <div class="col-sm-6">
+                            <input type="number" name="child" id="child" class="form-control"
+                                value="{{ old('child', $booking->child) }}" min="0" required readonly>
+                        </div>
+                    </div>
+                @endif
+
 
                 {{-- Status --}}
-                {{-- <div class="form-group row">
-                    <label for="status" class="col-sm-3 col-form-label text-right font-weight-bold">Status *</label>
-                    <div class="col-sm-6">
-                        <input type="text" name="status" id="status" class="form-control" value="{{ old('status', $booking->status) }}" required>
-                    </div>
-                </div> --}}
-
                 <div class="form-group row">
                     <label for="status" class="col-sm-3 col-form-label text-right font-weight-bold">Status *</label>
                     <div class="col-sm-6">
@@ -119,7 +181,6 @@
                         </select>
                     </div>
                 </div>
-
 
                 <div class="form-group row">
                     <div class="offset-3 col-sm-6">

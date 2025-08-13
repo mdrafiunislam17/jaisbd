@@ -34,7 +34,7 @@
                     <table class="table table-bordered" id="dataTable">
                         <thead>
                         <tr>
-                            <th>#SL</th>
+                            <th>Sort</th>
                             <th>Image</th>
                             <th>Title</th>
                             {{-- <th>Subtitle</th> --}}
@@ -43,9 +43,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($visas as $i => $item)
+                        @foreach($visas as $item)
                             <tr>
-                               <td>{{ ++$i }}</td>
+                                <td>{{ $item->sort }}</td>
                                <td>
                                 @if(!empty($item->image) && file_exists(public_path("uploads/visa/$item->image")))
                                     <img src="{{ asset("uploads/visa/$item->image") }}" width="100" alt="Image">

@@ -89,7 +89,7 @@
                                 <div class="side-bar-right">
                                     <div class="sidebar-widget">
                                         <h6 class="block-heading">Book This visa</h6>
-                                        <form action="{{ route('bookings.store') }}" method="POST" id="form-book-visa">
+                                        {{-- <form action="{{ route('bookings.store') }}" method="POST" id="form-book-visa">
                                             @csrf
 
                                             <!-- Hidden user_id, bookable_id, bookable_type -->
@@ -122,6 +122,79 @@
                                                 <input type="hidden" name="booking_amount"
                                                     value="{{ $visa->discount ?: $visa->price }}">
                                             </div>
+
+
+                                            <button type="submit">Proceed Booking</button>
+                                        </form> --}}
+
+
+                                        <form action="{{ route('bookings.store') }}" method="POST" id="form-book-visa">
+                                            @csrf
+
+                                            <!-- Hidden user_id, bookable_id, bookable_type -->
+                                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                            <input type="hidden" name="bookable_id" value="{{ $visa->id }}">
+                                            {{-- <input type="hidden" name="bookable_type" value="{{ $visa->title }}"> --}}
+                                            <input type="hidden" name="bookable_type" value="{{ get_class($visa) }}">
+                                             <input type="hidden" name="status" value="pending">
+
+                                            <!-- Booking Date -->
+                                            <div class="input-wrap mb-30">
+                                                <label for="booking_date">Booking Date</label>
+                                                <input type="date" name="booking_date" id="booking_date" required>
+                                            </div>
+
+                                            <div class="input-wrap mb-30">
+                                                <label for="child">Child </label>
+                                                <input type="number" name="child" id="child" required>
+
+                                            </div>
+
+                                            <div class="input-wrap mb-30">
+                                                <label for="adult">Adult </label>
+                                                <input type="number" name="adult" id="adult" required>
+                                            </div>
+
+                                            <!-- Notes -->
+                                            {{-- <div class="input-wrap mb-30">
+                                                <label for="notes">Notes</label>
+                                                <input type="hidden" name="notes" id="notes" rows="4" placeholder="Add any notes..."></input>
+                                            </div> --}}
+
+
+                                                <input type="hidden" name="notes" id="notes" rows="4" placeholder="Add any notes..."></input>
+
+
+                                            {{-- <div class="flex-two mb-40">
+                                                <span class="label">Total:</span>
+                                                <span class="total text-main">
+                                                    @if($visa->discount)
+                                                        ৳ {{ $visa->discount }}
+                                                    @else
+                                                        ৳ {{ $visa->price }}
+                                                    @endif
+                                                </span>
+                                                <input type="hidden" name="booking_amount"
+                                                    value="{{ $visa->discount ?: $visa->price }}">
+                                            </div> --}}
+
+
+                                            <div class="flex-two mb-40">
+                                                <span class="label">Total:</span>
+                                                <span class="total text-main">
+                                                    ৳
+                                                    @if(!empty($visa->discount) && $visa->discount > 0)
+                                                        {{ number_format($visa->discount, 2) }}
+                                                    @elseif(!empty($visa->price) && $visa->price > 0)
+                                                        {{ number_format($visa->price, 2) }}
+                                                    @else
+                                                        0.00
+                                                    @endif
+                                                </span>
+                                                <input type="hidden" name="booking_amount"
+                                                    value="{{ (!empty($visa->discount) && $visa->discount > 0) ? $visa->discount : (($visa->price > 0) ? $visa->price : 0) }}">
+                                            </div>
+
 
 
                                             <button type="submit">Proceed Booking</button>

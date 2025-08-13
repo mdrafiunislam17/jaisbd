@@ -65,12 +65,12 @@
                         <div class="row mb-40 image-gallery-single">
 
                            <div class="col-12 col-sm-12">
-    @if(!empty($studyAbroad->image) && file_exists(public_path('uploads/studyAbroad/' . $studyAbroad->image)))
-        <img src="{{ asset('uploads/studyAbroad/' . $studyAbroad->image) }}" alt="image" style="max-width: 100%; height: auto; max-height: 450px;">
-    @else
-        <p>No image</p>
-    @endif
-</div>
+                                @if(!empty($studyAbroad->image) && file_exists(public_path('uploads/studyAbroad/' . $studyAbroad->image)))
+                                    <img src="{{ asset('uploads/studyAbroad/' . $studyAbroad->image) }}" alt="image" style="max-width: 100%; height: auto; max-height: 450px;">
+                                @else
+                                    <p>No image</p>
+                                @endif
+                            </div>
 
 
                         </div>
@@ -95,22 +95,44 @@
                                             <!-- Hidden user_id, bookable_id, bookable_type -->
                                             <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                                             <input type="hidden" name="bookable_id" value="{{ $studyAbroad->id }}">
+                                            {{-- <input type="hidden" name="bookable_type" value="{{ $studyAbroad->title }}"> --}}
                                             <input type="hidden" name="bookable_type" value="{{ get_class($studyAbroad) }}">
                                              <input type="hidden" name="status" value="pending">
-
+                                             <input type="hidden" name="child" id="child" value="0">
+                                            <input type="hidden" name="adult" id="adult" value="0">
                                             <!-- Booking Date -->
                                             <div class="input-wrap mb-30">
                                                 <label for="booking_date">Booking Date</label>
                                                 <input type="date" name="booking_date" id="booking_date" required>
                                             </div>
 
-                                            <!-- Notes -->
                                             <div class="input-wrap mb-30">
-                                                <label for="notes">Notes</label>
-                                                <textarea name="notes" id="notes" rows="4" placeholder="Add any notes..."></textarea>
+                                                <label for="booking_time">booking_time</label>
+                                                <input type="time" name="booking_time" id="booking_time" required>
                                             </div>
 
-                                            <div class="flex-two mb-40">
+                                            {{-- <div class="input-wrap mb-30">
+                                                <label for="child">Child </label>
+                                                <input type="number" name="child" id="child" required>
+                                                <input type="number" name="adult" id="adult" required>
+                                            </div>
+
+                                            <div class="input-wrap mb-30">
+                                                <label for="adult">Adult </label>
+                                                <input type="number" name="adult" id="adult" required>
+                                            </div> --}}
+
+                                            <!-- Notes -->
+                                            {{-- <div class="input-wrap mb-30">
+                                                <label for="notes">Notes</label>
+                                                <input type="hidden" name="notes" id="notes" rows="4" placeholder="Add any notes..."></input>
+                                            </div> --}}
+
+
+                                                <input type="hidden" name="notes" id="notes" rows="4" placeholder="Add any notes..."></input>
+
+
+                                            {{-- <div class="flex-two mb-40">
                                                 <span class="label">Total:</span>
                                                 <span class="total text-main">
                                                     @if($studyAbroad->discount)
@@ -121,7 +143,25 @@
                                                 </span>
                                                 <input type="hidden" name="booking_amount"
                                                     value="{{ $studyAbroad->discount ?: $studyAbroad->price }}">
+                                            </div> --}}
+
+
+                                            <div class="flex-two mb-40">
+                                                <span class="label">Total:</span>
+                                                <span class="total text-main">
+                                                    ৳
+                                                    @if(!empty($studyAbroad->discount) && $studyAbroad->discount > 0)
+                                                        {{ number_format($studyAbroad->discount, 2) }}
+                                                    @elseif(!empty($studyAbroad->price) && $studyAbroad->price > 0)
+                                                        {{ number_format($studyAbroad->price, 2) }}
+                                                    @else
+                                                        0.00
+                                                    @endif
+                                                </span>
+                                                <input type="hidden" name="booking_amount"
+                                                    value="{{ (!empty($studyAbroad->discount) && $studyAbroad->discount > 0) ? $studyAbroad->discount : (($studyAbroad->price > 0) ? $studyAbroad->price : 0) }}">
                                             </div>
+
 
 
                                             <button type="submit">Proceed Booking</button>

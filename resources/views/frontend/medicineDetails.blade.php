@@ -88,29 +88,51 @@
                             <div class="col-lg-4">
                                 <div class="side-bar-right">
                                     <div class="sidebar-widget">
-                                        <h6 class="block-heading">Book This medicine</h6>
-                                        <form action="{{ route('bookings.store') }}" method="POST" id="form-book-medicine">
+                                        <h6 class="block-heading">Book An Appointment</h6>
+                                       <form action="{{ route('bookings.store') }}" method="POST" id="form-book-medicine">
                                             @csrf
 
                                             <!-- Hidden user_id, bookable_id, bookable_type -->
                                             <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                                             <input type="hidden" name="bookable_id" value="{{ $medicine->id }}">
-                                             <input type="hidden" name="bookable_type" value="{{ get_class($medicine) }}">
+                                            {{-- <input type="hidden" name="bookable_type" value="{{ $medicine->title }}"> --}}
+                                            <input type="hidden" name="bookable_type" value="{{ get_class($medicine) }}">
                                              <input type="hidden" name="status" value="pending">
-
+                                             <input type="hidden" name="child" id="child" value="0">
+                                            <input type="hidden" name="adult" id="adult" value="0">
                                             <!-- Booking Date -->
                                             <div class="input-wrap mb-30">
                                                 <label for="booking_date">Booking Date</label>
                                                 <input type="date" name="booking_date" id="booking_date" required>
                                             </div>
 
-                                            <!-- Notes -->
                                             <div class="input-wrap mb-30">
-                                                <label for="notes">Notes</label>
-                                                <textarea name="notes" id="notes" rows="4" placeholder="Add any notes..."></textarea>
+                                                <label for="booking_time">booking_time</label>
+                                                <input type="time" name="booking_time" id="booking_time" required>
                                             </div>
 
-                                            <div class="flex-two mb-40">
+                                            {{-- <div class="input-wrap mb-30">
+                                                <label for="child">Child </label>
+                                                <input type="number" name="child" id="child" required>
+                                                <input type="number" name="adult" id="adult" required>
+                                            </div>
+
+                                            <div class="input-wrap mb-30">
+                                                <label for="adult">Adult </label>
+                                                <input type="number" name="adult" id="adult" required>
+                                            </div> --}}
+
+                                            <!-- Notes -->
+                                            {{-- <div class="input-wrap mb-30">
+                                                <label for="notes">Notes</label>
+                                                <input type="hidden" name="notes" id="notes" rows="4" placeholder="Add any notes..."></input>
+                                            </div> --}}
+
+
+                                                <input type="hidden" name="notes" id="notes" rows="4" placeholder="Add any notes..."></input>
+
+
+                                            {{-- <div class="flex-two mb-40">
                                                 <span class="label">Total:</span>
                                                 <span class="total text-main">
                                                     @if($medicine->discount)
@@ -121,11 +143,31 @@
                                                 </span>
                                                 <input type="hidden" name="booking_amount"
                                                     value="{{ $medicine->discount ?: $medicine->price }}">
+                                            </div> --}}
+
+
+                                            <div class="flex-two mb-40">
+                                                <span class="label">Total:</span>
+                                                <span class="total text-main">
+                                                    ৳
+                                                    @if(!empty($medicine->discount) && $medicine->discount > 0)
+                                                        {{ number_format($medicine->discount, 2) }}
+                                                    @elseif(!empty($medicine->price) && $medicine->price > 0)
+                                                        {{ number_format($medicine->price, 2) }}
+                                                    @else
+                                                        0.00
+                                                    @endif
+                                                </span>
+                                                <input type="hidden" name="booking_amount"
+                                                    value="{{ (!empty($medicine->discount) && $medicine->discount > 0) ? $medicine->discount : (($medicine->price > 0) ? $medicine->price : 0) }}">
                                             </div>
+
 
 
                                             <button type="submit">Proceed Booking</button>
                                         </form>
+
+
                                     </div>
 
                                     <div class="sidebar-widget">

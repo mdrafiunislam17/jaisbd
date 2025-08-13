@@ -29,16 +29,28 @@ class FrontendController extends Controller
         // Logic to handle the frontend index page
 
         $sliders = Slider::where('status', 1)
-            // ->orderBy('sort', 'asc')
+             ->orderBy('sort', 'asc')
             ->get();
-        $tours = Tours::with('category')->get();
+        $tours = Tours::with('category')
+                    ->orderBy('sort', 'asc')
+                    ->take(5)
+                    ->get();
         $tourCategories = TourCategories::latest()->get();
         $settings = Setting::query()->pluck("value", "setting_name")->toArray();
-        $visa = Visa::with('category')->get();
+        $visa = Visa::with('category')
+                    ->orderBy('sort', 'asc')
+                    ->take(5)
+                    ->get();
         $visaCategories = VisaCategories::latest()->get();
-        $consultancyMedicine = ConsultancyMedicine::with('category')->get();
+        $consultancyMedicine = ConsultancyMedicine::with('category')
+                    ->orderBy('sort', 'asc')
+                    ->take(5)
+                    ->get();
         $consultancyMedicineCategories = ConsultancyMedicineCategories::latest()->get();
-        $studyAbroad = StudyAbroad::with('category')->get();
+        $studyAbroad = StudyAbroad::with('category')
+                    ->orderBy('sort', 'asc')
+                    ->take(5)
+                    ->get();
         $studyAbroadCategories = StudyAbroadCategories::latest()->get();
          $blogs = Blog::where('status', 1)
              ->orderBy('posted_on', 'desc')

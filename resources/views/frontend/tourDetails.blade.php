@@ -116,13 +116,27 @@
                                                 <input type="date" name="booking_date" id="booking_date" required>
                                             </div>
 
-                                            <!-- Notes -->
                                             <div class="input-wrap mb-30">
-                                                <label for="notes">Notes</label>
-                                                <textarea name="notes" id="notes" rows="4" placeholder="Add any notes..."></textarea>
+                                                <label for="child">Child </label>
+                                                <input type="number" name="child" id="child" required>
                                             </div>
 
-                                            <div class="flex-two mb-40">
+                                            <div class="input-wrap mb-30">
+                                                <label for="adult">Adult </label>
+                                                <input type="number" name="adult" id="adult" required>
+                                            </div>
+
+                                            <!-- Notes -->
+                                            {{-- <div class="input-wrap mb-30">
+                                                <label for="notes">Notes</label>
+                                                <input type="hidden" name="notes" id="notes" rows="4" placeholder="Add any notes..."></input>
+                                            </div> --}}
+
+
+                                                <input type="hidden" name="notes" id="notes" rows="4" placeholder="Add any notes..."></input>
+
+
+                                            {{-- <div class="flex-two mb-40">
                                                 <span class="label">Total:</span>
                                                 <span class="total text-main">
                                                     @if($tour->discount)
@@ -133,7 +147,25 @@
                                                 </span>
                                                 <input type="hidden" name="booking_amount"
                                                     value="{{ $tour->discount ?: $tour->price }}">
+                                            </div> --}}
+
+
+                                            <div class="flex-two mb-40">
+                                                <span class="label">Total:</span>
+                                                <span class="total text-main">
+                                                    ৳
+                                                    @if(!empty($tour->discount) && $tour->discount > 0)
+                                                        {{ number_format($tour->discount, 2) }}
+                                                    @elseif(!empty($tour->price) && $tour->price > 0)
+                                                        {{ number_format($tour->price, 2) }}
+                                                    @else
+                                                        0.00
+                                                    @endif
+                                                </span>
+                                                <input type="hidden" name="booking_amount"
+                                                    value="{{ (!empty($tour->discount) && $tour->discount > 0) ? $tour->discount : (($tour->price > 0) ? $tour->price : 0) }}">
                                             </div>
+
 
 
                                             <button type="submit">Proceed Booking</button>

@@ -39,7 +39,7 @@ class VisaController extends Controller
     public function index()
     {
         $settings = Setting::pluck("value", "setting_name")->toArray();
-        $visas = Visa::with('category')->latest()->get();
+        $visas = Visa::with('category')->orderBy('sort', 'asc')->get();
         return view('admin.visa.index', compact('visas', 'settings'));
     }
 
@@ -140,6 +140,7 @@ class VisaController extends Controller
                     'discount'    => $request->input('discount'),
                     'guests'      => $request->input('guests'),
                     'status'      => $request->input('status'),
+                     'sort' => $request->input('sort'),
                     'image'       => $imagePath,
                 ]);
 
@@ -319,6 +320,7 @@ public function update(Request $request, Visa $visa)
                 'discount' => $request->input('discount'),
                 'guests' => $request->input('guests'),
                 'status' => $request->input('status'),
+                 'sort' => $request->input('sort'),
                 'image' => $imagePath,
             ]);
 

@@ -23,6 +23,7 @@ class Visa extends Model
         'image',
         'guests',
         'status',
+        'sort',
     ];
 
 

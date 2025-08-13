@@ -168,6 +168,16 @@
                         </div>
                     </div>
 
+
+                    <div class="form-group row">
+                        <label for="sort"
+                               class="col-sm-3 col-form-label text-right font-weight-bold">Sort</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" id="sort" value="{{ old("sort") }}"
+                                   name="sort">
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label for="status" class="col-sm-3 col-form-label text-right font-weight-bold">Status</label>
                         <div class="col-sm-6">

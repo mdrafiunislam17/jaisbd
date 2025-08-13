@@ -37,7 +37,7 @@ class StudyAbroadControlle extends Controller
     public function index()
     {
         $settings = Setting::query()->pluck("value", "setting_name")->toArray();
-        $studyAbroads = StudyAbroad::with('category')->latest()->get();
+        $studyAbroads = StudyAbroad::with('category')->orderBy('sort', 'asc')->get();
         return view('admin.study_abroad.index', compact('studyAbroads', 'settings'));
     }
 
@@ -138,6 +138,7 @@ class StudyAbroadControlle extends Controller
                     'discount'    => $request->input('discount'),
                     'guests'      => $request->input('guests'),
                     'status'      => $request->input('status'),
+                     'sort' => $request->input('sort'),
                     'image'       => $imagePath,
                 ]);
 
@@ -292,6 +293,7 @@ class StudyAbroadControlle extends Controller
                 'discount' => $request->input('discount'),
                 'guests' => $request->input('guests'),
                 'status' => $request->input('status'),
+                 'sort' => $request->input('sort'),
                 'image' => $imagePath,
             ]);
 
