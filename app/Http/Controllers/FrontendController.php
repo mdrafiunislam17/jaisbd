@@ -33,23 +33,19 @@ class FrontendController extends Controller
             ->get();
         $tours = Tours::with('category')
                     ->orderBy('sort', 'asc')
-                    ->take(5)
                     ->get();
         $tourCategories = TourCategories::latest()->get();
         $settings = Setting::query()->pluck("value", "setting_name")->toArray();
         $visa = Visa::with('category')
                     ->orderBy('sort', 'asc')
-                    ->take(5)
                     ->get();
         $visaCategories = VisaCategories::latest()->get();
         $consultancyMedicine = ConsultancyMedicine::with('category')
                     ->orderBy('sort', 'asc')
-                    ->take(5)
                     ->get();
         $consultancyMedicineCategories = ConsultancyMedicineCategories::latest()->get();
         $studyAbroad = StudyAbroad::with('category')
                     ->orderBy('sort', 'asc')
-                    ->take(5)
                     ->get();
         $studyAbroadCategories = StudyAbroadCategories::latest()->get();
          $blogs = Blog::where('status', 1)
@@ -61,29 +57,156 @@ class FrontendController extends Controller
     }
 
 
-    // public function toursByCategory(Request $request , $name)
-    // {
-    //     $category = TourCategories::where('name', $name)->firstOrFail();
-    //     $tours = Tours::where('category_id', $category->id)->get();
-    //     $tourCategories = TourCategories::all();
-    //     $visaCategories = VisaCategories::all();
-    //     $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
-    //     $studyAbroadCategories = StudyAbroadCategories::all();
-    //    $searchQuery = $request->input('search');
+  public function allTour(Request $request)
+    {
+        // Fetch all categories
+        $tourCategories = TourCategories::all();
+        $visaCategories = VisaCategories::all();
+        $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
+        $studyAbroadCategories = StudyAbroadCategories::all();
+
+        // Get all unique, non-empty locations for the dropdown
+        $allLocations = Tours::pluck('location')->unique()->filter()->values();
+
+        // Initialize query for tours
+        $toursQuery = Tours::with('category')->orderBy('sort', 'asc');
+
+        // Apply location filter if provided
+        if ($request->filled('location')) {
+            $toursQuery->where('location', $request->location);
+        }
+
+        // Execute query
+        $tours = $toursQuery->get();
+
+        // Fetch settings as key-value pairs
+        $settings = Setting::pluck('value', 'setting_name')->toArray();
+
+        // Return view with all necessary data
+        return view('frontend.allTour', compact(
+            'tours',
+            'tourCategories',
+            'allLocations',
+            'visaCategories',
+            'studyAbroadCategories',
+            'consultancyMedicineCategories',
+            'settings'
+        ));
+    }
+
+  public function allVisa(Request $request)
+    {
+        // Fetch all categories
+        $tourCategories = TourCategories::all();
+        $visaCategories = VisaCategories::all();
+        $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
+        $studyAbroadCategories = StudyAbroadCategories::all();
+
+        // Get all unique, non-empty locations for the dropdown
+        $allLocations = Visa::pluck('location')->unique()->filter()->values();
+
+        // Initialize query for tours
+        $toursQuery = Visa::with('category')->orderBy('sort', 'asc');
+
+        // Apply location filter if provided
+        if ($request->filled('location')) {
+            $toursQuery->where('location', $request->location);
+        }
+
+        // Execute query
+        $tours = $toursQuery->get();
+
+        // Fetch settings as key-value pairs
+        $settings = Setting::pluck('value', 'setting_name')->toArray();
+
+        // Return view with all necessary data
+        return view('frontend.allVisa', compact(
+            'tours',
+            'tourCategories',
+            'allLocations',
+            'visaCategories',
+            'studyAbroadCategories',
+            'consultancyMedicineCategories',
+            'settings'
+        ));
+    }
 
 
-    //     if ($searchQuery) {
-    //         $searchChars = str_split($searchQuery);
+ public function allStudyAbroad(Request $request)
+    {
+        // Fetch all categories
+        $tourCategories = TourCategories::all();
+        $visaCategories = VisaCategories::all();
+        $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
+        $studyAbroadCategories = StudyAbroadCategories::all();
 
-    //         $tours->where(function ($query) use ($searchChars) {
-    //             foreach ($searchChars as $char) {
-    //                 $query->where('location', 'like', '%' . $char . '%');
-    //             }
-    //         });
-    //     }
-    //     $settings = Setting::query()->pluck("value", "setting_name")->toArray();
-    //     return view('frontend.category_tours', compact('category', 'tours','tourCategories','visaCategories','studyAbroadCategories','consultancyMedicineCategories','settings'));
-    // }
+        // Get all unique, non-empty locations for the dropdown
+        $allLocations = StudyAbroad::pluck('location')->unique()->filter()->values();
+
+        // Initialize query for tours
+        $toursQuery = StudyAbroad::with('category')->orderBy('sort', 'asc');
+
+        // Apply location filter if provided
+        if ($request->filled('location')) {
+            $toursQuery->where('location', $request->location);
+        }
+
+        // Execute query
+        $tours = $toursQuery->get();
+
+        // Fetch settings as key-value pairs
+        $settings = Setting::pluck('value', 'setting_name')->toArray();
+
+        // Return view with all necessary data
+        return view('frontend.allStudyAbroad', compact(
+            'tours',
+            'tourCategories',
+            'allLocations',
+            'visaCategories',
+            'studyAbroadCategories',
+            'consultancyMedicineCategories',
+            'settings'
+        ));
+    }
+
+
+ public function allMedical(Request $request)
+    {
+        // Fetch all categories
+        $tourCategories = TourCategories::all();
+        $visaCategories = VisaCategories::all();
+        $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
+        $studyAbroadCategories = StudyAbroadCategories::all();
+
+        // Get all unique, non-empty locations for the dropdown
+        $allLocations = ConsultancyMedicine::pluck('location')->unique()->filter()->values();
+
+        // Initialize query for tours
+        $toursQuery = ConsultancyMedicine::with('category')->orderBy('sort', 'asc');
+
+        // Apply location filter if provided
+        if ($request->filled('location')) {
+            $toursQuery->where('location', $request->location);
+        }
+
+        // Execute query
+        $tours = $toursQuery->get();
+
+        // Fetch settings as key-value pairs
+        $settings = Setting::pluck('value', 'setting_name')->toArray();
+
+        // Return view with all necessary data
+        return view('frontend.allMedical', compact(
+            'tours',
+            'tourCategories',
+            'allLocations',
+            'visaCategories',
+            'studyAbroadCategories',
+            'consultancyMedicineCategories',
+            'settings'
+        ));
+    }
+
 
 
 

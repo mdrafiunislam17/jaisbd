@@ -63,6 +63,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',[FrontendController::class,'index'])->name('frontend.index');
+Route::get('/all/tour',[FrontendController::class,'allTour'])->name('allTour');
+Route::get('/all/visa',[FrontendController::class,'allVisa'])->name('allVisa');
+Route::get('/all/studyAbroad',[FrontendController::class,'allStudyAbroad'])->name('allStudyAbroad');
+Route::get('/all/Medical',[FrontendController::class,'allMedical'])->name('allMedical');
 Route::get('/tour/{slug}', [FrontendController::class, 'show'])->name('tourDetails');
 Route::get('/visas/{slug}',[FrontendController::class,'VisaDetail'])->name('visaDetail');
 Route::get('/MedicineConsultancy/{slug}',[FrontendController::class,'MedicineDetail'])->name('medicineDetail');

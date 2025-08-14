@@ -29,7 +29,9 @@
           <div class="col-sm-6 col-lg-4 mb-37">
             <div class="tf-widget-destination">
               <a href="{{ route('medicineDetail', $item->slug) }}" class="destination-imgae">
-                <span class="tour">{{ $item->duration }}</span>
+                  @if(!empty($item->duration))
+                                                <span class="tour active">{{ $item->duration }}</span>
+                                            @endif
                 <img src="{{ asset('uploads/consultancyMedicine/'.$item->image) }}" alt="">
               </a>
               <div class="destination-content">

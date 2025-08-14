@@ -66,9 +66,10 @@
                         <label for="category_id" class="col-sm-3 col-form-label text-right font-weight-bold">Category *</label>
                         <div class="col-sm-6">
                             <select name="category_id[]" id="category_id" class="form-control">
-                                  <option value="all" {{ is_array(old('category_id')) && in_array('all', old('category_id')) ? 'selected' : '' }}>
+                                  {{-- <option value="all" {{ is_array(old('category_id')) && in_array('all', old('category_id')) ? 'selected' : '' }}>
                                     All
-                                </option>
+                                </option> --}}
+                                <option value="">Select Category</option>
                                @foreach($categories as $category)
                                     <option value="{{ $category->id }}" {{ old('category_id', $visa->category_id) == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}

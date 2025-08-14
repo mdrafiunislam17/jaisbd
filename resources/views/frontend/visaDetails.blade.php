@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Visa')
+@section('title', 'Visa Details')
 
 @section('content')
 
@@ -21,7 +21,11 @@
                                         <ul class="flex-three list-wrap-heading">
                                             <li class="flex-three">
                                                 <i class="icon-time-left"></i>
-                                                <span>{{$visa->duration }}</span>
+                                                
+
+                                                   @if(!empty($visa->duration))
+                                                <span>{{ $visa->duration }}</span>
+                                            @endif
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-user"></i>

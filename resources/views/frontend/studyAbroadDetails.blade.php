@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'studyAbroad')
+@section('title', 'Study Abroad Details')
 
 @section('content')
 
@@ -21,7 +21,9 @@
                                         <ul class="flex-three list-wrap-heading">
                                             <li class="flex-three">
                                                 <i class="icon-time-left"></i>
-                                                <span>{{$studyAbroad->duration }}</span>
+                                                   @if(!empty($studyAbroad->duration))
+                                                <span class="tour active">{{ $studyAbroad->duration }}</span>
+                                            @endif
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-user"></i>

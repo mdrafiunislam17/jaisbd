@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app/css/textanimation.css')}}">
 
     <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" href="{{asset('assets/images/logo2.png')}}">
-    <link rel="apple-touch-icon-precomposed" href="{{asset('assets/images/logo2.png')}}">
+    <link rel="shortcut icon" href="{{ asset("uploads/" . $settings["SETTING_SITE_LOGO"]) }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset("uploads/" . $settings["SETTING_SITE_LOGO"]) }}">
     @stack("styles")
    <style>
         /* Base floating button styles */
@@ -88,6 +88,9 @@
 </head>
 
 <body class="body header-fixed counter-scroll">
+
+
+        
 
     <div class="preload preload-container">
         <svg class="pl" width="240" height="240" viewBox="0 0 240 240">

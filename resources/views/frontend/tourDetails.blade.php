@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Tours')
+@section('title', 'Tours Details')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/your-stylesheet.css') }}">
@@ -28,7 +28,10 @@
                                         <ul class="flex-three list-wrap-heading">
                                             <li class="flex-three">
                                                 <i class="icon-time-left"></i>
-                                                <span>{{$tour->duration }}</span>
+                                                
+                                                   @if(!empty($tour->duration))
+                                                <span >{{ $tour->duration }}</span>
+                                            @endif
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-user"></i>

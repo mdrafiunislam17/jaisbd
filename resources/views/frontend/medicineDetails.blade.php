@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'medicine')
+@section('title', 'Medicine Details')
 
 @section('content')
 
@@ -21,7 +21,9 @@
                                         <ul class="flex-three list-wrap-heading">
                                             <li class="flex-three">
                                                 <i class="icon-time-left"></i>
-                                                <span>{{$medicine->duration }}</span>
+                                                   @if(!empty($medicine->duration))
+                                                <span >{{ $medicine->duration }}</span>
+                                            @endif
                                             </li>
                                             <li class="flex-three">
                                                 <i class="icon-user"></i>

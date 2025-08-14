@@ -2,6 +2,14 @@
 
 @section('title', 'Home Page')
 
+@section('styles')
+<style>
+
+
+
+</style>
+@endsection
+
 @section('content')
      <main id="main">
 
@@ -26,10 +34,10 @@
                                         <div class="row">
                                             <div class="col-lg-8">
                                                 <span
-                                                    class="sub-title text-main font-yes fs-28-46 fadeInDown wow">{{$slider->title}}</span>
+                                                    class="sub-title text-warning  fs-28-46 fadeInDown wow">{{$slider->title}}</span>
                                                     <h4 class="title-slide text-white mb-32 fadeInDown wow" >
                                                         {{ $slider->subtitle }}
-                                                        {{-- <span class="animationtext clip text-main">
+                                                        {{-- <span class="animationtext font-yes clip text-main">
                                                             <span class="cd-words-wrapper">
                                                                 <span class="item-text is-visible">{{ $slider->sulg ?? 'Camping' }}</span>
                                                                 <span class="item-text is-hidden">{{ $slider->sulg ?? 'Camping' }}</span>
@@ -3195,6 +3203,11 @@
                 <!-- Widget Counter -->
 
                 <!-- Widget destination -->
+             
+
+
+
+                      <!-- Widget destination -->
                <section class="widget-destination" style="margin-top: -210px;">
                     <div class="tf-container">
                         <div class="row">
@@ -3206,12 +3219,21 @@
                             </div>
                         </div>
 
-                        <div class="row"> <!-- ✅ এই নতুন row এর মধ্যে সকল ট্যুর card থাকবে -->
-                            @forelse ($tours as $item)
+                        <div class="row"> 
+                            
+                            @php
+                                $sortedTours = $tours->sortBy('sort')->take(5);
+                                $showMoreButton = $tours->count() > 5;
+                            @endphp
+
+                            @forelse ($sortedTours as $item)
                                 <div class="col-sm-6 col-lg-4 mb-37">
                                     <div class="tf-widget-destination">
                                         <a href="{{ route('tourDetails', $item->slug) }}" class="destination-imgae">
-                                            <span class="tour">{{ $item->duration }}</span>
+                                            @if(!empty($item->duration))
+                                                <span class="tour active">{{ $item->duration }}</span>
+                                            @endif
+
                                             <img src="{{ asset("uploads/tour/$item->image") }}" alt="{{ $item->title }}">
                                         </a>
                                         <div class="destination-content">
@@ -3232,9 +3254,25 @@
                                     <p>No tours found for this category.</p>
                                 </div>
                             @endforelse
-                        </div> <!-- ✅ row end -->
+
+                            @if($showMoreButton)
+
+                                <div class="col-sm-6 col-lg-4 pt-5 justify-content-center" style="margin-top: 60px;">
+                                    <a href="{{route('allTour')}}"
+                                    class="btn btn-primary d-inline-flex justify-content-center align-items-center fw-semibold destination-btn"
+                                    aria-label="View more tours">
+                                        <span>More Tour</span>
+                                        <i class="icon-Vector-32 ms-2"></i>
+                                    </a>
+                                </div>
+
+
+
+                            @endif
+                        </div>
                     </div>
                 </section>
+
 
                 <section class="widget-destination" style="margin-top: -210px;">
                     <div class="tf-container">
@@ -3247,12 +3285,23 @@
                             </div>
                         </div>
 
-                        <div class="row"> <!-- ✅ এই নতুন row এর মধ্যে সকল ট্যুর card থাকবে -->
-                            @forelse ($visa as $item)
+
+
+                        <div class="row"> 
+                            
+                            @php
+                                $sortedTours = $visa->sortBy('sort')->take(5);
+                                $showMoreButton = $visa->count() > 5;
+                            @endphp
+
+                            @forelse ($sortedTours as $item)
                                 <div class="col-sm-6 col-lg-4 mb-37">
                                     <div class="tf-widget-destination">
                                         <a href="{{ route('visaDetail', $item->slug) }}" class="destination-imgae">
-                                            <span class="tour">{{ $item->duration }}</span>
+                                            @if(!empty($item->duration))
+                                                <span class="tour active">{{ $item->duration }}</span>
+                                            @endif
+
                                             <img src="{{ asset("uploads/visa/$item->image") }}" alt="{{ $item->title }}">
                                         </a>
                                         <div class="destination-content">
@@ -3270,10 +3319,25 @@
                                 </div>
                             @empty
                                 <div class="col-12">
-                                    <p>No tours found for this category.</p>
+                                    <p>No Visa found for this category.</p>
                                 </div>
                             @endforelse
-                        </div> <!-- ✅ row end -->
+
+                            @if($showMoreButton)
+
+                             <div class="col-sm-6 col-lg-4 pt-5 justify-content-center" style="margin-top: 60px;">
+                                    <a href="{{route('allVisa')}}"
+                                    class="btn btn-primary d-inline-flex justify-content-center align-items-center fw-semibold destination-btn"
+                                    aria-label="View more tours">
+                                        <span>More Visa</span>
+                                        <i class="icon-Vector-32 ms-2"></i>
+                                    </a>
+                                </div>
+                                
+                            @endif
+                        </div>
+
+                       
                     </div>
                 </section>
 
@@ -3289,19 +3353,30 @@
                             </div>
                         </div>
 
-                        <div class="row"> <!-- ✅ এই নতুন row এর মধ্যে সকল ট্যুর card থাকবে -->
-                            @forelse ($consultancyMedicine as $item)
+
+
+                        <div class="row"> 
+                            
+                            @php
+                                $sortedTours = $consultancyMedicine->sortBy('sort')->take(5);
+                                $showMoreButton = $consultancyMedicine->count() > 5;
+                            @endphp
+
+                            @forelse ($sortedTours as $item)
                                 <div class="col-sm-6 col-lg-4 mb-37">
                                     <div class="tf-widget-destination">
                                         <a href="{{ route('medicineDetail', $item->slug) }}" class="destination-imgae">
-                                            <span class="tour">{{ $item->duration }}</span>
-                                            <img src="{{ asset('uploads/consultancyMedicine/' . $item->image) }}" alt="{{ $item->title }}">
+                                            @if(!empty($item->duration))
+                                                <span class="tour active">{{ $item->duration }}</span>
+                                            @endif
+
+                                            <img src="{{ asset("uploads/consultancyMedicine/$item->image") }}" alt="{{ $item->title }}">
                                         </a>
                                         <div class="destination-content">
                                             <span class="nation">{{ $item->title }}</span>
                                             <div class="flex-two btn-destination">
                                                 <h6 class="title">
-                                                    <a href="{{ route('medicineDetail', $item->slug) }}">View Medical Consultancy</a>
+                                                    <a href="{{ route('medicineDetail', $item->slug) }}">View  Medical Consultancy</a>
                                                 </h6>
                                                 <a href="{{ route('medicineDetail', $item->slug) }}" class="flex-five btn-view">
                                                     <i class="icon-Vector-32"></i>
@@ -3312,10 +3387,26 @@
                                 </div>
                             @empty
                                 <div class="col-12">
-                                    <p>No tours found for this category.</p>
+                                    <p>Medicalfound for this category.</p>
                                 </div>
                             @endforelse
-                        </div> <!-- ✅ row end -->
+
+                            @if($showMoreButton)
+
+                             <div class="col-sm-6 col-lg-4 pt-5 justify-content-center" style="margin-top: 60px;">
+                                    <a href="{{route('allMedical')}}"
+                                    class="btn btn-primary d-inline-flex justify-content-center align-items-center fw-semibold destination-btn"
+                                    aria-label="View more tours">
+                                        <span>More Visa</span>
+                                        <i class="icon-Vector-32 ms-2"></i>
+                                    </a>
+                                </div>
+
+                          
+                            @endif
+                        </div>
+
+                        
                     </div>
                 </section>
 
@@ -3331,19 +3422,30 @@
                             </div>
                         </div>
 
-                        <div class="row"> <!-- ✅ এই নতুন row এর মধ্যে সকল ট্যুর card থাকবে -->
-                            @forelse ($studyAbroad as $item)
+                    
+
+                    <div class="row"> 
+                            
+                            @php
+                                $sortedTours = $studyAbroad->sortBy('sort')->take(5);
+                                $showMoreButton = $studyAbroad->count() > 5;
+                            @endphp
+
+                            @forelse ($sortedTours as $item)
                                 <div class="col-sm-6 col-lg-4 mb-37">
                                     <div class="tf-widget-destination">
                                         <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}" class="destination-imgae">
-                                            <span class="tour">{{ $item->duration }}</span>
+                                            @if(!empty($item->duration))
+                                                <span class="tour active">{{ $item->duration }}</span>
+                                            @endif
+
                                             <img src="{{ asset("uploads/studyAbroad/$item->image") }}" alt="{{ $item->title }}">
                                         </a>
                                         <div class="destination-content">
                                             <span class="nation">{{ $item->category->name }}</span>
                                             <div class="flex-two btn-destination">
                                                 <h6 class="title">
-                                                    <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}">View Study Abroad</a>
+                                                    <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}">View  Study Abroad</a>
                                                 </h6>
                                                 <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}" class="flex-five btn-view">
                                                     <i class="icon-Vector-32"></i>
@@ -3354,10 +3456,25 @@
                                 </div>
                             @empty
                                 <div class="col-12">
-                                    <p>No tours found for this category.</p>
+                                    <p>No Study Abroad for this category.</p>
                                 </div>
                             @endforelse
-                        </div> <!-- ✅ row end -->
+
+                            @if($showMoreButton)
+
+                                <div class="col-sm-6 col-lg-4 pt-5 justify-content-center" style="margin-top: 60px;">
+                                    <a href="{{route('allStudyAbroad')}}"
+                                    class="btn btn-primary d-inline-flex justify-content-center align-items-center fw-semibold destination-btn"
+                                    aria-label="View more tours">
+                                        <span>More  Study Abroad</span>
+                                        <i class="icon-Vector-32 ms-2"></i>
+                                    </a>
+                                </div>
+                             
+                            @endif
+                        </div> 
+
+                        
                     </div>
                 </section>
 
