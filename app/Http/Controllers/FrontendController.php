@@ -133,41 +133,40 @@ class FrontendController extends Controller
 
 
  public function allStudyAbroad(Request $request)
-    {
-        // Fetch all categories
-        $tourCategories = TourCategories::all();
-        $visaCategories = VisaCategories::all();
-        $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
-        $studyAbroadCategories = StudyAbroadCategories::all();
+{
+    // Fetch all categories
+    $tourCategories = TourCategories::all();
+    $visaCategories = VisaCategories::all();
+    $consultancyMedicineCategories = ConsultancyMedicineCategories::all();
+    $studyAbroadCategories = StudyAbroadCategories::all();
 
-        // Get all unique, non-empty locations for the dropdown
-        $allLocations = StudyAbroad::pluck('location')->unique()->filter()->values();
+    // Get all unique, non-empty locations for the dropdown
+    $allLocations = StudyAbroad::pluck('location')->unique()->filter()->values();
 
-        // Initialize query for tours
-        $toursQuery = StudyAbroad::with('category')->orderBy('sort', 'asc');
+    // Initialize query for tours
+    $tours  = StudyAbroad::with('category')
+        ->when($request->filled('location'), fn($q) => $q->where('location', $request->location))
+        ->orderBy('sort', 'asc')
+        ->get()
+        ->unique(fn($item) => $item->category->name)
+        ->values();
 
-        // Apply location filter if provided
-        if ($request->filled('location')) {
-            $toursQuery->where('location', $request->location);
-        }
+    // Fetch settings as key-value pairs
+    $settings = Setting::pluck('value', 'setting_name')->toArray();
 
-        // Execute query
-        $tours = $toursQuery->get();
+    // Return view
+    return view('frontend.allStudyAbroad', compact(
+    'tours', // remove extra space
+    'tourCategories',
+    'allLocations',
+    'visaCategories',
+    'studyAbroadCategories',
+    'consultancyMedicineCategories',
+    'settings'
+));
 
-        // Fetch settings as key-value pairs
-        $settings = Setting::pluck('value', 'setting_name')->toArray();
+}
 
-        // Return view with all necessary data
-        return view('frontend.allStudyAbroad', compact(
-            'tours',
-            'tourCategories',
-            'allLocations',
-            'visaCategories',
-            'studyAbroadCategories',
-            'consultancyMedicineCategories',
-            'settings'
-        ));
-    }
 
 
  public function allMedical(Request $request)

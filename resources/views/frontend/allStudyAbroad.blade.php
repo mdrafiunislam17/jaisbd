@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', ' Study Abroad All')
+@section('title', 'All Study Abroad ')
 
 @section('content')
 <main id="main">
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </form>
-            </div>  
+            </div>
 
             </div>
         </div>
@@ -67,7 +67,7 @@
                 @forelse ($tours as $item)
                     <div class="col-sm-6 col-lg-4 mb-37">
                         <div class="tf-widget-destination">
-                            <a href="{{ route('tourDetails', $item->slug) }}" class="destination-imgae">
+                            <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}" class="destination-imgae">
                                    @if(!empty($item->duration))
                                                 <span class="tour active">{{ $item->duration }}</span>
                                             @endif
@@ -76,8 +76,8 @@
                             <div class="destination-content">
                                 <span class="nation">{{ $item->category->name }}</span>
                                 <div class="flex-two btn-destination">
-                                    <h6 class="title"><a href="{{ route('tourDetails', $item->slug) }}">View Study Abroad</a></h6>
-                                    <a href="{{ route('tourDetails', $item->slug) }}" class="flex-five btn-view">
+                                    <h6 class="title"><a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}">View Study Abroad</a></h6>
+                                    <a href="{{ route('categoryStudyAbroad', ['name' => $item->category->name]) }}" class="flex-five btn-view">
                                         <i class="icon-Vector-32"></i>
                                     </a>
                                 </div>

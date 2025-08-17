@@ -14,4 +14,20 @@ class StudyAbroadCategories extends Model
     {
         return $this->hasMany(StudyAbroad::class, 'category_id');
     }
+
+
+    public function getCategoryNameAttribute()
+{
+    if ($this->category) {
+        return $this->category->name;
+    }
+
+    // fallback to last inserted category
+    $lastCategory = StudyAbroadCategories::latest('id')->first();
+
+    return $lastCategory
+        ? $lastCategory->name
+        : (new StudyAbroadCategories())->getTable(); // will return "study_abroad_categories"
+}
+
 }
